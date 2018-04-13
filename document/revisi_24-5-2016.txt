@@ -1,0 +1,21 @@
++ Running Text Kurang besar & bold
++ SAKIP (View dulu)
+	Format : hanya pdf
++ Placeholder pencarian berita
+
+Kalimat Approval User Mobile:
++ Non aktif:
+	Akun user mobile Disperindag Jatim anda telah dinonaktifkan oleh admin, lebih detail silahkan hubungi admin.
++ Aktif:
+
+- Mobile link sama kayak menu di website
++ Link terkait dropdown (aktif)
+
++ Passowrd Hash users
+- Jumlah User Online
+
++ Halaman Error
++ Production
++ Git
+
+010878040981

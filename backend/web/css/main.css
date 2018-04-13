@@ -1,0 +1,143 @@
+.fa-sm{
+	font-size: 11px !important;
+}
+.buku-tamu .timeline > li{
+	margin: 0;
+}
+.buku-tamu .timeline > li > .timeline-item {
+	margin:0;
+	margin-bottom: 10px;
+}
+.buku-tamu .timeline::before {
+	background-color: transparent;
+}
+
+.box-body.thumb-dashboard {
+	height: 300px;
+	overflow-y:scroll;
+}
+.box-body.thumb-dashboard.buku-tamu {
+	background-color: #f6f6f6;
+}
+.box-body.thumb-dashboard.agenda .label,.box-body.thumb-dashboard.agenda .text{
+	margin-left: 0px;
+}
+.box-body.thumb-dashboard.member .product-info{
+	margin-left: 0px;
+}
+.todo-list {
+	overflow-x:hidden;
+}
+.td-action{
+	text-align: center;
+	width: 150px;
+}
+.td-action i{
+	font-size: 14px;
+}
+.td-serial-number{
+	text-align: center;
+	width: 30px;
+}
+
+.single-page{
+	max-width: 850px;
+	margin: 0 auto;
+	border:solid 1px #eee;
+	padding: 20px;
+	margin-bottom: 25px;
+}
+.single-page .judul{
+	font-size: 22px;
+	line-height: 25px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	color: #0A3D78;
+	margin-bottom: 0px;	
+}
+.single-page .info{
+	font-size: 14px;
+	color: #999;
+	border-bottom: solid 1px #eee;
+	padding-bottom: 5px;
+	margin-bottom: 20px;
+}
+.single-page .article{
+	text-align: justify;
+}
+.single-page .article p{
+	margin:0px;
+	margin-top:5px;
+	text-align: justify;
+}
+.single-page .article ul, .single-page .article ol{
+	margin: 0px;
+	padding-left: 15px;
+}
+.single-page .article ul{
+	list-style: circle;
+}
+.single-page .article ol{
+	padding-left: 20px;	
+}
+.single-page .article li{
+	margin-top: 5px;
+}
+.single-page .imageThumb{
+    border:solid 1px #eee;
+    margin-bottom: 20px;
+}
+.single-page .imageThumb img{
+	width: 100%;
+}
+
+.preview-website::before{
+	content: "\00a0\00a0\00a0";
+}
+.preview-image-update-form{
+	width: 300px;
+}
+.preview-image-update-form img{
+	width: 100%;
+}
+
+.count-char-wrep{
+	float: right;
+	margin-top:-15px;
+	color: #888;
+}
+.has-success .tages label,.has-success .radios label{
+	color: #333;
+}
+.tages label{
+	font-weight: normal;
+	margin-right: 10px;
+	padding-right: 10px;
+	border-right:solid 1px #ddd;
+}
+.radios label{
+	font-weight: normal;
+	margin-right: 10px;
+	padding-right: 10px;	
+}
+.help-block.image{
+	margin-bottom: 20px;
+	margin-top: -10px;
+}
+.box-headline{
+	border:dashed 1px #ccc;
+	padding: 20px;
+	margin-bottom: 20px;
+}
+
+.form-control[readonly]{
+	background-color: #fff;
+}
+
+table.detail-view th {
+    width: 25%;
+}
+
+table.detail-view td {
+    width: 75%;
+}

@@ -1,0 +1,25 @@
+body{
+	font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #333;
+}
+.mce-content-body p{
+	margin:0px;
+	margin-top:5px;
+	text-align: justify;
+}
+.mce-content-body ul, .mce-content-body ol{
+	margin: 0px;
+	padding-left: 15px;
+}
+.mce-content-body ul{
+	list-style: circle;
+}
+.mce-content-body ol{
+	padding-left: 20px;	
+}
+.mce-content-body li{
+	margin-top: 5px;
+}

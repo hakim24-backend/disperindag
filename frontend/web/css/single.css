@@ -1,0 +1,277 @@
+#body-content{
+    margin-bottom: 30px;
+    background-color: transparent;
+    border:none;
+}
+.main-content{
+    padding-right: 7px;
+    padding-left: 7px;
+}
+.main-content > div{
+    padding: 7px 7px 0px;
+}
+.single-page .box-content .box-header {
+    border-bottom: solid 1px #e8e8e8;
+    padding: 15px 0px !important;
+}
+
+.single-page{
+    padding: 30px 30px 50px;
+    background-color: #fff;
+}
+.single-page .box-comment{
+    padding-bottom: 0px;
+}
+.single-page .top{
+    margin-bottom: 20px;
+    border-bottom:solid 1px #eee;
+    padding-bottom: 7px;
+}
+.single-page .top .title{
+    font-size: 22px;
+    line-height: 25px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    color: #0A3D78;
+    margin-bottom: 10px;
+}
+.single-page .top .td-post-meta a:hover{
+    text-decoration: underline;
+}
+.single-page .top .td-post-meta{
+    font-size: 12px;
+    margin-top: 0px;
+    color: #999;
+}
+.single-page .top .td-post-meta .kategori{
+    color:#333;
+    margin-right: 20px;
+}
+.single-page .top .td-post-meta .kategori a{
+    color:#333;
+}
+.single-page .top .td-post-meta .by{
+    color:#333;
+    font-weight: bold;
+    padding-right: 5px;
+}
+.single-page .top .td-post-meta .date{
+    padding-left: 5px;
+}
+.single-page .image-thumb{
+    border:solid 1px #eee;
+    margin-bottom: 20px;
+}
+.single-page .image-thumb img{
+    width: 100%;
+}
+.single-page .article{
+    text-align: justify;
+    font-size: 14px;
+}
+.single-page .article p{
+    margin:0;
+    margin-top:5px;
+}
+.single-page .article li{
+    margin-top: 5px;
+}
+.single-page .article ul, .single-page .article ol{
+    margin: 0px;
+}
+.single-page .article ul{
+    list-style: circle;
+    padding-left: 15px;
+}
+.single-page .article ol{
+    padding-left: 20px; 
+}
+
+
+.list-page{
+    border:solid 1px #ddd;
+}
+.list-page .box-header{
+    background-color: #fff;
+    border-bottom:solid 2px #0A3D78 !important;
+}
+.list-page .box-footer{
+    background-color: #fff;
+    padding: 15px 20px;
+    border-top:solid 2px #0A3D78 !important;
+}
+.list-page .box-body{
+    background-color: #f9f9f9;
+}
+#body-content .box-content .box-body.padding{
+    padding:25px;
+}
+.list-page .box-body .news-item{
+    padding: 10px 20px;
+    border-top: solid 1px #fff;
+    border-bottom: solid 1px #e2e2e2;
+}
+.list-page .box-body .news-item .date{
+    font-size: 12px;
+    color:#999;
+}
+.list-page .box-body .news-item .title{
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+}
+.list-page .box-body .news-item .title:hover{
+    text-decoration: underline;
+}
+.list .media .media-left{
+    width: 40%;
+}
+.list .media .media-left img{
+    width: 100%;
+}
+.list .media .media-body .media-heading{
+    font-size: 17px;
+}
+.list .media .media-body .media-heading a{
+    color: #333;
+}
+.list .media .media-body .media-heading a:hover{
+    text-decoration: underline;
+}
+.list-page .top{
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.list-page .top .title{
+    font-size: 22px;
+    line-height: 40px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    margin-bottom: -10px;
+}
+
+.video-item{
+    height: 230px;
+}
+.video-item img{
+    margin-bottom: 5px;
+}
+.video-item .date{
+    margin-bottom: -10px;
+}
+.video-item .text-title{
+    font-size: 14px; 
+    font-weight: bold; 
+    margin-top: -3px; 
+    max-height: 2.6em; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    word-wrap: break-word;
+}
+
+.item{
+    border:solid 1px #ddd;
+    margin-bottom: 25px;
+}
+.item .preview-image{
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    border-bottom: solid 1px #ddd;
+}
+.item .keterangan{
+    padding: 10px 15px;
+}
+.item .keterangan .text1 a{
+    color: #0a3d78;
+    font-weight: bold;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    line-height: 18px;
+}
+.item .keterangan .text1 a:hover{
+    text-decoration: underline;
+}
+.item .keterangan .text2{
+    color: #999;
+    font-size: 13px;
+}
+    
+
+.photos .item{
+    transition: all .20s ease-in-out;
+}
+.photos .item .preview-image{
+    overflow: hidden;
+    text-align: center;
+    background-color: #999;
+    height: 180px;
+}
+.photos .item .preview-image img{
+    height: 100%;
+}
+
+.list-comment .item{
+    padding: 25px ;
+    border: none;
+    border-top: solid 1px #fff;
+    border-bottom: solid 1px #e2e2e2;
+    margin-bottom: 0px;
+}
+.list-comment .item .text1{
+    font-weight: bold;
+}
+.list-comment .item .text2{
+    margin-top: 7px;
+    font-size: 14px;
+}
+.buku-tamu .form{
+    border:solid 1px #ddd;
+    padding: 20px;
+}
+.buku-tamu .form label{
+    font-size: 14px;
+    font-weight: normal;
+}
+.buku-tamu .form .title{
+    border-bottom: solid 1px #eee;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.buku-tamu .form .btn{
+    padding: 10px 40px;
+    font-weight: bold;
+}
+.buku-tamu .form .help-block{
+    font-size: 11px;
+    font-style: italic;
+}
+
+.agenda{
+    padding: 20px;
+    margin-top: 20px;
+}
+.agenda small{
+    margin-bottom: 10px;
+}
+.agenda small,.agenda label,.agenda {
+    display: block;
+}
+
+.list-page .pagination {
+    margin:0px;
+}
+
+.box-posting-terkait .box-body{
+    padding-top: 20px !important;
+}
+.box-posting-terkait .caption h3{
+    text-transform: none !important;
+    
+}

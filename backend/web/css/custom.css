@@ -1,0 +1,45 @@
+/*.btn-primary{
+    background-color:#0a3d78;
+}
+.btn-primary:hover{
+	background-color:#11519b;
+}*/
+.morris-hover.morris-default-style {
+    color: #393939 !important;
+    background: rgba(237, 237, 237, 0.8) !important;
+    border: solid 2px rgba(137, 137, 137, 0.9) !important;
+}
+.datepicker table tr td.disabled, .datepicker table tr td.disabled:hover {
+    background: none;
+    color: #ABABAB !important;
+    cursor: default;
+    }
+
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > h4 {
+    padding: 0;
+    padding-right: 65px;
+    margin: 0 0 0 0px;
+    color: #444444;
+    font-size: 15px;
+    position: relative;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > p {
+    margin: 0 0 0 0px;
+    font-size: 12px;
+    color: #888888;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header {
+    height: 105px;
+}
+
+@media (min-width: 1024px){
+    .content-header > h1 {
+        width: 50%;
+    }
+}
