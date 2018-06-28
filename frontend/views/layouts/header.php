@@ -113,13 +113,18 @@ use yii\bootstrap\NavBar;
                                 'label' => 'Video', 'url' => ['/gallery/video'], 
                                 'active'=>Yii::$app->controller->action->id=='video',
                             ],
+                            [   'label' => 'Download', 'url' => ['/download'], 
+                                'active'=>Yii::$app->controller->id=='download'
+                            ],
                         ],
                     ],
-                    ['label' => 'Download', 'url' => ['/download'], 'active'=>Yii::$app->controller->id=='download'],
+
+                    // ['label' => 'Download', 'url' => ['/download'], 'active'=>Yii::$app->controller->id=='download'],
                     //['label' => 'Intranet', 'url' => null, 'linkOptions'=>['href'=>'http://disperindag.jatimprov.go.id/intranet/', 'target'=>'blank']],
                     //['label' => 'SIM IKM', 'url' => null, 'linkOptions'=>['href'=>'http://disperindag.jatimprov.go.id/sim_ikm/', 'target'=>'blank']],
                     ['label' => 'PPID', 'url' => null, 'linkOptions'=>['href'=>'http://disperindag.jatimprov.go.id/dp/', 'target'=>'blank']],
-					['label' => 'Contact Us', 'url' => ['interaktif/feedback']],
+                    ['label' => 'Contact Us', 'url' => ['interaktif/feedback']],
+                    ['label' => 'Industri', 'url' => ['/download'], 'active'=>Yii::$app->controller->id=='download'],
                 ];
                 echo Nav::widget([
                     'encodeLabels' => false,

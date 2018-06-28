@@ -20,7 +20,10 @@
         "yiisoft/yii2-swiftmailer": "*",
         "yiisoft/yii2-imagine": "*",
         "himiklab/yii2-recaptcha-widget": "*",
-		"lslsoft/yii2-poll" : "dev-master"
+		"lslsoft/yii2-poll" : "dev-master",
+        "nirvana-msu/yii2-instafeed": "1.0.*@dev",
+        "miloschuman/yii2-highcharts-widget": "^6.0",
+        "kartik-v/yii2-date-range": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

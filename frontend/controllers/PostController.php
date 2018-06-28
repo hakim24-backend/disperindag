@@ -10,7 +10,7 @@ use yii\web\BadRequestHttpException;
 use yii\data\Pagination;
 use yii\db\Query;
 use yii\base\Component;
-use yii\base\Object;
+// use yii\base\Object;
 use Yii;
 
 class PostController extends MainController
