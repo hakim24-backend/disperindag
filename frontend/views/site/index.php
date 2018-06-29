@@ -2,6 +2,11 @@
 
 /* @var $this yii\web\View */
 ?>
+<style type="text/css">
+#instafeed img {
+  width: 33%;
+}
+</style>
 
 <div id="carousel-slider" class="carousel slide" data-ride="carousel">
     
@@ -181,6 +186,34 @@
                             </div>
                             <div class="box-body" style="max-height:358px;overflow:auto;">
                                 <a class="twitter-timeline" href="https://twitter.com/INDAG_JATIM">Tweets by TwitterDev</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            </div>
+                        </div>
+                    </div>
+					<div class="col-md-12 col-sm-6">
+                        <div class="box-content agenda-sidebar">
+                            <div class="box-header">
+                                <h3 class="title">Instagram
+                                    <span class="pull-right">
+                                        <a href="<?= Yii::$app->request->baseUrl ?>/agenda"><i class="fa fa-plus"></i></a>
+                                    </span>
+                                </h3>
+                            </div>
+                            <div class="box-body" style="max-height:358px;overflow:auto;">
+								
+                                <?php
+									 $config = Yii::$app->instafeedConfig;
+									  // var_dump($config);die();
+									  echo \nirvana\instafeed\Instafeed::widget([
+										'pluginOptions' => [
+										  'get' => 'user',
+										  'userId'=>'7215683654',
+										  'clientId' => $config->clientId,
+										  'accessToken' => $config->accessToken,
+										  'limit'=>3,
+										  'template' => '<a href="{{link}}" target="_blank" id="{{id}}"><img src="{{image}}" /></a>',
+										],
+									  ]);
+									?>
                             </div>
                         </div>
                     </div>

@@ -67,6 +67,45 @@ class BukuTamuController extends MainController
         }
     }
 
+	/**
+     * Displays a single Contact model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionGrafik()
+    {
+		$tgl = Contact::find()
+				->select(['DATE_FORMAT(tanggal, "%m-%Y")'])
+				//->groupBy('DATE_FORMAT(tanggal, "%m-%Y")')
+				->all();
+				var_dump($tgl);
+				die;
+		//$tampX = array();
+		//$tampY = array();
+		//$model = Yii::$app->db->createCommand('SELECT DISTINCT YEAR(tanggal) as tahun from hubungi ')->queryAll();
+		//foreach($model as $key =>  $val){
+			
+			//array_push($tampX,Yii::$app->db->createCommand('SELECT  MONTH(tanggal) as bln from hubungi where YEAR(tanggal) = '.$val['tahun'].' GROUP BY MONTH(tanggal)')->queryAll());
+		
+		//}
+		
+		
+		
+		
+		
+        $printForm = new PrintBukuTamuForm();
+        if (Yii::$app->request->post()){
+           
+        }
+		var_dump($tampCommand);die();
+		
+		return $this->render('grafik', [
+			'data'=>$tampCommand,
+		]);
+		
+       
+    }
+	
     /**
      * Displays a single Contact model.
      * @param integer $id

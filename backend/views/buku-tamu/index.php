@@ -48,7 +48,12 @@ $this->title = 'Buku Tamu';
         </div>
     </div>
     <div class="box box-primary">
+		
         <div class="box-body">
+		<br>
+		<p>
+			<?= Html::a('Grafik Buku Tamu', ['grafik'], ['class' => 'btn btn-success']) ?>
+		</p>
         <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
         <?= GridView::widget([

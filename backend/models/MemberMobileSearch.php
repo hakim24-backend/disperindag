@@ -60,11 +60,28 @@ class MemberMobileSearch extends MemberMobile
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
-            'created_at' => $this->created_at,
+           // 'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
-
-        $query->andFilterWhere(['like', 'nama', $this->nama])
+		
+		if(!empty($this->created_at)){
+			$time1 = (int)strtotime(explode(' - ',$this->created_at)[0]);
+			$time2 = (int)strtotime(explode(' - ',$this->created_at)[1]);
+			$dateStart =  date('Y-m-d',$time1);
+			$dateEnd =  date('Y-m-d',$time2);
+			
+			$query->andFilterWhere(['like', 'nama', $this->nama])
+            ->andFilterWhere(['like', 'gender', $this->gender])
+            ->andFilterWhere(['like', 'alamat', $this->alamat])
+            ->andFilterWhere(['like', 'no_telp', $this->no_telp])
+            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
+            ->andFilterWhere(['like', 'password_hash', $this->password_hash])
+            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
+            ->andFilterWhere(['like', 'email', $this->email])
+			->andFilterWhere(['between', 'created_at', $time1, $time2 ]);
+		}else{
+			
+			$query->andFilterWhere(['like', 'nama', $this->nama])
             ->andFilterWhere(['like', 'gender', $this->gender])
             ->andFilterWhere(['like', 'alamat', $this->alamat])
             ->andFilterWhere(['like', 'no_telp', $this->no_telp])
@@ -72,6 +89,10 @@ class MemberMobileSearch extends MemberMobile
             ->andFilterWhere(['like', 'password_hash', $this->password_hash])
             ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
             ->andFilterWhere(['like', 'email', $this->email]);
+			
+		}
+
+        
 
         return $dataProvider;
     }

@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use kartik\daterange\DateRangePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\MemberMobileSearch */
@@ -44,7 +45,9 @@ $this->title = 'Member Mobiles';
                     'headerOptions' => ['class' => 'td-serial-number']],
 
             //'id',
+			
             'nama',
+			
             //'gender',
             //'alamat',
             //'no_telp',
@@ -53,6 +56,26 @@ $this->title = 'Member Mobiles';
             // 'password_reset_token',
             'email:email',
             [
+                'attribute' => 'created_at',
+                'format' => 'raw',
+				'filter' => DateRangePicker::widget([
+											'name' => 'MemberMobileSearch[created_at]',
+											'convertFormat'=>true,
+											'startAttribute' => 'from_date',
+											'endAttribute' => 'to_date',
+											'pluginOptions'=>[
+												'locale'=>['format' => 'Y-m-d'],
+												
+												
+											],
+										]),
+                'value' => function($data){
+                    return $data->getDate($data->created_at);
+                },
+                'contentOptions' => ['class' => 'text-center'],
+                'headerOptions' => ['class' => 'text-center']
+            ],
+			[
                 'attribute'=>'status',
                 'format'=>'raw',
                 'value' => function($data){
@@ -62,15 +85,7 @@ $this->title = 'Member Mobiles';
                 'headerOptions' => ['class' => 'text-center'],
                  'filter' => Html::activeDropDownList($searchModel, 'status',   ['10'=>'Aktif','00'=>'Non-Aktif'],['class'=>'form-control','prompt' => 'Semua Status']),
             ],
-            [
-                'attribute' => 'created_at',
-                'format' => 'raw',
-                'value' => function($data){
-                    return $data->getDate($data->created_at);
-                },
-                'contentOptions' => ['class' => 'text-center'],
-                'headerOptions' => ['class' => 'text-center']
-            ],
+            
             // 'updated_at',
 
             [
