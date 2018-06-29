@@ -309,6 +309,29 @@ AppAsset::register($this);
                                   'url' => ['label/index'],
                                   'active'=>Yii::$app->controller->id=='label',
                                ],
+                               // [
+                               //    'label' => '<i class="fa fa-tags fa-sm"></i> Tag Post (label)', 
+                               //    'url' => ['label/index'],
+                               //    'active'=>Yii::$app->controller->id=='label',
+                               // ],
+                               [
+                                  'label' => '<i class="fa fa-database fa-sm"></i> Master Industri', 
+                                  'url' => ['#'],
+                                  'options'=> ['class'=>'treeview'],
+                                  'items' => [
+                                      [
+                                        'label' => '<i class="fa fa-list-ol fa-sm"></i>KBLI',
+                                        'url' => ['kbli/index'],
+                                        'active'=>Yii::$app->controller->id=='kbli',
+                                      ],
+                                      [
+                                        'label' => '<i class="fa fa-list-ol fa-sm"></i>Badan Usaha',
+                                        'url' => ['badan-usaha/index'],
+                                        'active'=>Yii::$app->controller->id=='badan-usaha',
+                                      ]
+                                    ]
+                                 
+                               ],
                                /*[
                                   'label' => '<i class="fa fa-exclamation-triangle fa-sm"></i> Kata Sensor', 
                                   'url' => ['kata-sensor/index'],

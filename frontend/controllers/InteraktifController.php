@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use frontend\components\MainController;
 use common\models\LinkTerkait;
 use common\models\Contact;
+use common\models\Industri;
 use frontend\models\ContactForm;
 use Yii;
 use yii\data\Pagination;
@@ -69,6 +70,31 @@ class InteraktifController extends MainController
         }
         return $this->render('feedback', [
             'model_form_feedback' => $model_form_feedback,
+        ]);
+    }
+    public function actionIndustri()
+    {
+        $model_form_bukutamu = new ContactForm();
+        $model_form_bukutamu->subject='Pengajuan Industri Baru';
+        // var_dump($model_form_feedback); die();
+        if ($model_form_bukutamu->load(Yii::$app->request->post())) {
+            if($model_form_bukutamu->validate()){
+                $model= new Industri();
+                if ($model) {
+                    # code...
+                }
+                return $this->render('form-industri', [
+                    'model' => $model,
+                ]);
+                // Yii::$app->session->setFlash('success', 'Terimakasih atas masukkan Anda');
+            }
+            else{
+                Yii::$app->session->setFlash('error', 'Error');
+            }
+            return $this->refresh();
+        }
+        return $this->render('buku-tamu-industri', [
+            'model_form_bukutamu' => $model_form_bukutamu,
         ]);
     }
 }
