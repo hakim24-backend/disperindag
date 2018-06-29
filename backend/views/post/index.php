@@ -28,7 +28,8 @@ $this->title = 'List Post Berita';
 
             <p>
                 <?= Html::a('Tambah Post Berita', ['create'], ['class' => 'btn btn-primary btn-flat']) ?>
-            </p>
+				<?= Html::a('Grafik Post Berita', ['grafik'], ['class' => 'btn btn-info btn-flat']) ?>
+			</p>
 
             <?php 
             if(Yii::$app->user->identity->level=="admin"){ 

@@ -57,6 +57,32 @@ class PostController extends MainController
             'dataProvider' => $dataProvider,
         ]);
     }
+	
+	/**
+     * Displays a single Contact model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionGrafik()
+    {
+		
+		$dataX = array();
+		$dataY = array();
+		$model = Post::find()->select(['judul','dibaca'])->limit(10)->orderBy(['dibaca' => SORT_DESC])->all();
+		
+		foreach($model as $key =>  $val){
+			//array_push($dataY, $val['judul']);
+			array_push($dataX,$val['judul']);
+			array_push($dataY,(int)$val['dibaca']);
+			
+			//$dataX[] = array('type'=> 'bar', 'name' =>$val['judul'], 'data' => array((int)$val['dibaca']));
+		}
+		//var_dump($data);die();
+		return $this->render('grafik', [
+			'dataX'=>$dataX,
+			'dataY'=>$dataY,
+		]);    
+    }
 
     /**
      * Displays a single Post model.

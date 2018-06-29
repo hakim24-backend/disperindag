@@ -8,7 +8,7 @@ use kartik\daterange\DateRangePicker;
 /* @var $this yii\web\View */
 /* @var $model common\models\Contact */
 
-$this->title = "Grafik Download";
+$this->title = "Grafik Post Berita";
 ?>
 
 <section class="content-header">
@@ -32,17 +32,18 @@ $this->title = "Grafik Download";
 				echo Highcharts::widget([
 						   'options' => [
 							
-							  'title' => ['text' => 'Grafik Dowload'],
+							  'title' => ['text' => 'Grafik Post Berita'],
 							  'xAxis' => [
 								 'categories' => $dataX
 							  ],
 							  'yAxis' => [
-								 'title' => ['text' => 'Jumlah Download']
+								 'title' => ['text' => 'Jumlah Post Berita Sering Dibaca']
 							  ],
 							  'series' => [	
-								 ['type'=>'bar', 'name' => 'Download', 'data' => $dataY],
-								 
+								['type'=>'bar', 'name' => 'Post Berita', 'data' => $dataY], 
 							  ]
+								 
+							  
 						   ]
 						]);
 			?>
