@@ -27,6 +27,7 @@ $this->title = 'File Download';
     
     <p>
         <?= Html::a('Tambah File', ['create'], ['class' => 'btn btn-primary btn-flat']) ?>
+		<?= Html::a('Grafik Download', ['grafik'], ['class' => 'btn btn-info btn-flat']) ?>
     </p>
     <form>
     <input type="hidden" name="_backend_csrf" value="<?=Yii::$app->request->getCsrfToken()?>" />

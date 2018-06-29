@@ -74,33 +74,63 @@ class BukuTamuController extends MainController
      */
     public function actionGrafik()
     {
-		$tgl = Contact::find()
-				->select(['DATE_FORMAT(tanggal, "%m-%Y")'])
-				//->groupBy('DATE_FORMAT(tanggal, "%m-%Y")')
-				->all();
-				var_dump($tgl);
-				die;
-		//$tampX = array();
-		//$tampY = array();
-		//$model = Yii::$app->db->createCommand('SELECT DISTINCT YEAR(tanggal) as tahun from hubungi ')->queryAll();
-		//foreach($model as $key =>  $val){
+		$dataX = array();
+		$dataY = array();
+		$model = Yii::$app->db->createCommand('SELECT DISTINCT YEAR(tanggal) as tahun from hubungi ORDER BY tahun ASC')->queryAll();
+		foreach($model as $key =>  $val){
+			$tampX = array();
+			$tampX = Yii::$app->db->createCommand('SELECT  MONTH(tanggal) as bln, count(*) as jml from hubungi where YEAR(tanggal) = '.$val['tahun'].' GROUP BY MONTH(tanggal)')->queryAll();
+			foreach($tampX as $keyX =>  $valX){
+				//set data X
+				array_push($dataX,$this->setBulan($valX['bln'],$val['tahun']));
+				
+				//set data Y
+				array_push($dataY,(int)$valX['jml']);
+				
+			}	
+		}
+		
+        if (Yii::$app->request->post('kvdate3')){
+			$dataX = array();
+			$dataY = array();
+			$dateRange = Yii::$app->request->post('kvdate3');
+			$time1 = strtotime(explode(' - ',$dateRange)[0]);
+			$time2 = strtotime(explode(' - ',$dateRange)[1]);
+			$dateStart =  date('Y-m-d',$time1);
+			$dateEnd =  date('Y-m-d',$time2);
 			
-			//array_push($tampX,Yii::$app->db->createCommand('SELECT  MONTH(tanggal) as bln from hubungi where YEAR(tanggal) = '.$val['tahun'].' GROUP BY MONTH(tanggal)')->queryAll());
-		
-		//}
-		
-		
-		
-		
-		
-        $printForm = new PrintBukuTamuForm();
-        if (Yii::$app->request->post()){
-           
+			
+			
+			$modelFilter = Yii::$app->db->createCommand('SELECT DISTINCT YEAR(tanggal) as tahun from hubungi WHERE tanggal BETWEEN "'.$dateStart.'" AND "'.$dateEnd.'" ORDER BY tahun ASC')->queryAll();
+			
+			foreach($modelFilter as $key =>  $val){
+				$tampX = array();
+				
+				$tampX = Yii::$app->db->createCommand('SELECT  MONTH(tanggal) as bln, count(*) as jml from hubungi where YEAR(tanggal) = '.$val['tahun'].' GROUP BY MONTH(tanggal)')->queryAll();
+				
+				foreach($tampX as $keyX =>  $valX){
+					//set data X
+					array_push($dataX,$this->setBulan($valX['bln'],$val['tahun']));
+					
+					//set data Y
+					array_push($dataY,(int)$valX['jml']);
+					
+				}
+				
+					
+			}
+			
+			//var_dump($dataX);die();
+			
+			return $this->render('grafik', [
+				'dataX'=>$dataX,
+				'dataY'=>$dataY,
+			]);
         }
-		var_dump($tampCommand);die();
 		
 		return $this->render('grafik', [
-			'data'=>$tampCommand,
+			'dataX'=>$dataX,
+			'dataY'=>$dataY,
 		]);
 		
        
@@ -216,5 +246,36 @@ class BukuTamuController extends MainController
                 'model' => $model,
             ]);
         }
+    }
+	
+	protected function setBulan($bln,$tahun)
+    {
+        if($bln == 1){
+			return 'Januari '.$tahun;
+		}else if($bln == 2){
+			return 'Februari '.$tahun;
+		}else if($bln == 3){
+			return 'Maret '.$tahun;
+		}else if($bln == 4){
+			return 'April '.$tahun;
+		}else if($bln == 5){
+			return 'Mei '.$tahun;
+		}else if($bln == 6){
+			return 'Juni '.$tahun;
+		}else if($bln == 7){
+			return 'Juli '.$tahun;
+		}else if($bln == 8){
+			return 'Agustus '.$tahun;
+		}else if($bln == 9){
+			return 'September '.$tahun;
+		}else if($bln == 10){
+			return 'Oktober '.$tahun;
+		}else if($bln == 11){
+			return 'November '.$tahun;
+		}else if($bln == 12){
+			return 'Desember '.$tahun;
+		}else{
+			return 'Nan '.$tahun;
+		}
     }
 }

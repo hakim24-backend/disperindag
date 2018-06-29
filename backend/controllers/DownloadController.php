@@ -54,6 +54,75 @@ class DownloadController extends MainController
             'dataProvider' => $dataProvider,
         ]);
     }
+	
+	/**
+     * Displays a single Contact model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionGrafik()
+    {
+		$dataX = array();
+		$dataY = array();
+		$model = Yii::$app->db->createCommand('SELECT DISTINCT YEAR(tanggal) as tahun from hubungi ORDER BY tahun ASC')->queryAll();
+		foreach($model as $key =>  $val){
+			$tampX = array();
+			$tampX = Yii::$app->db->createCommand('SELECT  MONTH(tanggal) as bln, count(*) as jml from hubungi where YEAR(tanggal) = '.$val['tahun'].' GROUP BY MONTH(tanggal)')->queryAll();
+			foreach($tampX as $keyX =>  $valX){
+				//set data X
+				array_push($dataX,$this->setBulan($valX['bln'],$val['tahun']));
+				
+				//set data Y
+				array_push($dataY,(int)$valX['jml']);
+				
+			}	
+		}
+		
+        if (Yii::$app->request->post('kvdate3')){
+			$dataX = array();
+			$dataY = array();
+			$dateRange = Yii::$app->request->post('kvdate3');
+			$time1 = strtotime(explode(' - ',$dateRange)[0]);
+			$time2 = strtotime(explode(' - ',$dateRange)[1]);
+			$dateStart =  date('Y-m-d',$time1);
+			$dateEnd =  date('Y-m-d',$time2);
+			
+			
+			
+			$modelFilter = Yii::$app->db->createCommand('SELECT DISTINCT YEAR(tanggal) as tahun from hubungi WHERE tanggal BETWEEN "'.$dateStart.'" AND "'.$dateEnd.'" ORDER BY tahun ASC')->queryAll();
+			
+			foreach($modelFilter as $key =>  $val){
+				$tampX = array();
+				
+				$tampX = Yii::$app->db->createCommand('SELECT  MONTH(tanggal) as bln, count(*) as jml from hubungi where YEAR(tanggal) = '.$val['tahun'].' GROUP BY MONTH(tanggal)')->queryAll();
+				
+				foreach($tampX as $keyX =>  $valX){
+					//set data X
+					array_push($dataX,$this->setBulan($valX['bln'],$val['tahun']));
+					
+					//set data Y
+					array_push($dataY,(int)$valX['jml']);
+					
+				}
+				
+					
+			}
+			
+			//var_dump($dataX);die();
+			
+			return $this->render('grafik', [
+				'dataX'=>$dataX,
+				'dataY'=>$dataY,
+			]);
+        }
+		
+		return $this->render('grafik', [
+			'dataX'=>$dataX,
+			'dataY'=>$dataY,
+		]);
+		
+       
+    }
 
     /**
      * Displays a single Download model.
