@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use backend\models\MemberMobile;
+use backend\models\DateTime;
 
 /**
  * MemberMobileSearch represents the model behind the search form about `backend\models\MemberMobile`.
@@ -43,6 +44,7 @@ class MemberMobileSearch extends MemberMobile
     {
         $query = MemberMobile::find();
 
+		//var_dump($query); die();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort'=> ['defaultOrder' => ['seen'=>SORT_ASC,'id'=>SORT_DESC]]
@@ -58,15 +60,15 @@ class MemberMobileSearch extends MemberMobile
 
         
         $query->andFilterWhere([
-            'id' => $this->id,
+            //'id' => $this->id,
             'status' => $this->status,
            // 'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            //'updated_at' => $this->updated_at,
         ]);
 		
 		if(!empty($this->created_at)){
-			$time1 = (int)strtotime(explode(' - ',$this->created_at)[0]);
-			$time2 = (int)strtotime(explode(' - ',$this->created_at)[1]);
+			$time1 = strtotime(explode(' - ',$this->created_at)[0]);
+			$time2 = strtotime(explode(' - ',$this->created_at)[1]);
 			$dateStart =  date('Y-m-d',$time1);
 			$dateEnd =  date('Y-m-d',$time2);
 			
@@ -76,9 +78,9 @@ class MemberMobileSearch extends MemberMobile
             ->andFilterWhere(['like', 'no_telp', $this->no_telp])
             ->andFilterWhere(['like', 'auth_key', $this->auth_key])
             ->andFilterWhere(['like', 'password_hash', $this->password_hash])
-            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
+			->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
             ->andFilterWhere(['like', 'email', $this->email])
-			->andFilterWhere(['between', 'created_at', $time1, $time2 ]);
+			->andFilterWhere(['between', 'FROM_UNIXTIME(created_at,"%Y-%m-%d")', $dateStart,$dateEnd ]);
 		}else{
 			
 			$query->andFilterWhere(['like', 'nama', $this->nama])
