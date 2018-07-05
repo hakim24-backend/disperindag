@@ -2,6 +2,9 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use elzix\CurrencyConverter\CurrencyConverter;
+
+
 ?>
 
 <div id="top-of-footer">
@@ -39,14 +42,18 @@ use yii\bootstrap\NavBar;
                 <div class="content tukar-rupiah">
                     <table class="table">
                         <?php 
-                        if(isset($currency_exchange)){
-                            foreach ($currency_exchange->rates as $currency => $value) { 
-                                echo '<tr>';
-                                echo '<td width="75">1 '.$currency.'</td>';
-                                echo '<td width="1">=</td>';
-                                echo '<td>Rp '.number_format($value, 0, ',', '.').'</td>';
-                                echo '</tr>';
-                            }
+$converter = new CurrencyConverter();
+$ratea =  $converter->convert('Your-API-Key', 'USD', 'NPR'); // Use Single Currency Code
+$rateb =  $converter->convert('Your-API-Key', 'USD', 'NGN,NPR,KES'); // Use Multiple Currency Codes
+$ratec =  $converter->convert('Your-API-Key', 'US', 'NP'); // Use Single Country Code
+$rated =  $converter->convert('Your-API-Key', 'US', 'NG,NP,KE'); // Use Multiple Country Codes
+$ratee =  $converter->convert('Your-API-Key', 'USD', 'NG,NPR,KE'); // Mix Multiple Country/Currency Codes
+
+print_r($ratea);  // it will print current Nepalese currency (NPR) rate according to USD
+print_r($rateb);  // it will print current Nigerian, Nepalese and Kenyan currencies (NGN,NPR,KES) rates according to USD
+print_r($ratec);  // it will print current Nepalese (NP) currency rate according to US
+print_r($rated);  // it will print current Nigerian, Nepalese and Kenyan (NG,NP,KE) currencies rates according to US
+print_r($ratee);  // it will print current Nigerian, Nepalese and Kenyan currencies (NG,NPR,KE) rates according to USD
                         }
                         
                         ?>
