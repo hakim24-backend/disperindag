@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "1ceb56f937ebfc92fd71b5e9d4d456f3",
+    "content-hash": "e61ed708c1d5b4b27f17d851ead59170",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -487,6 +487,47 @@
             "time": "2018-04-10T10:11:19+00:00"
         },
         {
+            "name": "elzix/yii2-currency-converter",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/elzix/yii2-currency-converter.git",
+                "reference": "c9b883cf0d4b7fc1aa9c4e4b9b5f29f07f1fb251"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/elzix/yii2-currency-converter/zipball/c9b883cf0d4b7fc1aa9c4e4b9b5f29f07f1fb251",
+                "reference": "c9b883cf0d4b7fc1aa9c4e4b9b5f29f07f1fb251",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "elzix\\CurrencyConverter\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Erix Kivuti",
+                    "email": "i@erixkivuti.men"
+                }
+            ],
+            "description": "This extension will help to find out current currency conversion rate. This extension uses Open Exchange Rates's currency conversion API",
+            "keywords": [
+                "extension",
+                "yii2"
+            ],
+            "time": "2017-09-06T13:46:57+00:00"
+        },
+        {
             "name": "ezyang/htmlpurifier",
             "version": "v4.10.0",
             "source": {
@@ -634,6 +675,47 @@
                 "image processing"
             ],
             "time": "2017-05-16T10:31:22+00:00"
+        },
+        {
+            "name": "imanilchaudhari/yii2-currency-converter",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/imanilchaudhari/yii2-currency-converter.git",
+                "reference": "fccfd608fa83f2da2394ea897b366f875ad64f37"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/imanilchaudhari/yii2-currency-converter/zipball/fccfd608fa83f2da2394ea897b366f875ad64f37",
+                "reference": "fccfd608fa83f2da2394ea897b366f875ad64f37",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "imanilchaudhari\\CurrencyConverter\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anil Chaudhari",
+                    "email": "imanilchaudhari@gmail.com"
+                }
+            ],
+            "description": "This extension will help to find out current currency conversion rate. This extension uses Yahoo's currency conversion API",
+            "keywords": [
+                "extension",
+                "yii2"
+            ],
+            "time": "2018-04-08T05:59:29+00:00"
         },
         {
             "name": "kartik-v/yii2-date-range",
@@ -1664,7 +1746,9 @@
         "lslsoft/yii2-poll": 20,
         "nirvana-msu/yii2-instafeed": 20,
         "kartik-v/yii2-date-range": 20,
-        "kartik-v/yii2-widget-select2": 20
+        "kartik-v/yii2-widget-select2": 20,
+        "elzix/yii2-currency-converter": 20,
+        "imanilchaudhari/yii2-currency-converter": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

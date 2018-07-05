@@ -42,19 +42,37 @@ use elzix\CurrencyConverter\CurrencyConverter;
                 <div class="content tukar-rupiah">
                     <table class="table">
                         <?php 
-$converter = new CurrencyConverter();
-$ratea =  $converter->convert('Your-API-Key', 'USD', 'NPR'); // Use Single Currency Code
-$rateb =  $converter->convert('Your-API-Key', 'USD', 'NGN,NPR,KES'); // Use Multiple Currency Codes
-$ratec =  $converter->convert('Your-API-Key', 'US', 'NP'); // Use Single Country Code
-$rated =  $converter->convert('Your-API-Key', 'US', 'NG,NP,KE'); // Use Multiple Country Codes
-$ratee =  $converter->convert('Your-API-Key', 'USD', 'NG,NPR,KE'); // Mix Multiple Country/Currency Codes
+// $converter = new CurrencyConverter();
+// $ratea =  $converter->convert('c222ff3fe93847068b127563a3fa8cf4', 'USD', 'NPR'); // Use Single Currency Code
+// $ratec =  $converter->convert('c222ff3fe93847068b127563a3fa8cf4', 'NPR', 'IDR'); // Use Single Country Code
 
-print_r($ratea);  // it will print current Nepalese currency (NPR) rate according to USD
-print_r($rateb);  // it will print current Nigerian, Nepalese and Kenyan currencies (NGN,NPR,KES) rates according to USD
-print_r($ratec);  // it will print current Nepalese (NP) currency rate according to US
-print_r($rated);  // it will print current Nigerian, Nepalese and Kenyan (NG,NP,KE) currencies rates according to US
-print_r($ratee);  // it will print current Nigerian, Nepalese and Kenyan currencies (NG,NPR,KE) rates according to USD
-                        }
+// print_r($ratea);  // it will print current Nepalese currency (NPR) rate according to USD
+// print_r($ratec);  // it will print current Nepalese (NP) currency rate according to US
+// $response =  json_decode(file_get_contents('http://kurs.dropsugar.com/rates/bca.json'));
+// echo "Terakhir diupdate pada: " . date('j-m-Y H:i:s');
+// foreach ($response->kurs as $currency => $value) {
+//     echo 'Nilai jual ' . $currency . ' adalah: ' . $value->jual . '<br>';
+//     echo 'Nilai beli ' . $currency . ' adalah: ' . $value->beli . '<br><br>';
+// }     
+$json = file_get_contents('http://www.adisurya.net/kurs-bca/get');
+$my_array = json_decode($json);
+
+$kurs_usd= $my_array->Data->USD->Jual; 
+$kurs_eur= $my_array->Data->EUR->Jual; 
+$kurs_aud= $my_array->Data->AUD->Jual; 
+$kurs_jpy= $my_array->Data->JPY->Jual; 
+$kurs_sgd= $my_array->Data->SGD->Jual; 
+$last_update_kurs= $my_array->LastUpdate; 
+
+
+
+echo '1 USD = <b>' . number_format("$kurs_usd",2,",",".") . '</b> IDR<br>';
+echo '1 EUR = <b>' . number_format("$kurs_eur",2,",",".") . '</b> IDR<br>';
+echo '1 AUD = <b>' . number_format("$kurs_aud",2,",",".") . '</b> IDR<br>';
+echo '1 JPY = <b>' . number_format("$kurs_jpy",2,",",".") . '</b> IDR<br>';
+echo '1 SGD = <b>' . number_format("$kurs_sgd",2,",",".") . '</b> IDR<br>';
+echo '<br>Terakhir diperbarui pada <b>' . $last_update_kurs . '</b> GMT(+7), Jakarta<br>';
+
                         
                         ?>
                     </table>
