@@ -8,6 +8,9 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 use backend\models\BadanUsaha;
+use common\models\Villages;
+use common\models\Districts;
+use kartik\widgets\Select2;
 // use yii\captcha\Captcha;
 // use yii\widgets\LinkPager;
 use yii\web\View;
@@ -16,6 +19,8 @@ $this->title = 'Pengajuan Industri';
 $this->params['breadcrumbs'][] = $this->title;
 
 $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => SORT_ASC])->asArray()->all(), 'id', 'nama_badan_usaha');
+$kecamatan=ArrayHelper::map(Villages::find()->orderBy(['name' => SORT_ASC])->asArray()->all(), 'id', 'name');
+
 ?>
 <div class="list-page">
     <div class="box-content">
@@ -34,9 +39,17 @@ $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => 
 
                 <?= $form->field($model, 'jalan')->textInput(['maxlength' => true]) ?>
 
-                <?= $form->field($model, 'kelurahan')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'kecamatan')->widget(Select2::classname(), [
+                    'data' => $kecamatan,
+                    'options' => ['placeholder' => 'pilih kecamatan'],
+                    'pluginOptions' => [
+                        'allowClear' => true
+                    ],
+                ]);?>
 
-                <?= $form->field($model, 'kecamatan')->textInput(['maxlength' => true]) ?>
+                <!-- <?= $form->field($model, 'kecamatan')->textInput(['maxlength' => true]) ?>
+
+                <?= $form->field($model, 'kelurahan')->textInput(['maxlength' => true]) ?> -->
 
                 <?= $form->field($model, 'telepon')->textInput(['maxlength' => true]) ?>
 
