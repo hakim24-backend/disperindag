@@ -328,6 +328,11 @@ AppAsset::register($this);
                                         'label' => '<i class="fa fa-list-ol fa-sm"></i>Badan Usaha',
                                         'url' => ['badan-usaha/index'],
                                         'active'=>Yii::$app->controller->id=='badan-usaha',
+                                      ],
+                                      [
+                                        'label' => '<i class="fa fa-list-ol fa-sm"></i>Data Perindustrian',
+                                        'url' => ['badan-usaha/index'],
+                                        'active'=>Yii::$app->controller->id=='badan-usaha',
                                       ]
                                     ]
                                  
