@@ -98,13 +98,13 @@ class Industri extends \yii\db\ActiveRecord
             'tk_lk' => 'Tk Lk',
             'tk_pr' => 'Tk Pr',
             'nilai_investasi' => 'Nilai Investasi',
-            'jml_kapasitas_produksi' => 'Jml Kapasitas Produksi',
+            'jml_kapasitas_produksi' => 'Jumlah Kapasitas Produksi',
             'satuan' => 'Satuan',
             'nilai_produksi' => 'Nilai Produksi',
-            'nilai_bb_bp' => 'Nilai Bb Bp',
+            'nilai_bb_bp' => 'Nilai BB BP',
             'orientasi_ekspor' => 'Orientasi Ekspor',
             'negara_tujuan_ekspor' => 'Negara Tujuan Ekspor',
-            'npwp' => 'Npwp',
+            'npwp' => 'NPWP',
             'status' => 'Status',
         ];
     }
@@ -123,5 +123,19 @@ class Industri extends \yii\db\ActiveRecord
     public function getBadanUsaha()
     {
         return $this->hasOne(BadanUsaha::className(), ['id' => 'badan_usaha']);
+    }
+    public function getStatus()
+    {
+        switch ($this->status) {
+            case 1:
+                $label = "<label class='label label-success'>Aktif</label>";
+                break;
+            
+            default:
+                $label = "<label class='label label-danger'>Non-Aktif</label>";
+                break;
+        }
+
+        return $label;
     }
 }
