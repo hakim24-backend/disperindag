@@ -57,4 +57,14 @@ class Villages extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Districts::className(), ['id' => 'district_id']);
     }
+
+    public function getSubCatList($cat_id){
+        $subCategories = self::find()
+        ->select(['id','name'])
+        ->where(['district_id'=>$cat_id])
+        ->asArray()
+        ->all();
+
+        return $subCategories;
+    }
 }

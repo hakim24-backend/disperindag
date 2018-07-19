@@ -33,6 +33,8 @@ class SingleAppAsset extends AssetBundle
         '../../common/assets/plugins/datatables/dataTables.bootstrap.min.js',
         'plugins/lightbox/js/lightbox.min.js',
         'js/script.js',
+        'assets/registerJs.js',
+        
     ];
     public $depends = [
         'yii\web\YiiAsset',

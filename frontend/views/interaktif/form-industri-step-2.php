@@ -19,9 +19,18 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="box-body padding" id="form-industri">
             <div class="form">
                 <div class="title">Silahkan isi masukkan anda dibawah ini:</div>
+                <?php $form = ActiveForm::begin(['id' => 'form-industri-2']); ?>
+
                 <?= $form->field($model, 'npwp')->textInput(['maxlength' => true]) ?>
                 
-                <?= $form->field($model, 'izin_usaha_industri')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'izin_usaha_industri')->dropDownList(
+                    [
+                        '0' => 'Belum', 
+                        '1' => 'TDI', 
+                        '2' => 'IUI', 
+                        '3' => 'IUMK', 
+                        '4' => 'Izin Lainnya'
+                    ]) ?>
 
                 <?= $form->field($model, 'tahun_izin')->textInput(['maxlength' => true]) ?>
 
@@ -38,6 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= $form->field($model, 'tk_lk')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'tk_pr')->textInput(['maxlength' => true]) ?>
+
+                <?php ActiveForm::end(); ?>
 
             </div>
         </div>
