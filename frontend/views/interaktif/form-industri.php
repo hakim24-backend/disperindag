@@ -4,9 +4,15 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \frontend\models\ContactForm */
 
+// The controller action that will render the list
+
+$url = \yii\helpers\Url::to(['/industri/kbli-list']);
+
+// The widget
 
 use yii\bootstrap\ActiveForm;
 use yii\web\View;
+use yii\web\JsExpression;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
@@ -132,7 +138,24 @@ $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => 
 
                         <?= $form->field($model, 'tahun_izin')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'kbli')->textInput() ?>
+                        <?= $form->field($model, 'kbli')->widget(Select2::classname(), [
+                            'options' => ['placeholder' => 'Search for a kbli ...'],
+                            'pluginOptions' => [
+                                'allowClear' => true,
+                                'minimumInputLength' => 3,
+                                'language' => [
+                                    'errorLoading' => new JsExpression("function () { return 'Waiting for results...'; }"),
+                                ],
+                                'ajax' => [
+                                    'url' => $url,
+                                    'dataType' => 'json',
+                                    'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                                ],
+                                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                                'templateResult' => new JsExpression('function(kbli) { return kbli.text; }'),
+                                'templateSelection' => new JsExpression('function (kbli) { return kbli.text; }'),
+                            ],
+                        ]) ?>
 
                         <?= $form->field($model, 'komoditi')->textInput(['maxlength' => true]) ?>
 

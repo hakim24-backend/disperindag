@@ -8,6 +8,7 @@ use common\models\Contact;
 use common\models\Districts;
 use common\models\Villages;
 use common\models\Industri;
+use common\models\Kbli;
 use frontend\models\ContactForm;
 use Yii;
 use yii\data\Pagination;
@@ -162,5 +163,24 @@ class InteraktifController extends MainController
         return json_encode(['output'=>'', 'selected'=>'']);
     }
 
+
+    public function actionKblilist($q = null, $id = null) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if (!is_null($q)) {
+            $query = new Query;
+            $query->select('id, name AS text')
+                ->from('kbli')
+                ->where(['like', 'name', $q])
+                ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => Kbli::find($id)->name];
+        }
+        return $out;
+    }
 
 }
