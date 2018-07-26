@@ -75,7 +75,7 @@ class InteraktifController extends MainController
             'model_form_feedback' => $model_form_feedback,
         ]);
     }
-    
+
     public function actionIndustri()
     {
 
@@ -151,10 +151,6 @@ class InteraktifController extends MainController
         }
         return $out;
     }
-
-
-    }
-
 
 
 }
