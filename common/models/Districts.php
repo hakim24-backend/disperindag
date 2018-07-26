@@ -53,4 +53,9 @@ class Districts extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Villages::className(), ['district_id' => 'id']);
     }
+
+    public function getDistricts()
+    {
+        return self::find()->select(['name','id'])->indexBy('id')->column();
+    }
 }

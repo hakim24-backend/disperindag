@@ -124,4 +124,13 @@ class Industri extends \yii\db\ActiveRecord
     {
         return $this->hasOne(BadanUsaha::className(), ['id' => 'badan_usaha']);
     }
+
+    public function selectionPerusahaan(){
+        $models = Industri::find()->all();
+        $selection = [];
+        foreach ($models as $model) {
+            $selection[$model->id] = $model->npwp.' - '.$model->nama_perusahaan;
+        }
+        return $selection;
+    }
 }

@@ -5,7 +5,10 @@ namespace frontend\controllers;
 use frontend\components\MainController;
 use common\models\LinkTerkait;
 use common\models\Contact;
+use common\models\Districts;
+use common\models\Villages;
 use common\models\Industri;
+use common\models\Kbli;
 use frontend\models\ContactForm;
 use Yii;
 use yii\data\Pagination;
@@ -74,27 +77,107 @@ class InteraktifController extends MainController
     }
     public function actionIndustri()
     {
+
         $model_form_bukutamu = new ContactForm();
+        $model= new Industri();
+        $selectionPerusahaan = Industri::selectionPerusahaan();
+
         $model_form_bukutamu->subject='Pengajuan Industri Baru';
-        // var_dump($model_form_feedback); die();
-        if ($model_form_bukutamu->load(Yii::$app->request->post())) {
-            if($model_form_bukutamu->validate()){
-                $model= new Industri();
-                if ($model) {
-                    # code...
-                }
-                return $this->render('form-industri', [
-                    'model' => $model,
-                ]);
-                // Yii::$app->session->setFlash('success', 'Terimakasih atas masukkan Anda');
+        // $model->tahun_izin = date("Y");
+        // $model->tahun_data = date("Y");
+        $model->status = 0;
+
+        if ($model_form_bukutamu->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post())) {
+            $isValid = $model_form_bukutamu->validate();
+
+            $isValid = $model->validate() && $isValid;
+            // var_dump($isValid);die;
+
+            if ($isValid) {
+
+                $model_form_bukutamu->saveAs();
+                $model->save();
+                return $this->refresh();
             }
-            else{
-                Yii::$app->session->setFlash('error', 'Error');
-            }
-            return $this->refresh();
         }
-        return $this->render('buku-tamu-industri', [
+        
+        return $this->render('form-industri', [
             'model_form_bukutamu' => $model_form_bukutamu,
+            'selectionPerusahaan' => $selectionPerusahaan,
+            'model' => $model,
+            
         ]);
+
+
+        // if ($model_form_bukutamu->load(Yii::$app->request->post())&&$model->load(Yii::$app->request->post())) {
+        //     if($model_form_bukutamu->validate() && $model->validate()){
+        //         // $model_form_bukutamu->save();
+        //         if ($model_form_bukutamu->save()) {
+        //             # code...
+        //             var_dump("expression");die();
+        //             if ($model->save()) {
+        //                 # code...
+        //                 var_dump("expression2");die();
+
+        //             }else{
+        //                 var_dump("expression4");die();
+        //             }
+        //         }else{
+        //             var_dump("expression3");die();
+
+        //         }
+        //         return $this->refresh();
+                
+        //     }
+
+        // }
+        // if (Yii::$app->request->post()) {
+        //     # code...
+        //     var_dump(Yii::$app->request->post());die();
+        // }
+        // return $this->render('form-industri', [
+        //     'model_form_bukutamu' => $model_form_bukutamu,
+        //     'selectionPerusahaan' => $selectionPerusahaan,
+        //     'model' => $model,
+            
+        // ]);
     }
+
+    public function actionSubcat() 
+    {
+        $out = [];
+        if (isset($_POST['depdrop_parents'])) {
+            $parents = $_POST['depdrop_parents'];
+            if ($parents != null) {
+                $cat_id = $parents[0];
+                $out = Villages::getSubCatList($cat_id); 
+                var_dump($out);die;
+                return json_encode(['output'=>$out, 'selected'=>'']);
+            }
+        }
+        return json_encode(['output'=>'', 'selected'=>'']);
+    }
+
+    public function actionKbliList($q = null, $id = null) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if (!is_null($q)) {
+            $query = new \yii\db\Query;
+
+            $query->select('id, kode AS kode')
+                ->from('kbli')
+                ->where(['like', 'kode', $q])
+                ->limit(20);
+
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'name' => Kbli::find($id)->kode];
+        }
+        return $out;
+    }
+
+
 }

@@ -9,6 +9,8 @@ use yii\bootstrap\ActiveForm;
 // use yii\captcha\Captcha;
 // use yii\widgets\LinkPager;
 use yii\web\View;
+use kartik\select2\Select2;
+
 
 $this->title = 'Pengajuan Industri';
 $this->params['breadcrumbs'][] = $this->title;
@@ -36,6 +38,7 @@ $this->registerJs(
                 <div class="title">Silahkan isi masukkan anda dibawah ini:</div>
                  <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
 
+
                     <?= $form->field($model_form_bukutamu, 'name') ?>
 
                     <?= $form->field($model_form_bukutamu, 'email') ?>
@@ -48,26 +51,25 @@ $this->registerJs(
                         \himiklab\yii2\recaptcha\ReCaptcha::className(),
                         ['siteKey' => '6LeIaRIUAAAAANL1ghU-DGEWI0a42ddw7AXclJgt']
                     ) ?> -->
-
                     <div class="form-group">
                         <?= Html::submitButton('<i class="fa fa-send"></i> Kirim', ['class' => 'btn btn-flat btn-primary', 'name' => 'contact-button']) ?>
                     </div>
-
                 <?php ActiveForm::end(); ?>
             </div>
         </div>
-        <div class="box-body padding" id="daftar-industri" hidden>
+        <div class="box-body padding" id="daftar-industri" style="padding:50px" hidden>
             <div class="form">
                 <div class="title">Silahkan isi masukkan npwp perusahaan anda dibawah ini:</div>
                  <?php $form = ActiveForm::begin(['id' => 'contact-form']); ?>
 
-                    <?= $form->field($model_form_bukutamu, 'name') ?>
-
-                    <div class="form-group">
-                        <?= Html::submitButton('Kirim', ['class' => 'btn btn-flat btn-primary', 'name' => 'contact-button']) ?>
-                        <a href=""><button type='button' class='btn btn-flat btn-warning'>Batal</button>
+                    <div class="col-md-12">
+                        <?= Select2::widget([
+                            'name' => 'state_2',
+                            'value' => '',
+                            'data' => $selectionPerusahaan,
+                            'options' => ['multiple' => true, 'placeholder' => 'Pilih NPWP / Nama Perusahaan ...']
+                        ]) ?>
                     </div>
-
                 <?php ActiveForm::end(); ?>
             </div>
         </div>

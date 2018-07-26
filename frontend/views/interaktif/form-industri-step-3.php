@@ -19,6 +19,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="box-body padding" id="form-industri">
             <div class="form">
                 <div class="title">Silahkan isi masukkan anda dibawah ini:</div>
+
+                <?php $form = ActiveForm::begin(['id' => 'form-industri-3']); ?>
+
                 <?= $form->field($model, 'nilai_investasi')->textInput(['maxlength' => true]) ?>
 
                 <?= $form->field($model, 'jml_kapasitas_produksi')->textInput(['maxlength' => true]) ?>
