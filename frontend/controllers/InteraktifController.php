@@ -22,9 +22,9 @@ class InteraktifController extends MainController
     public function actionLinkTerkait()
     {
         $list_link_terkait = LinkTerkait::find()
-        						->all();
+                                ->all();
         return $this->render('link-terkait',[
-        	'list_link_terkait' => $list_link_terkait,
+            'list_link_terkait' => $list_link_terkait,
         ]);
     }
 
@@ -36,19 +36,19 @@ class InteraktifController extends MainController
      */
     public function actionContact()
     {
-    	$model_form_comment = new ContactForm();
+        $model_form_comment = new ContactForm();
         if ($model_form_comment->load(Yii::$app->request->post())) {
-        	if($model_form_comment->validate() && $model_form_comment->saveAs())
-            	Yii::$app->session->setFlash('success', 'Terimakasih telah mengisi buku tamu kami, kami akan merespon pesan Anda ini segera mungkin melalui email Anda.');
+            if($model_form_comment->validate() && $model_form_comment->saveAs())
+                Yii::$app->session->setFlash('success', 'Terimakasih telah mengisi buku tamu kami, kami akan merespon pesan Anda ini segera mungkin melalui email Anda.');
             else
-            	Yii::$app->session->setFlash('error', 'Error');
+                Yii::$app->session->setFlash('error', 'Error');
             return $this->refresh();
         }
 
-    	$list_comment = Contact::find()
-    						->where(['tampilkan'=>'Y'])
-    						->orderBy(['id_hubungi'=>SORT_DESC]);
-    	$countQuery = clone $list_comment;
+        $list_comment = Contact::find()
+                            ->where(['tampilkan'=>'Y'])
+                            ->orderBy(['id_hubungi'=>SORT_DESC]);
+        $countQuery = clone $list_comment;
         $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize'=>3]);
         $list_comment_page = $list_comment->offset($pages->offset)
             ->limit($pages->limit)
@@ -60,7 +60,7 @@ class InteraktifController extends MainController
             'pages' => $pages,
         ]);
     }
-	public function actionFeedback()
+    public function actionFeedback()
     {
         $model_form_feedback = new FeedbackForm();
         // var_dump($model_form_feedback); die();
@@ -83,11 +83,19 @@ class InteraktifController extends MainController
         $selectionPerusahaan = Industri::selectionPerusahaan();
 
         $model_form_bukutamu->subject='Pengajuan Industri Baru';
+<<<<<<< HEAD
         // $model->tahun_izin = date("Y");
         // $model->tahun_data = date("Y");
         $model->status = 0;
 
         if ($model_form_bukutamu->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post())) {
+=======
+        $model->tahun_izin = date("Y");
+        $model->tahun_data = date("Y");
+
+        if ($model_form_bukutamu->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post())) {
+            $model->status=0;
+>>>>>>> 18add4c9bb3606ccd7e15a1701fb7ff68c547e73
             $isValid = $model_form_bukutamu->validate();
 
             $isValid = $model->validate() && $isValid;
@@ -151,11 +159,21 @@ class InteraktifController extends MainController
             if ($parents != null) {
                 $cat_id = $parents[0];
                 $out = Villages::getSubCatList($cat_id); 
+<<<<<<< HEAD
                 var_dump($out);die;
+=======
+                // the getSubCatList function will query the database based on the
+                // cat_id and return an array like below:
+                // [
+                //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+                //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+                // ]
+>>>>>>> 18add4c9bb3606ccd7e15a1701fb7ff68c547e73
                 return json_encode(['output'=>$out, 'selected'=>'']);
             }
         }
         return json_encode(['output'=>'', 'selected'=>'']);
+<<<<<<< HEAD
     }
 
     public function actionKbliList($q = null, $id = null) {
@@ -180,4 +198,28 @@ class InteraktifController extends MainController
     }
 
 
+=======
+    }
+
+
+    public function actionKblilist($q = null, $id = null) {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $out = ['results' => ['id' => '', 'text' => '']];
+        if (!is_null($q)) {
+            $query = new Query;
+            $query->select('id, name AS text')
+                ->from('kbli')
+                ->where(['like', 'name', $q])
+                ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => Kbli::find($id)->name];
+        }
+        return $out;
+    }
+
+>>>>>>> 18add4c9bb3606ccd7e15a1701fb7ff68c547e73
 }

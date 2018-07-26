@@ -4,10 +4,16 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \frontend\models\ContactForm */
 
+<<<<<<< HEAD
 
 // The controller action that will render the list
 $url =  Yii::$app->request->baseUrl. '/interaktif/kbli-list';
 //$url = \yii\helpers\Url::to(['/interaktif/kbli-list']);
+=======
+// The controller action that will render the list
+
+$url = \yii\helpers\Url::to(['/industri/kbli-list']);
+>>>>>>> 18add4c9bb3606ccd7e15a1701fb7ff68c547e73
 
 // The widget
 
@@ -24,7 +30,11 @@ use common\models\Districts;
 
 use kartik\depdrop\DepDrop;
 use kartik\select2\Select2;
+<<<<<<< HEAD
 use kartik\daterange\DateRangePicker;
+=======
+
+>>>>>>> 18add4c9bb3606ccd7e15a1701fb7ff68c547e73
 
 $this->title = 'Pengajuan Industri';
 $this->params['breadcrumbs'][] = $this->title;
@@ -137,6 +147,7 @@ $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => 
                                 '4' => 'Izin Lainnya'
                             ]) ?>
 
+<<<<<<< HEAD
                         <?= $form->field($model, 'tahun_izin')->widget(etsoft\widgets\YearSelectbox::classname(), [
                             'yearStart' => -10,
                             'yearEnd' => 10,
@@ -150,12 +161,22 @@ $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => 
                             'pluginOptions' => [
                                 'allowClear' => true,
                                 'minimumInputLength' => 2,
+=======
+                        <?= $form->field($model, 'tahun_izin')->textInput(['maxlength' => true]) ?>
+
+                        <?= $form->field($model, 'kbli')->widget(Select2::classname(), [
+                            'options' => ['placeholder' => 'Search for a kbli ...'],
+                            'pluginOptions' => [
+                                'allowClear' => true,
+                                'minimumInputLength' => 3,
+>>>>>>> 18add4c9bb3606ccd7e15a1701fb7ff68c547e73
                                 'language' => [
                                     'errorLoading' => new JsExpression("function () { return 'Waiting for results...'; }"),
                                 ],
                                 'ajax' => [
                                     'url' => $url,
                                     'dataType' => 'json',
+<<<<<<< HEAD
 
                                     'data' => new JsExpression('function(params) { return {q:params.term}; }')
                                 ],
@@ -170,6 +191,15 @@ $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => 
                             ],
                           ])->label('KBLI'); ?>
 
+=======
+                                    'data' => new JsExpression('function(params) { return {q:params.term}; }')
+                                ],
+                                'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+                                'templateResult' => new JsExpression('function(kbli) { return kbli.text; }'),
+                                'templateSelection' => new JsExpression('function (kbli) { return kbli.text; }'),
+                            ],
+                        ]) ?>
+>>>>>>> 18add4c9bb3606ccd7e15a1701fb7ff68c547e73
 
                         <?= $form->field($model, 'komoditi')->textInput(['maxlength' => true]) ?>
 
@@ -177,10 +207,14 @@ $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => 
 
                         <?= $form->field($model, 'cabang_industri')->textInput(['maxlength' => true]) ?>
 
+<<<<<<< HEAD
                         <?= $form->field($model, 'tahun_data')->widget(etsoft\widgets\YearSelectbox::classname(), [
                             'yearStart' => -10,
                             'yearEnd' => 10,
                          ]) ?>
+=======
+                        <?= $form->field($model, 'tahun_data')->textInput(['maxlength' => true]) ?>
+>>>>>>> 18add4c9bb3606ccd7e15a1701fb7ff68c547e73
 
                         <?= $form->field($model, 'tk_lk')->textInput(['maxlength' => true]) ?>
 
