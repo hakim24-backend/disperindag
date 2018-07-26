@@ -5,6 +5,7 @@ namespace backend\controllers;
 use Yii;
 use common\models\Post;
 use backend\models\PostSearch;
+use backend\models\PollsResult;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\models\BroadcastBerita;
@@ -58,6 +59,23 @@ class PostController extends MainController
         ]);
     }
 	
+    public function actionChart()
+    {
+        $pollSangatBagus = PollsResult::find()->where(['id_answer'=>54])->count();
+        $pollBagus = PollsResult::find()->where(['id_answer'=>55])->count();
+        $pollBiasaSaja = PollsResult::find()->where(['id_answer'=>56])->count();
+        $pollKurangBagus = PollsResult::find()->where(['id_answer'=>57])->count();
+
+
+        return $this->render('chart', [
+            'pollSangatBagus' => $pollSangatBagus,
+            'pollBagus' => $pollBagus,
+            'pollBiasaSaja' => $pollBiasaSaja,
+            'pollKurangBagus' => $pollKurangBagus
+
+        ]);
+    }
+
 	/**
      * Displays a single Contact model.
      * @param integer $id
@@ -93,14 +111,24 @@ class PostController extends MainController
     {
         $model = $this->findModel($id);
         $haveBroadcast = BroadcastBerita::find()->where(['id_berita'=>$id,'date'=>date("Y-m-d")])->count();
+        $pollSangatBagus = PollsResult::find()->where(['id_berita'=>$id,'id_answer'=>54])->count();
+        $pollBagus = PollsResult::find()->where(['id_berita'=>$id,'id_answer'=>55])->count();
+        $pollBiasaSaja = PollsResult::find()->where(['id_berita'=>$id,'id_answer'=>56])->count();
+        $pollKurangBagus = PollsResult::find()->where(['id_berita'=>$id,'id_answer'=>57])->count();
+
         if($haveBroadcast > 0)
             $model->status_broadcast = 1;
         else
             $model->status_broadcast = 0;
         $model->save();
-        
+
         return $this->render('view', [
             'model' => $model,
+            'pollSangatBagus' => (int)$pollSangatBagus,
+            'pollBagus' => (int)$pollBagus,
+            'pollBiasaSaja' => (int)$pollBiasaSaja,
+            'pollKurangBagus' => (int)$pollKurangBagus,
+
         ]);
     }
 

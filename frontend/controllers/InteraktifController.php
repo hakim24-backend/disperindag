@@ -75,6 +75,7 @@ class InteraktifController extends MainController
             'model_form_feedback' => $model_form_feedback,
         ]);
     }
+
     public function actionIndustri()
     {
 
@@ -83,15 +84,13 @@ class InteraktifController extends MainController
         $selectionPerusahaan = Industri::selectionPerusahaan();
 
         $model_form_bukutamu->subject='Pengajuan Industri Baru';
-        // $model->tahun_izin = date("Y");
-        // $model->tahun_data = date("Y");
-
+        $model->tahun_izin = date("Y");
+        $model->tahun_data = date("Y");
+        $model->status = 0;
         if ($model_form_bukutamu->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post())) {
             $model->status=0;
             $isValid = $model_form_bukutamu->validate();
-
             $isValid = $model->validate() && $isValid;
-            // var_dump($isValid);die;
 
             if ($isValid) {
 
@@ -109,38 +108,6 @@ class InteraktifController extends MainController
         ]);
 
 
-        // if ($model_form_bukutamu->load(Yii::$app->request->post())&&$model->load(Yii::$app->request->post())) {
-        //     if($model_form_bukutamu->validate() && $model->validate()){
-        //         // $model_form_bukutamu->save();
-        //         if ($model_form_bukutamu->save()) {
-        //             # code...
-        //             var_dump("expression");die();
-        //             if ($model->save()) {
-        //                 # code...
-        //                 var_dump("expression2");die();
-
-        //             }else{
-        //                 var_dump("expression4");die();
-        //             }
-        //         }else{
-        //             var_dump("expression3");die();
-
-        //         }
-        //         return $this->refresh();
-                
-        //     }
-
-        // }
-        // if (Yii::$app->request->post()) {
-        //     # code...
-        //     var_dump(Yii::$app->request->post());die();
-        // }
-        // return $this->render('form-industri', [
-        //     'model_form_bukutamu' => $model_form_bukutamu,
-        //     'selectionPerusahaan' => $selectionPerusahaan,
-        //     'model' => $model,
-            
-        // ]);
     }
 
     public function actionSubcat() 
@@ -163,24 +130,26 @@ class InteraktifController extends MainController
         return json_encode(['output'=>'', 'selected'=>'']);
     }
 
-
-    public function actionKblilist($q = null, $id = null) {
+    public function actionKbliList($q = null, $id = null) {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $out = ['results' => ['id' => '', 'text' => '']];
         if (!is_null($q)) {
-            $query = new Query;
-            $query->select('id, name AS text')
+            $query = new \yii\db\Query;
+
+            $query->select('id, kode AS kode')
                 ->from('kbli')
-                ->where(['like', 'name', $q])
+                ->where(['like', 'kode', $q])
                 ->limit(20);
+
             $command = $query->createCommand();
             $data = $command->queryAll();
             $out['results'] = array_values($data);
         }
         elseif ($id > 0) {
-            $out['results'] = ['id' => $id, 'text' => Kbli::find($id)->name];
+            $out['results'] = ['id' => $id, 'name' => Kbli::find($id)->kode];
         }
         return $out;
     }
+
 
 }

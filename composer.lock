@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "07a0f5dc5beef12789c51a3c05d6ac86",
+    "content-hash": "4d2a7a6823947d79fe7824870252cb84",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -582,6 +582,46 @@
             "time": "2017-09-06T13:46:57+00:00"
         },
         {
+            "name": "et-soft/yii2-widget-select-year",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/et-soft/yii2-widget-select-year.git",
+                "reference": "10210cf42b9e79ae14d053f10b5de2a6432ab473"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/et-soft/yii2-widget-select-year/zipball/10210cf42b9e79ae14d053f10b5de2a6432ab473",
+                "reference": "10210cf42b9e79ae14d053f10b5de2a6432ab473",
+                "shasum": ""
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "etsoft\\widgets\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Evgeny Titov",
+                    "email": "etsoft2015@gmail.com"
+                }
+            ],
+            "description": "Widget for Yii2, created selectbox field with years",
+            "homepage": "https://github.com/et-soft/yii2-widget-select-year",
+            "keywords": [
+                "extension",
+                "form",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-08-02T07:05:19+00:00"
+        },
+        {
             "name": "ezyang/htmlpurifier",
             "version": "v4.10.0",
             "source": {
@@ -925,8 +965,116 @@
             "time": "2017-11-06T16:04:54+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "kartik-v/yii2-dynagrid",
             "version": "v1.4.8",
+=======
+            "name": "kartik-v/yii2-widget-datepicker",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-datepicker.git",
+                "reference": "39e0e71277d0f115341e118a2b879a0dfcbd01c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-datepicker/zipball/39e0e71277d0f115341e118a2b879a0dfcbd01c3",
+                "reference": "39e0e71277d0f115341e118a2b879a0dfcbd01c3",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": "~1.7"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\date\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Enhanced Yii2 wrapper for the bootstrap datepicker plugin (sub repo split from yii2-widgets).",
+            "homepage": "https://github.com/kartik-v/yii2-widget-datepicker",
+            "keywords": [
+                "date",
+                "extension",
+                "form",
+                "jquery",
+                "picker",
+                "plugin",
+                "select2",
+                "widget",
+                "yii2"
+            ],
+            "time": "2018-07-13T09:53:28+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-widget-depdrop",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-widget-depdrop.git",
+                "reference": "a86b48bdb350c4db9f6e070a07471889171196b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-depdrop/zipball/a86b48bdb350c4db9f6e070a07471889171196b8",
+                "reference": "a86b48bdb350c4db9f6e070a07471889171196b8",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/dependent-dropdown": "~1.4",
+                "kartik-v/yii2-krajee-base": "~1.7"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\depdrop\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Widget that enables setting up dependent dropdowns with nested dependencies (sub repo split from yii2-widgets)",
+            "homepage": "https://github.com/kartik-v/yii2-widget-depdrop",
+            "keywords": [
+                "dependent",
+                "dropdown",
+                "extension",
+                "form",
+                "jquery",
+                "plugin",
+                "widget",
+                "yii2"
+            ],
+            "time": "2018-03-24T08:46:26+00:00"
+        },
+        {
+            "name": "kartik-v/yii2-widget-select2",
+            "version": "dev-master",
+>>>>>>> 27a3978f44b7537fa0fa260ddd0c96b6e728ec24
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-dynagrid.git",
@@ -1888,6 +2036,7 @@
             "time": "2017-10-23T01:57:42+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "setasign/fpdi",
             "version": "1.6.2",
             "source": {
@@ -1935,6 +2084,50 @@
                 "pdf"
             ],
             "time": "2017-05-11T14:25:49+00:00"
+=======
+            "name": "scotthuangzl/yii2-google-chart",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ScottHuangZL/yii2-google-chart.git",
+                "reference": "6bd68466030af8a931b34d2ceacf0a498da5b9a0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ScottHuangZL/yii2-google-chart/zipball/6bd68466030af8a931b34d2ceacf0a498da5b9a0",
+                "reference": "6bd68466030af8a931b34d2ceacf0a498da5b9a0",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "scotthuangzl\\googlechart\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Scott Huang",
+                    "email": "zhiliang.huang@gmail.com"
+                }
+            ],
+            "description": "A wraper for google chart",
+            "keywords": [
+                "extension",
+                "google chart",
+                "hzl",
+                "scott huang",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-06-11T12:13:00+00:00"
+>>>>>>> 27a3978f44b7537fa0fa260ddd0c96b6e728ec24
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2675,8 +2868,14 @@
         "kartik-v/yii2-widget-select2": 20,
         "elzix/yii2-currency-converter": 20,
         "imanilchaudhari/yii2-currency-converter": 20,
+<<<<<<< HEAD
         "kartik-v/yii2-export": 20,
         "kartik-v/yii2-widget-depdrop": 20
+=======
+        "kartik-v/yii2-widget-depdrop": 20,
+        "kartik-v/yii2-widget-datepicker": 20,
+        "scotthuangzl/yii2-google-chart": 20
+>>>>>>> 27a3978f44b7537fa0fa260ddd0c96b6e728ec24
     },
     "prefer-stable": false,
     "prefer-lowest": false,

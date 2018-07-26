@@ -14,6 +14,7 @@ use backend\components\AccessRule;
 /**
  * HalamanProfilController implements the CRUD actions for HalamanProfil model.
  */
+​
 class HalamanProfilController extends MainController
 {
     public function behaviors()

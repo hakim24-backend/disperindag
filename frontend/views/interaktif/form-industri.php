@@ -4,9 +4,10 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \frontend\models\ContactForm */
 
-// The controller action that will render the list
 
-$url = \yii\helpers\Url::to(['/industri/kbli-list']);
+// The controller action that will render the list
+$url =  Yii::$app->request->baseUrl. '/interaktif/kbli-list';
+//$url = \yii\helpers\Url::to(['/interaktif/kbli-list']);
 
 // The widget
 
@@ -23,7 +24,7 @@ use common\models\Districts;
 
 use kartik\depdrop\DepDrop;
 use kartik\select2\Select2;
-
+use kartik\daterange\DateRangePicker;
 
 $this->title = 'Pengajuan Industri';
 $this->params['breadcrumbs'][] = $this->title;
@@ -141,24 +142,32 @@ $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => 
                             'yearEnd' => 10,
                          ]) ?>
 
-                        <?= $form->field($model, 'kbli')->widget(Select2::classname(), [
-                            'options' => ['placeholder' => 'Search for a kbli ...'],
+                            <?= $form->field($model, "kbli")->widget(Select2::classname(), [
+                                'initValueText' => '', // set the initial display text
+                                'options' => ['class'=>'tes','placeholder' => 'Cari Barang ...'],
                             'pluginOptions' => [
                                 'allowClear' => true,
-                                'minimumInputLength' => 3,
+                                'minimumInputLength' => 2,
                                 'language' => [
                                     'errorLoading' => new JsExpression("function () { return 'Waiting for results...'; }"),
                                 ],
                                 'ajax' => [
                                     'url' => $url,
                                     'dataType' => 'json',
+
                                     'data' => new JsExpression('function(params) { return {q:params.term}; }')
                                 ],
                                 'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
-                                'templateResult' => new JsExpression('function(kbli) { return kbli.text; }'),
-                                'templateSelection' => new JsExpression('function (kbli) { return kbli.text; }'),
+                                'templateResult' => new JsExpression('function(kbli) { return kbli.kode; }'),
+                                'templateSelection' => new JsExpression('function (kbli) {
+
+                                  if (kbli.nama!=undefined) return kbli.kode;
+                                  return kbli.kode; }'),
+
+
                             ],
-                        ]) ?>
+                          ])->label('KBLI'); ?>
+
 
                         <?= $form->field($model, 'komoditi')->textInput(['maxlength' => true]) ?>
 

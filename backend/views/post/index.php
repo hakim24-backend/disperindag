@@ -29,6 +29,8 @@ $this->title = 'List Post Berita';
             <p>
                 <?= Html::a('Tambah Post Berita', ['create'], ['class' => 'btn btn-primary btn-flat']) ?>
 				<?= Html::a('Grafik Post Berita', ['grafik'], ['class' => 'btn btn-info btn-flat']) ?>
+                <?= Html::a('Grafik Polling Survey', ['chart'], ['class' => 'btn btn-success btn-flat']) ?>
+               
 			</p>
 
             <?php 
