@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use scotthuangzl\googlechart\GoogleChart;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Post */
@@ -143,6 +144,25 @@ function tampilkanBerita(berita) {
                 <div class="imageThumb"><img src="<?= Yii::$app->request->baseUrl ?>/..<?= Yii::$app->params['uploadUrlPost'] ?><?= $model->gambar ?>"></div>
                 <div class="article"><?= $model->isi_berita ?></div>
             </div>
+            <div class="col-md-12">
+              <div class="box-body" style="position:relative;left: 22%;">
+
+                <?php
+                echo GoogleChart::widget(array('visualization' => 'PieChart',
+                        'data' => array(
+                            array('Komentar', 'Total Polling'),
+                            array('Sangat Bagus', (int)$pollSangatBagus),
+                            array('Bagus', (int)$pollBagus),
+                            array('Biasa Saja', (int)$pollBiasaSaja),
+                            array('Kurang Bagus',(int)$pollKurangBagus)
+                        ),
+                        'options' =>
+                          ['width'=>'600','height'=>'400','title'=>'Diagram lingkaran Polling Berita','left'=>'23%']));
+                ?>
+
+              </div>
+            </div>
+            
         </div>
     </div>
 </section>

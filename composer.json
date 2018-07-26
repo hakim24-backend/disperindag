@@ -31,7 +31,9 @@
         "phpoffice/phpspreadsheet": "^1.2",
         "kartik-v/yii2-widget-depdrop": "@dev",
         "kartik-v/yii2-widget-datepicker": "@dev",
-        "et-soft/yii2-widget-select-year": "*"
+        "et-soft/yii2-widget-select-year": "*",
+        "scotthuangzl/yii2-google-chart": "dev-master"
+        
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
