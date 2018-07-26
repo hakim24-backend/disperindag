@@ -28,7 +28,9 @@
         "kartik-v/yii2-widget-select2": "@dev",
         "elzix/yii2-currency-converter": "dev-master",
         "imanilchaudhari/yii2-currency-converter": "dev-master",
-        "phpoffice/phpspreadsheet": "^1.2"
+        "phpoffice/phpspreadsheet": "^1.2",
+        "kartik-v/yii2-export": "@dev",
+        "kartik-v/yii2-widget-depdrop": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

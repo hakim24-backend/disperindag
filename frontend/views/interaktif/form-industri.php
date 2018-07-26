@@ -136,7 +136,10 @@ $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => 
                                 '4' => 'Izin Lainnya'
                             ]) ?>
 
-                        <?= $form->field($model, 'tahun_izin')->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($model, 'tahun_izin')->widget(etsoft\widgets\YearSelectbox::classname(), [
+                            'yearStart' => -10,
+                            'yearEnd' => 10,
+                         ]) ?>
 
                         <?= $form->field($model, 'kbli')->widget(Select2::classname(), [
                             'options' => ['placeholder' => 'Search for a kbli ...'],
@@ -163,7 +166,10 @@ $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => 
 
                         <?= $form->field($model, 'cabang_industri')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'tahun_data')->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($model, 'tahun_data')->widget(etsoft\widgets\YearSelectbox::classname(), [
+                            'yearStart' => -10,
+                            'yearEnd' => 10,
+                         ]) ?>
 
                         <?= $form->field($model, 'tk_lk')->textInput(['maxlength' => true]) ?>
 

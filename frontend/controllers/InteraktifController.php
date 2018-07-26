@@ -83,8 +83,8 @@ class InteraktifController extends MainController
         $selectionPerusahaan = Industri::selectionPerusahaan();
 
         $model_form_bukutamu->subject='Pengajuan Industri Baru';
-        $model->tahun_izin = date("Y");
-        $model->tahun_data = date("Y");
+        // $model->tahun_izin = date("Y");
+        // $model->tahun_data = date("Y");
 
         if ($model_form_bukutamu->load(Yii::$app->request->post()) && $model->load(Yii::$app->request->post())) {
             $model->status=0;

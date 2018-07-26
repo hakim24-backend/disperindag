@@ -1,11 +1,85 @@
+<style type="text/css">
+    #w0-cols{
+        display: none;
+    }
+</style>
 <?php
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\DetailView;
+use common\models\Villages;
+use common\models\Districts;
+use kartik\export\ExportMenu;
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\JenisPelayananSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
+//
+$gridColumns = [
+    ['class' => 'kartik\grid\SerialColumn'],
+    [
+        'attribute'=>'badan_usaha',
+        'label'=>'Badan Usaha',
+        'value'=>function($data){
+            return $data->badanUsaha->nama_badan_usaha;
+        },
+    ],
+    'nama_perusahaan',
+    'nama_pemilik',
+    'jalan',
+    [
+        'attribute'=>'kelurahan',
+        'label'=>'Desa/Kel',
+        'value'=>function($model){
+            return $model->kelurahan != null ? Villages::find()->where(['id'=>$model->kelurahan])->one()->name : '-';
+        },
+    ],
+    [
+        'attribute'=>'kecamatan',
+        'label'=>'Kecamatan',
+        'value'=>function($model){
+            return $model->kelurahan != null ? Villages::find()->where(['id'=>$model->kelurahan])->one()->name : '-';
+        },
+    ],
+    'telepon',
+    'fax',
+    'email',
+    'web',
+    'tahun_izin',
+    [
+        'label' => 'KBLI',
+        'attribute' => 'kbli',
+        'value' => function($model){
+            return $model->kbli != null ? $model->kbli0->nama : '-';
+        }
+    ],
+    'komoditi',
+    'jenis_produk',
+    'kecamatan',
+    'izin_usaha_industri',
+    'cabang_industri',
+    'tahun_data',
+    'tk_lk',
+    'tk_pr',
+    'nilai_investasi',
+    'jml_kapasitas_produksi',
+    'satuan',
+    'nilai_produksi',
+    [
+        'label' => 'Nilai BB/BP',
+        'attribute' => 'nilai_bb_bp',
+    ],
+    //'nilai_bb_bp',
+    'orientasi_ekspor',
+    'negara_tujuan_ekspor',
+    'npwp',
+];
+
+// var_dump($gridColumns);
+
 
 $this->title = 'Data Perindustrian';
 ?>
@@ -21,15 +95,30 @@ $this->title = 'Data Perindustrian';
   </ol>
 </section>
 
+
 <!-- Main content -->
 <section class="content">
     <div class="box box-primary">
         <div class="box-body">
-            <p>
-                <?= Html::a('Download Excel', ['export-excel'], ['class' => 'btn btn-primary btn-flat']) ?>
-            </p>
 
-            <?= GridView::widget([
+            <?= ExportMenu::widget([
+                'showConfirmAlert'=>false,
+                'target'=> ExportMenu::TARGET_SELF,
+                'dataProvider' => $dataProvider,
+                'columns' => $gridColumns,
+                'fontAwesome' => true,
+                // 'asDropdown' => false,
+                'dropdownOptions' => [
+                    'label' => 'Export All',
+                    'class' => 'btn btn-default'
+                ],
+                'exportConfig' => [
+                    ExportMenu::FORMAT_HTML => false,
+                    ExportMenu::FORMAT_TEXT => false,
+                    ExportMenu::FORMAT_PDF => false
+                ]
+            ]). "<hr>\n".
+            GridView::widget([
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'columns' => [
@@ -38,7 +127,16 @@ $this->title = 'Data Perindustrian';
                     // 'id',
                     //'npwp',
                     'nama_perusahaan',
-                    'badan_usaha',
+                    [
+                        'attribute'=>'badan_usaha',
+                        'label'=>'Badan Usaha',
+                        'format'=>'raw',
+                        'value'=>function($data){
+                            return $data->badanUsaha->nama_badan_usaha;
+                        },
+                        'contentOptions' => ['class' => 'td-action'],
+                        'headerOptions' => ['class' => 'text-center'],
+                    ],
                     'nama_pemilik',
                     [
                         'attribute'=>'status',

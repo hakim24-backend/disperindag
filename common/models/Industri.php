@@ -133,4 +133,16 @@ class Industri extends \yii\db\ActiveRecord
         }
         return $selection;
     }
+    public function getStatus()
+    {
+        switch ($this->status) {
+            case '1':
+                return "<label class='label label-success'>Aktif</label>";
+                break;
+            
+            default:
+                return "<label class='label label-danger'>Tidak Aktif</label>";
+                break;
+        }
+    }
 }

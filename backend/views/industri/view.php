@@ -3,11 +3,15 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use yii\widgets\ActiveForm;
+use common\models\Villages;
+use common\models\Districts;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Industri */
 // var_dump($model->kbli0->nama);die();
-
+// $dataKelurahan=;
+// $dataKecamatan=
+// var_dump();die();
 $this->title = "Detail Data Perindustrian";
 ?>
 <section class="content-header">
@@ -77,11 +81,11 @@ $this->title = "Detail Data Perindustrian";
                     ],
                     [
                         'attribute' => 'kelurahan',
-                        'value' => $model->kelurahan != null ? $model->kelurahan : '-',
+                        'value' => $model->kelurahan != null ? Villages::find()->where(['id'=>$model->kelurahan])->one()->name : '-',
                     ],
                     [
                         'attribute' => 'kecamatan',
-                        'value' => $model->kecamatan != null ? $model->kecamatan : '-',
+                        'value' => $model->kecamatan != null ? Districts::find()->where(['id'=>$model->kecamatan])->one()->name : '-',
                     ],
                     [
                         'label' => 'No. telp',
