@@ -5,6 +5,8 @@ use yii\widgets\DetailView;
 use yii\widgets\ActiveForm;
 use miloschuman\highcharts\Highcharts;
 use kartik\daterange\DateRangePicker;
+use kartik\date\DatePicker;
+
 /* @var $this yii\web\View */
 /* @var $model common\models\Contact */
 
@@ -30,29 +32,19 @@ $this->title = "Grafik Buku Tamu";
             <div class="row">
                <?php $form = ActiveForm::begin(); ?>
                 <div class="col-sm-10">
+
                    <?php
-							$addon = <<< HTML
-										<span class="input-group-addon">
-											<i class="glyphicon glyphicon-calendar"></i>
-										</span> 
-HTML;
 							echo '<div class="input-group drp-container">';
-							echo DateRangePicker::widget([
-								'name'=>'kvdate3',
-								
-								'useWithAddon'=>true,
-								'convertFormat'=>true,
-								'startAttribute' => 'from_date',
-								'endAttribute' => 'to_date',
-								'pluginOptions'=>[
-									'locale'=>['format' => 'Y-m-d'],
-									'optoins'=>[
-									'required'=>true,
-								]
-									
-								],
-								
-							]) . $addon;
+							echo DatePicker::widget([
+			                  'name' => 'kvdate3',
+			                  'options' => ['placeholder' => 'Pilih periode'],
+			                  'pluginOptions' => [
+			                    'autoclose'=>true,
+			                    'startView'=>'year',
+			                    'minViewMode'=>'years',
+			                    'format' => 'yyyy'
+			                  ]
+			                ]);
 							echo '</div>';						
 						?>
                 </div>

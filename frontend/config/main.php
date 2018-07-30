@@ -16,7 +16,7 @@ return [
 		'instafeedConfig' => [
             'class' => InstafeedConfig::className(),
             'clientId' => '7dda0acda05e49c091d956d9ef9c2aeb',
-            'accessToken' => '7215683654.1677ed0.51c930982c214850b7608bf0193edc64',
+            'accessToken' => '7215683654.1677ed0.854237ed10fa447989ae595a15351b60',
         ],
         'userCounter' => [
             'class' => 'app\components\UserCounter',

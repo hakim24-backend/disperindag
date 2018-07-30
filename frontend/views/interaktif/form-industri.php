@@ -25,6 +25,8 @@ use common\models\Districts;
 use kartik\depdrop\DepDrop;
 use kartik\select2\Select2;
 use kartik\daterange\DateRangePicker;
+use kartik\date\DatePicker;
+
 
 $this->title = 'Pengajuan Industri';
 $this->params['breadcrumbs'][] = $this->title;
@@ -137,10 +139,16 @@ $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => 
                                 '4' => 'Izin Lainnya'
                             ]) ?>
 
-                        <?= $form->field($model, 'tahun_izin')->widget(etsoft\widgets\YearSelectbox::classname(), [
-                            'yearStart' => -10,
-                            'yearEnd' => 10,
-                         ]) ?>
+                        <?= $form->field($model, 'tahun_izin')->widget(DatePicker::classname(), [
+                                'name' => 'filter_date',
+                                'options' => ['placeholder' => 'Pilih Tahun Izin ...'],
+                                'pluginOptions' => [
+                                    'autoclose'=>true,
+                                    'startView'=>'year',
+                                    'minViewMode'=>'years',
+                                    'format' => 'yyyy'
+                                  ]
+                            ]) ?>
 
                             <?= $form->field($model, "kbli")->widget(Select2::classname(), [
                                 'initValueText' => '', // set the initial display text
@@ -175,10 +183,16 @@ $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => 
 
                         <?= $form->field($model, 'cabang_industri')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'tahun_data')->widget(etsoft\widgets\YearSelectbox::classname(), [
-                            'yearStart' => -10,
-                            'yearEnd' => 10,
-                         ]) ?>
+                        <?= $form->field($model, 'tahun_data')->widget(DatePicker::classname(), [
+                                'name' => 'filter_date',
+                                'options' => ['placeholder' => 'Pilih Tahun Izin ...'],
+                                'pluginOptions' => [
+                                    'autoclose'=>true,
+                                    'startView'=>'year',
+                                    'minViewMode'=>'years',
+                                    'format' => 'yyyy'
+                                  ]
+                            ]) ?>
 
                         <?= $form->field($model, 'tk_lk')->textInput(['maxlength' => true]) ?>
 

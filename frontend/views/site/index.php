@@ -209,7 +209,7 @@
 										  'userId'=>'7215683654',
 										  'clientId' => $config->clientId,
 										  'accessToken' => $config->accessToken,
-										  'limit'=>3,
+										  'limit'=>9,
 										  'template' => '<a href="{{link}}" target="_blank" id="{{id}}"><img src="{{image}}" /></a>',
 										],
 									  ]);
