@@ -72,14 +72,17 @@ $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => 
                                     'name' => 'state_2',
                                     'value' => '',
                                     'data' => $selectionPerusahaan,
-                                    'options' => ['multiple' => true, 'placeholder' => 'Pilih NPWP / Nama Perusahaan ...']
+                                    'options' => ['placeholder' => 'Pilih NPWP / Nama Perusahaan ...','onchange'=>'dataperusahaan(this);']
                                 ]) ?>
-                                <div id="button-buku-back" style="display:in-line;">
-                                      <div onclick="bukuTamuBack()" class="tombol-next" style="color:#40e854;border:1px solid #CCC;background:#999999;cursor:pointer;vertical-align:middle;width: 100px;padding: 5px;text-align: center;">
+
+                                <div id="button-buku-back" style="display:in-line;padding-top: 10px;">
+                                      <div onclick="bukuTamuBack()" class="tombol-next" style="color:#40e854;border:1px solid #CCC;background:#999999;cursor:pointer;vertical-align:middle;width: 100px;padding: 10px;text-align: center;">
                                         <font color="white">Kembali</font>
                                         <a href="#" class="fill-div"></a>
                                       </div>
                                 </div>
+
+                                <div class="detail-perusahaan" style="padding-top: 10px;"></div>
 
 
 

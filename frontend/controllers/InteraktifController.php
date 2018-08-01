@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use yii\widgets\DetailView;
+
 use frontend\components\MainController;
 use common\models\LinkTerkait;
 use common\models\Contact;
@@ -151,5 +153,150 @@ class InteraktifController extends MainController
         return $out;
     }
 
+
+    public function actionInfo(){
+
+      $id = $_POST['id'];
+      $model = Industri::find()->andFilterWhere(['id'=>$id])->one();
+      // var_dump($model);die();
+      echo DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    // 'jalan',
+                    [
+                        'attribute'=>'status',
+                        'format'=>'raw',
+                        'value' => $model->getStatus(),
+                    ],
+                    [
+                        'attribute' => 'badanUsaha.nama_badan_usaha',
+                        'value' => $model->badan_usaha != null ? $model->badanUsaha->nama_badan_usaha : '-',
+                    ],
+                    [
+                        'attribute' => 'nama_perusahaan',
+                        'value' => $model->nama_perusahaan != null ? $model->nama_perusahaan : '-',
+                    ],
+                    [
+                        'attribute' => 'nama_pemilik',
+                        'value' => $model->nama_pemilik != null ? $model->nama_pemilik : '-',
+                    ],
+                    [
+                        'label' => 'Alamat',
+                        'attribute'=>'jalan',
+                        'value' => $model->jalan != null ? $model->jalan : '-',
+                    ],
+                    [
+                        'attribute' => 'kelurahan',
+                        'value' => $model->kelurahan != null ? Villages::find()->where(['id'=>$model->kelurahan])->one()->name : '-',
+                    ],
+                    [
+                        'attribute' => 'kecamatan',
+                        'value' => $model->kecamatan != null ? Districts::find()->where(['id'=>$model->kecamatan])->one()->name : '-',
+                    ],
+                    [
+                        'label' => 'No. telp',
+                        'attribute'=>'telepon',
+                        'value' => $model->telepon != null ? $model->telepon : '-',
+
+                    ],
+                    [
+                        'attribute' => 'fax',
+                        'value' => $model->fax != null ? $model->fax : '-',
+                    ],
+                    [
+                        'attribute' => 'email',
+                        'value' => $model->email != null ? $model->email : '-',
+                    ],
+                    [
+                        'attribute' => 'web',
+                        'value' => $model->web != null ? $model->web : '-',
+                    ],
+                    [
+                        'attribute' => 'izin_usaha_industri',
+                        'value' => function($model) {
+                            if($model->izin_usaha_industri != NULL){
+                                if ($model->izin_usaha_industri==0) {
+                                    return 'belum';
+                                }else if ($model->izin_usaha_industri==1) {
+                                    return 'TDI';
+                                }else if ($model->izin_usaha_industri==2) {
+                                    return 'IUI';
+                                }else if ($model->izin_usaha_industri==3) {
+                                    return 'IUMK';
+                                }else if ($model->izin_usaha_industri==4) {
+                                    return 'IZIN LAINNYA';
+                                }
+                            }else{
+
+                                return '-';
+                            }
+                        },
+                    ],
+                    [
+                        'attribute' => 'tahun_izin',
+                        'value' => $model->tahun_izin != null ? $model->tahun_izin : '-',
+                    ],
+                    [
+                        'label' => 'Nama KBLI',
+                        'attribute' => 'kbli0.nama',
+                        'value' => $model->kbli != null ? $model->kbli0->nama : '-',
+                    ],
+                    [
+                        'attribute' => 'komoditi',
+                        'value' => $model->komoditi != null ? $model->komoditi : '-',
+                    ],
+                    [
+                        'attribute' => 'jenis_produk',
+                        'value' => $model->jenis_produk != null ? $model->jenis_produk : '-',
+                    ],
+                    [
+                        'attribute' => 'cabang_industri',
+                        'value' => $model->cabang_industri != null ? $model->cabang_industri : '-',
+                    ],
+                    [
+                        'label' => 'TK LK',
+                        'attribute' => 'tk_lk',
+                        'value' => $model->tk_lk != null ? $model->tk_lk : '-',
+                    ],
+                    [
+                        'label' => 'TK PR',
+                        'attribute' => 'tk_pr',
+                        'value' => $model->tk_pr != null ? $model->tk_pr : '-',
+                    ],
+                    [
+                        'attribute' => 'nilai_investasi',
+                        'value' => $model->nilai_investasi != null ? $model->nilai_investasi : '-',
+                    ],
+                    [
+                        'attribute' => 'jml_kapasitas_produksi',
+                        'value' => $model->jml_kapasitas_produksi != null ? $model->jml_kapasitas_produksi : '-',
+                    ],
+                    [
+                        'attribute' => 'satuan',
+                        'value' => $model->satuan != null ? $model->satuan : '-',
+                    ],
+                    [
+                        'attribute' => 'nilai_produksi',
+                        'value' => $model->nilai_produksi != null ? $model->nilai_produksi : '-',
+                    ],
+                    [
+                        'attribute' => 'nilai_bb_bp',
+                        'value' => $model->nilai_bb_bp != null ? $model->nilai_bb_bp : '-',
+                    ],
+                    [
+                        'attribute' => 'orientasi_ekspor',
+                        'value' => $model->orientasi_ekspor != null ? $model->orientasi_ekspor : '-',
+                    ],
+                    [
+                        'attribute' => 'negara_tujuan_ekspor',
+                        'value' => $model->negara_tujuan_ekspor != null ? $model->negara_tujuan_ekspor : '-',
+                    ],
+                    [
+                        'attribute' => 'npwp',
+                        'value' => $model->npwp != null ? $model->npwp : '-',
+                    ],
+                ],
+            ]);
+    }
 
 }
