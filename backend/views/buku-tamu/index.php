@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use backend\assets\InputMaskAsset;
+use yii\widgets\Pjax;
+
 
 InputMaskAsset::register($this);
 
@@ -50,11 +52,25 @@ $this->title = 'Buku Tamu';
     <div class="box box-primary">
 		
         <div class="box-body">
-		<br>
-		<p>
-			<?= Html::a('Grafik Buku Tamu', ['grafik'], ['class' => 'btn btn-success']) ?>
-		</p>
+            <div class="row">
+                <div class="col-sm-2">
+                    <?= Html::a('Grafik Buku Tamu', ['grafik'], ['class' => 'btn btn-success']) ?>
+                </div>
+                <div class="col-sm-2">
+                    <?php $form = ActiveForm::begin(
+                                        ['action' =>['buku-tamu/delete-all'], 
+                                         'method' => 'post',]
+                                    ); ?>
+                    <?= Html::submitButton('Hapus', ['class' => 'btn btn-danger']) ?>
+                </div>
+            </div>
+        <br>
+        <p>
+        </p>
+        <hr>
+        <?php //Pjax::begin(); ?>
         <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+        <br>
 
         <?= GridView::widget([
             'dataProvider' => $dataProvider,
@@ -87,7 +103,18 @@ $this->title = 'Buku Tamu';
                     'contentOptions' => ['class' => 'text-center'],
                     'headerOptions' => ['class' => 'text-center']
                 ],
-
+                [
+                   'class' => 'yii\grid\CheckboxColumn',
+                   'header' => '',
+                   'checkboxOptions' => function($model) {
+                        return [
+                            'value' => $model->id_hubungi,
+                            // 'checked' => true,
+                            'class'=>'del-selected',
+                            'id'=> $model->id_hubungi
+                        ];
+                    },
+                ],
                 [
                     'class' => 'yii\grid\ActionColumn',
                     'template' => '{view} {delete}',
@@ -95,6 +122,11 @@ $this->title = 'Buku Tamu';
                 ],
             ],
         ]); ?>
+
+        
+
+        <?php ActiveForm::end(); ?>
+        <?php //Pjax::end(); ?>
 
         </div>
     </div>

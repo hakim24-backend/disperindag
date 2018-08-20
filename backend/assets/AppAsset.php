@@ -30,6 +30,7 @@ class AppAsset extends AssetBundle
         'static/bootstrap/js/bootstrap.min.js',
         'static/dist/js/app.min.js',
         'js/main.js',
+        'js/buku-tamu.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

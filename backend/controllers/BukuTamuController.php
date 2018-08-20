@@ -49,6 +49,19 @@ class BukuTamuController extends MainController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         $printForm = new PrintBukuTamuForm();
+
+        // $session = Yii::$app->session;
+        // foreach ($dataProvider->getModels() as $key => $value) {
+        //     # code...
+        //     // echo $key;
+        //     echo $value->id_hubungi;
+        //     echo "<br>";
+        // $session->open();
+        // $session->set('select', 'wkwkwk');
+        // $session['select']='wkwkwk';
+        // print_r(Yii::$app->request->queryParams);
+        // }
+        // var_dump($session->get('select'));
         if ($printForm->load(Yii::$app->request->post()) && $printForm->check()){
             $dataPrint = $printForm->getDataPrint();
             $this->layout = "print";
@@ -62,6 +75,15 @@ class BukuTamuController extends MainController
                 'dataProvider' => $dataProvider,
             ]);
         }
+    }
+
+    /**
+     * Lists all Contact models.
+     * @return mixed
+     */
+    public function actionDeleteAll()
+    {
+        var_dump(Yii::$app->request->post());
     }
 
 	/**
