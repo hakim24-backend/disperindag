@@ -18,7 +18,7 @@ class KbliSearch extends Kbli
     public function rules()
     {
       return [
-          [['nama','kode'], 'string', 'max' => 255]
+          [['nama','kode','deskripsi'], 'string', 'max' => 255]
       ];
     }
 
@@ -52,7 +52,8 @@ class KbliSearch extends Kbli
         if($this->load($params)){
           $query
             ->andFilterWhere(['like', 'kode', $params['KbliSearch']['kode']])
-            ->andFilterWhere(['like', 'nama', $params['KbliSearch']['nama']]);
+            ->andFilterWhere(['like', 'nama', $params['KbliSearch']['nama']])
+            ->andFilterWhere(['like', 'deskripsi', $params['KbliSearch']['deskripsi']]);
         }
 
         if (!$this->validate()) {

@@ -19,7 +19,7 @@ class KbliSearch extends Kbli
     {
         return [
             [['id'], 'integer'],
-            [['kode', 'nama'], 'safe'],
+            [['kode', 'nama','deskripsi'], 'safe'],
         ];
     }
 
@@ -63,7 +63,9 @@ class KbliSearch extends Kbli
         ]);
 
         $query->andFilterWhere(['like', 'kode', $this->kode])
-            ->andFilterWhere(['like', 'nama', $this->nama]);
+            ->andFilterWhere(['like', 'nama', $this->nama])
+            ->andFilterWhere(['like', 'deskripsi', $this->deskripsi]);
+
 
         return $dataProvider;
     }
