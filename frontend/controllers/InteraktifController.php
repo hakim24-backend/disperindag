@@ -11,9 +11,11 @@ use common\models\Districts;
 use common\models\Villages;
 use common\models\Industri;
 use common\models\Kbli;
+use common\models\KbliSearch;
 use frontend\models\ContactForm;
 use Yii;
 use yii\data\Pagination;
+use yii\data\ActiveDataProvider;
 use frontend\models\FeedbackForm;
 class InteraktifController extends MainController
 {
@@ -78,6 +80,85 @@ class InteraktifController extends MainController
         ]);
     }
 
+    public function actionSearchnpwp($query){
+      $model = Industri::find()->select(['npwp', 'nama_perusahaan'])->where(['npwp' => $query])->asArray()->one();
+      if($model == null){
+        $model = Industri::find()->select(['npwp', 'nama_perusahaan'])->where(['nama_perusahaan' => $query])->asArray()->one();
+      }
+      echo json_encode($model);
+    }
+
+    public function actionIndustrisave(){
+      #data kbli
+      $searchModel = new KbliSearch();
+      $providerKBLI = $searchModel->search(Yii::$app->request->queryParams);
+      #buku tamu load
+      $model_form_comment = new ContactForm();
+      $list_comment = Contact::find()
+                          ->where(['tampilkan'=>'Y'])
+                          ->orderBy(['id_hubungi'=>SORT_DESC]);
+      $countQuery = clone $list_comment;
+      $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize'=>3]);
+      $list_comment_page = $list_comment->offset($pages->offset)
+          ->limit($pages->limit)
+          ->all();
+      #industri load
+      $model= new Industri();
+      $model->tahun_izin = date("Y");
+      $model->tahun_data = date("Y");
+      $model->status = 0;
+      $selectionPerusahaan = Industri::selectionPerusahaan();
+
+      if ($model->load(Yii::$app->request->post())) {
+          $model->status=0;
+          $model->kbli = intval($model->kbli);
+          $isValid = $model->validate();
+          // var_dump($isValid);die;
+
+          if ($isValid) {
+              $model->save(false);
+              return Yii::$app->response->redirect(['interaktif/contact']);
+          }
+      }
+
+      return $this->render('pendaftaran_industri', [
+        'model_form_comment' => $model_form_comment,
+        'list_comment' => $list_comment_page,
+        'pages' => $pages,
+        'selectionPerusahaan' => $selectionPerusahaan,
+        'model' => $model,
+        'providerKBLI' => $providerKBLI,
+        'searchModel' => $searchModel,
+      ]);
+    }
+
+    public function actionPendaftaransave(){
+      $model_form_comment = new ContactForm();
+      if ($model_form_comment->load(Yii::$app->request->post())) {
+        if($model_form_comment->validate() && $model_form_comment->saveAs()){
+            Yii::$app->session->setFlash('success', 'Terimakasih telah mengisi buku tamu kami, kami akan merespon pesan Anda ini segera mungkin melalui email Anda.');
+            #buku tamu load
+            $model_form_comment = new ContactForm();
+            $list_comment = Contact::find()
+                                ->where(['tampilkan'=>'Y'])
+                                ->orderBy(['id_hubungi'=>SORT_DESC]);
+            $countQuery = clone $list_comment;
+            $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize'=>3]);
+            $list_comment_page = $list_comment->offset($pages->offset)
+                ->limit($pages->limit)
+                ->all();
+            #industri load
+            $model= new Industri();
+            $selectionPerusahaan = Industri::selectionPerusahaan();
+            return Yii::$app->response->redirect(['interaktif/industrisave']);
+
+        }else{
+            Yii::$app->session->setFlash('error', 'Error');
+            return $this->redirect(Yii::$app->request->referrer);
+        }
+      }
+    }
+
     public function actionIndustri()
     {
 
@@ -101,25 +182,25 @@ class InteraktifController extends MainController
                 return $this->refresh();
             }
         }
-        
+
         return $this->render('form-industri', [
             'model_form_bukutamu' => $model_form_bukutamu,
             'selectionPerusahaan' => $selectionPerusahaan,
             'model' => $model,
-            
+
         ]);
 
 
     }
 
-    public function actionSubcat() 
+    public function actionSubcat()
     {
         $out = [];
         if (isset($_POST['depdrop_parents'])) {
             $parents = $_POST['depdrop_parents'];
             if ($parents != null) {
                 $cat_id = $parents[0];
-                $out = Villages::getSubCatList($cat_id); 
+                $out = Villages::getSubCatList($cat_id);
                 // the getSubCatList function will query the database based on the
                 // cat_id and return an array like below:
                 // [
@@ -151,6 +232,11 @@ class InteraktifController extends MainController
             $out['results'] = ['id' => $id, 'name' => Kbli::find($id)->kode];
         }
         return $out;
+    }
+    public function actionPilih($id)
+    {
+      var_dump($id);
+      // code...
     }
 
 

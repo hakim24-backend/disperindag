@@ -5,14 +5,16 @@ use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use backend\assets\InputMaskAsset;
 use yii\widgets\Pjax;
-
+use yii\web\Session;
 
 InputMaskAsset::register($this);
+
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\ContactSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
+$session = Yii::$app->session;
+$selected = array();
 $this->title = 'Buku Tamu';
 ?>
 
@@ -50,7 +52,7 @@ $this->title = 'Buku Tamu';
         </div>
     </div>
     <div class="box box-primary">
-		
+
         <div class="box-body">
             <div class="row">
                 <div class="col-sm-2">
@@ -58,9 +60,10 @@ $this->title = 'Buku Tamu';
                 </div>
                 <div class="col-sm-2">
                     <?php $form = ActiveForm::begin(
-                                        ['action' =>['buku-tamu/delete-all'], 
+                                        ['action' =>['buku-tamu/delete-all'],
                                          'method' => 'post',]
                                     ); ?>
+                    <?php Pjax::begin(); ?>
                     <?= Html::submitButton('Hapus', ['class' => 'btn btn-danger']) ?>
                 </div>
             </div>
@@ -68,7 +71,7 @@ $this->title = 'Buku Tamu';
         <p>
         </p>
         <hr>
-        <?php //Pjax::begin(); ?>
+
         <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
         <br>
 
@@ -87,14 +90,14 @@ $this->title = 'Buku Tamu';
                     'headerOptions' => ['class' => 'td-serial-number']
                 ],
 
-                [ 
+                [
                     'attribute' => 'tanggal',
                     'contentOptions' => ['class' => 'text-center'],
                     'headerOptions' => ['class' => 'text-center']
                 ],
                 'email:email',
                 'subjek',
-                [ 
+                [
                     'attribute' => 'tampilkan',
                     'format' => 'raw',
                     'value' => function ($data){
@@ -123,10 +126,10 @@ $this->title = 'Buku Tamu';
             ],
         ]); ?>
 
-        
 
+        <?php Pjax::end(); ?>
         <?php ActiveForm::end(); ?>
-        <?php //Pjax::end(); ?>
+
 
         </div>
     </div>

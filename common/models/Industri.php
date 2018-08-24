@@ -64,7 +64,7 @@ class Industri extends \yii\db\ActiveRecord
             [['nama_pemilik', 'kelurahan', 'kecamatan', 'web', 'izin_usaha_industri', 'tahun_izin', 'komoditi', 'tahun_data', 'tk_lk', 'tk_pr', 'nilai_investasi', 'jml_kapasitas_produksi', 'satuan', 'nilai_produksi', 'nilai_bb_bp', 'orientasi_ekspor', 'negara_tujuan_ekspor'], 'string', 'max' => 50],
             [['telepon', 'fax'], 'string', 'max' => 20],
             [['email'], 'string', 'max' => 150],
-            [['npwp'], 'string', 'max' => 255],
+            [['npwp'], 'integer', 'integerOnly'=>true],
             [['npwp'], 'unique'],
             [['kbli'], 'exist', 'skipOnError' => true, 'targetClass' => Kbli::className(), 'targetAttribute' => ['kbli' => 'id']],
             [['badan_usaha'], 'exist', 'skipOnError' => true, 'targetClass' => BadanUsaha::className(), 'targetAttribute' => ['badan_usaha' => 'id']],
@@ -139,7 +139,7 @@ class Industri extends \yii\db\ActiveRecord
             case '1':
                 return "<label class='label label-success'>Aktif</label>";
                 break;
-            
+
             default:
                 return "<label class='label label-danger'>Tidak Aktif</label>";
                 break;

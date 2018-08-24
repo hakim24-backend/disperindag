@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use backend\components\MainController;
 use backend\components\AccessRule;
+use yii\web\Session;
 
 class BukuTamuController extends MainController
 {
@@ -83,7 +84,11 @@ class BukuTamuController extends MainController
      */
     public function actionDeleteAll()
     {
-        var_dump(Yii::$app->request->post());
+      $post = Yii::$app->request->post();
+      foreach ($post['selection'] as $id) {
+        $this->findModel($id)->delete();
+      }
+      return $this->redirect(Yii::$app->request->referrer);
     }
 
 	/**
@@ -102,13 +107,13 @@ class BukuTamuController extends MainController
 			foreach($tampX as $keyX =>  $valX){
 				//set data X
 				array_push($dataX,$this->setBulan($valX['bln'],$val['tahun']));
-				
+
 				//set data Y
 				array_push($dataY,(int)$valX['jml']);
-				
-			}	
+
+			}
 		}
-		
+
         if (Yii::$app->request->post('kvdate3')){
 			$dataX = array();
 			$dataY = array();
@@ -117,45 +122,45 @@ class BukuTamuController extends MainController
 			// $time2 = strtotime(explode(' - ',$dateRange)[1]);
 			// $dateStart =  date('Y-m-d',$time1);
 			// $dateEnd =  date('Y-m-d',$time2);
-			
-			
-			
+
+
+
 			$modelFilter = Yii::$app->db->createCommand('SELECT DISTINCT YEAR(tanggal) as tahun from hubungi WHERE YEAR(tanggal) = "'.$dateRange.'"')->queryAll();
-			
+
 			foreach($modelFilter as $key =>  $val){
 				$tampX = array();
-				
+
 				$tampX = Yii::$app->db->createCommand('SELECT  MONTH(tanggal) as bln, count(*) as jml from hubungi where YEAR(tanggal) = '.$val['tahun'].' GROUP BY MONTH(tanggal)')->queryAll();
 
-				
+
 				foreach($tampX as $keyX =>  $valX){
 					//set data X
 					array_push($dataX,$this->setBulan($valX['bln'],$val['tahun']));
-					
+
 					//set data Y
 					array_push($dataY,(int)$valX['jml']);
-					
+
 				}
-				
-					
+
+
 			}
-			
+
 			//var_dump($dataX);die();
-			
+
 			return $this->render('grafik', [
 				'dataX'=>$dataX,
 				'dataY'=>$dataY,
 			]);
         }
-		
+
 		return $this->render('grafik', [
 			'dataX'=>$dataX,
 			'dataY'=>$dataY,
 		]);
-		
-       
+
+
     }
-	
+
     /**
      * Displays a single Contact model.
      * @param integer $id
@@ -170,10 +175,10 @@ class BukuTamuController extends MainController
                         ->where(['id_hubungi'=>$id])
                         ->orderBy(['id'=>SORT_DESC])
                         ->all();
-        
-        if ($model->load(Yii::$app->request->post()) && $model->save()) 
+
+        if ($model->load(Yii::$app->request->post()) && $model->save())
             return $this->redirect(['view', 'id' => $model->id_hubungi]);
-        
+
         return $this->render('view', [
             'model' => $model,
             'balasan' => $balasan,
@@ -267,7 +272,7 @@ class BukuTamuController extends MainController
             ]);
         }
     }
-	
+
 	protected function setBulan($bln,$tahun)
     {
         if($bln == 1){
