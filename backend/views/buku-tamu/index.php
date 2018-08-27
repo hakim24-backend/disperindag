@@ -60,11 +60,18 @@ $this->title = 'Buku Tamu';
                 </div>
                 <div class="col-sm-2">
                     <?php $form = ActiveForm::begin(
-                                        ['action' =>['buku-tamu/delete-all'],
-                                         'method' => 'post',]
+                                    [   'action' =>['buku-tamu/delete-all'],
+                                        'method' => 'post',
+                                     ]
                                     ); ?>
                     <?php Pjax::begin(); ?>
-                    <?= Html::submitButton('Hapus', ['class' => 'btn btn-danger']) ?>
+                    <?= Html::submitButton('Hapus', [
+                        'class' => 'btn btn-danger',
+                        'data' => [
+                            'confirm' => 'Are you sure you want to delete this item?',
+                            'method' => 'post',
+                        ],
+                    ]) ?>
                 </div>
             </div>
         <br>

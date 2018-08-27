@@ -84,11 +84,17 @@ class BukuTamuController extends MainController
      */
     public function actionDeleteAll()
     {
+      // $post['selection']='';
       $post = Yii::$app->request->post();
-      foreach ($post['selection'] as $id) {
-        $this->findModel($id)->delete();
+      if (in_array('selection', $post)) {
+        # code...
+        foreach ($post['selection'] as $id) {
+          $this->findModel($id)->delete();
+        }
+        return $this->redirect(Yii::$app->request->referrer);
+      }else{
+        $this->redirect(['index']);
       }
-      return $this->redirect(Yii::$app->request->referrer);
     }
 
 	/**
