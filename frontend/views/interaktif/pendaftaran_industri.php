@@ -193,20 +193,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div id="form-1">
                         <?= $form->field($model, 'badan_usaha')->dropDownList(
                             $badanUsaha,           // Flat array ('id'=>'label')
-                            ['prompt'=>'Pilih Badan Usaha Perusahaan Anda', 'required'=>true]    // options
+                            ['prompt'=>'Pilih Badan Usaha Perusahaan Anda']    // options
                         ) ?>
 
-                        <?= $form->field($model, 'nama_perusahaan')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'nama_perusahaan')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'nama_pemilik')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'nama_pemilik')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'jalan')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'jalan')->textInput(['maxlength' => true]) ?>
 
                         <?= $form->field($model, 'kecamatan')->dropDownList(Districts::getDistricts(),
-                        ['prompt'=>'Pilih Kecamatan...','id'=> 'cat-id', 'required'=>true])?>
+                        ['prompt'=>'Pilih Kecamatan...','id'=> 'cat-id'])?>
 
                         <?= $form->field($model, 'kelurahan')->widget(DepDrop::classname(), [
-                            'options'=>['id'=>'subcat-id','prompt'=>'Pilih Kelurahan...', 'required'=>true],
+                            'options'=>['id'=>'subcat-id','prompt'=>'Pilih Kelurahan...'],
                             'pluginOptions'=>[
                                 'depends'=>['cat-id'],
                                 'placeholder'=>'Pilih Kelurahan...',
@@ -232,7 +232,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
 
                     <div id="form-2" style="display: none;">
-                        <?= $form->field($model, 'npwp')->textInput(['min'=>'1' ,'type' => 'number' ,'maxlength' => true, 'placeholder' => 'Contoh : 1234567890', 'required'=>true])->label('Nomor Pokok Wajib Pajak') ?>
+                        <?= $form->field($model, 'npwp')->textInput(['min'=>'1' ,'type' => 'number' ,'maxlength' => true, 'placeholder' => 'Contoh : 1234567890'])->label('Nomor Pokok Wajib Pajak') ?>
 
                         <?= $form->field($model, 'izin_usaha_industri')->dropDownList(
                             [
@@ -241,11 +241,11 @@ $this->params['breadcrumbs'][] = $this->title;
                                 '2' => 'IUI',
                                 '3' => 'IUMK',
                                 '4' => 'Izin Lainnya'
-                            ,],['required'=>true])->label('Legalitas Industri') ?>
+                            ])->label('Legalitas Industri') ?>
 
                         <?= $form->field($model, 'tahun_izin')->widget(DatePicker::classname(), [
                                 'name' => 'filter_date',
-                                'options' => ['placeholder' => 'Pilih Tahun Izin ...', 'required'=>true],
+                                'options' => ['placeholder' => 'Pilih Tahun Izin ...'],
                                 'pluginOptions' => [
                                     'autoclose'=>true,
                                     'startView'=>'year',
@@ -257,17 +257,17 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= Html::label('KBLI') ?>
                         <?= Html::textInput('txt_kbli', NULL, ['class' => 'form-control', 'id' => 'txt_kbli']) ?>
 
-                        <?= $form->field($model, 'kbli')->hiddenInput(['id'=>'txt_kbli_val', 'required'=>true])->label(false); ?>
+                        <?= $form->field($model, 'kbli')->hiddenInput(['id'=>'txt_kbli_val'])->label(false); ?>
 
-                        <?= $form->field($model, 'komoditi')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'komoditi')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'jenis_produk')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'jenis_produk')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'cabang_industri')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'cabang_industri')->textInput(['maxlength' => true]) ?>
 
                         <?= $form->field($model, 'tahun_data')->widget(DatePicker::classname(), [
                                 'name' => 'filter_date',
-                                'options' => ['placeholder' => 'Pilih Tahun Izin ...', 'required'=>true],
+                                'options' => ['placeholder' => 'Pilih Tahun Izin ...'],
                                 'pluginOptions' => [
                                     'autoclose'=>true,
                                     'startView'=>'year',
@@ -276,9 +276,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                   ]
                             ]) ?>
 
-                        <?= $form->field($model, 'tk_lk')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'tk_lk')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'tk_pr')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'tk_pr')->textInput(['maxlength' => true]) ?>
 
                         <div class="button-grup-1" style="height: 30px;width: 100%;">
                             <div id="button-kasir-back-1" style="display:in-line;float:left">
@@ -298,19 +298,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     </div>
                     <div id="form-3" style="display: none;">
-                        <?= $form->field($model, 'nilai_investasi')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'nilai_investasi')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'jml_kapasitas_produksi')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'jml_kapasitas_produksi')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'satuan')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'satuan')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'nilai_produksi')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'nilai_produksi')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'nilai_bb_bp')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'nilai_bb_bp')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'orientasi_ekspor')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'orientasi_ekspor')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'negara_tujuan_ekspor')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'negara_tujuan_ekspor')->textInput(['maxlength' => true]) ?>
                         <div class="button-grup-2" style="height: 30px;width: 100%;">
                             <div id="button-kasir-back-2" style="display:in-line;float:left">
                                   <div onclick="myFunctionBack2()" class="tombol-next" style="color:#40e854;border:1px solid #CCC;background:#999999;cursor:pointer;vertical-align:middle;width: 100px;padding: 5px;text-align: center;">
