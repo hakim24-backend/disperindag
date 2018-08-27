@@ -26,8 +26,9 @@ class Kbli extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama','kode'], 'required'],
-            [['nama','kode'], 'string', 'max' => 255]
+            [['nama','kode','deskripsi'], 'required'],
+            [['nama','kode'], 'string', 'max' => 255],
+            [['deskripsi'], 'string'],
         ];
     }
 
@@ -40,6 +41,7 @@ class Kbli extends \yii\db\ActiveRecord
             'id' => 'ID',
             'nama' => 'Nama',
             'kode' => 'Kode',
+            'deskripsi'=>'Deskripsi'
         ];
     }
 }

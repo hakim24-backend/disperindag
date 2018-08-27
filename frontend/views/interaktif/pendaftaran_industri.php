@@ -49,6 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'data-dismiss' =>'modal',
       ],
    ]);
+  echo "<div class='box box-primary table-responsive'>";
   Pjax::begin();
   echo GridView::widget([
      'dataProvider' => $providerKBLI,
@@ -73,9 +74,21 @@ $this->params['breadcrumbs'][] = $this->title;
           [
             'attribute' => 'nama',
             'label' => 'Nama',
+            // 'options' => ['max-width' => '120px'],
             'contentOptions' => [
               'id' => 'val_nama',
               'class' => 'val_nama',
+              // 'style' => 'max-width: 100px;'
+            ],
+          ],
+          [
+            'attribute' => 'deskripsi',
+            'label' => 'Deskripsi',
+            // 'options' => ['max-width' => '120px'],
+            'contentOptions' => [
+              'id' => 'val_desk',
+              'class' => 'val_desk',
+              // 'style' => 'max-width: 100px;'
             ],
           ],
          [
@@ -91,7 +104,7 @@ $this->params['breadcrumbs'][] = $this->title;
      ],
   ]);
   Pjax::end();
-
+  echo "</div>";
   Modal::end();
 ?>
 

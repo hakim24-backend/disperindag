@@ -95,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
           <div id="form-pendaftaranindustri">
             <div class="form">
-              <div class="title">Silahkan isi buku tamu dibawah ini:</div><br>
+              <div class="title">Silahkan daftarkan perusahaan anda dibawah ini:</div><br>
                 <?php $form = ActiveForm::begin(['id' => 'form-pendaftaranindustri', 'action' => 'pendaftaransave/']); ?>
 
                   <?= $form->field($model_form_comment, 'name') ?>

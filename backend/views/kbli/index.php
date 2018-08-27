@@ -39,8 +39,8 @@ $this->title = 'Kbli';
 
                 [
                     'class' => 'yii\grid\ActionColumn',
-                    'template'=>'{update} {delete}',
-                    'contentOptions' => ['class' => 'td-action']
+                    // 'template'=>'{update} {view} {delete}',
+                    // 'contentOptions' => ['class' => 'td-action']
                 ],
             ],
         ]); ?>
