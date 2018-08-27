@@ -58,7 +58,7 @@ class Industri extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['badan_usaha', 'nama_perusahaan', 'nama_pemilik', 'jalan', 'kelurahan', 'kecamatan', 'izin_usaha_industri', 'tahun_izin', 'komoditi', 'jenis_produk', 'tahun_data', 'tk_lk', 'nilai_investasi', 'jml_kapasitas_produksi', 'satuan', 'nilai_produksi', 'nilai_bb_bp', 'orientasi_ekspor', 'npwp', 'status'], 'required'],
+            [['badan_usaha', 'nama_perusahaan', 'nama_pemilik', 'jalan', 'kelurahan', 'kecamatan', 'izin_usaha_industri', 'tahun_izin', 'komoditi', 'jenis_produk', 'tahun_data', 'tk_lk', 'nilai_investasi', 'jml_kapasitas_produksi', 'satuan', 'nilai_produksi', 'nilai_bb_bp', 'npwp', 'status'], 'required'],
             [['badan_usaha', 'kbli', 'status'], 'integer'],
             [['nama_perusahaan', 'jalan', 'jenis_produk', 'cabang_industri'], 'string', 'max' => 100],
             [['nama_pemilik', 'kelurahan', 'kecamatan', 'web', 'izin_usaha_industri', 'tahun_izin', 'komoditi', 'tahun_data', 'tk_lk', 'tk_pr', 'nilai_investasi', 'jml_kapasitas_produksi', 'satuan', 'nilai_produksi', 'nilai_bb_bp', 'orientasi_ekspor', 'negara_tujuan_ekspor'], 'string', 'max' => 50],
@@ -95,13 +95,13 @@ class Industri extends \yii\db\ActiveRecord
             'jenis_produk' => 'Jenis Produk',
             'cabang_industri' => 'Cabang Industri',
             'tahun_data' => 'Tahun Data',
-            'tk_lk' => 'Tk Lk',
-            'tk_pr' => 'Tk Pr',
+            'tk_lk' => 'TK LK',
+            'tk_pr' => 'TK PR',
             'nilai_investasi' => 'Nilai Investasi',
             'jml_kapasitas_produksi' => 'Jml Kapasitas Produksi',
             'satuan' => 'Satuan',
             'nilai_produksi' => 'Nilai Produksi',
-            'nilai_bb_bp' => 'Nilai Bb Bp',
+            'nilai_bb_bp' => 'Nilai BB BP',
             'orientasi_ekspor' => 'Orientasi Ekspor',
             'negara_tujuan_ekspor' => 'Negara Tujuan Ekspor',
             'npwp' => 'Npwp',

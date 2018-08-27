@@ -26,7 +26,7 @@ use kartik\select2\Select2;
 use kartik\depdrop\DepDrop;
 use kartik\daterange\DateRangePicker;
 use kartik\date\DatePicker;
-
+$this->registerJsFile("@web/frontend/web/js/sweetalert.js",['depends' => 'yii\web\JqueryAsset']);
 $this->registerJsFile("@web/frontend/web/js/industri.js",['depends' => 'yii\web\JqueryAsset']);
 $url =  Yii::$app->request->baseUrl. '/interaktif/kbli-list';
 $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => SORT_ASC])->asArray()->all(), 'id', 'nama_badan_usaha');
@@ -216,11 +216,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <?= $form->field($model, 'telepon')->textInput(['maxlength' => true, 'required' => 'true']) ?>
 
-                        <?= $form->field($model, 'fax')->textInput(['maxlength' => true, 'required' => 'true']) ?>
+                        <?= $form->field($model, 'fax')->textInput(['maxlength' => true]) ?>
 
                         <?= $form->field($model, 'email')->hiddenInput(['value'=>'-'])->label(false); ?>
 
-                        <?= $form->field($model, 'web')->textInput(['maxlength' => true, 'required' => 'true']) ?>
+                        <?= $form->field($model, 'web')->textInput(['maxlength' => true,]) ?>
 
                             <div id="button-kasir-next-1" style="display:in-line;">
                                   <div onclick="myFunctionNext1()" class="tombol-next" style="color:#40e854;border:1px solid #CCC;background:#4CAF50;cursor:pointer;vertical-align:middle;width: 100px;padding: 5px;text-align: center;">
@@ -263,7 +263,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <?= $form->field($model, 'jenis_produk')->textInput(['maxlength' => true, 'required'=>true]) ?>
 
-                        <?= $form->field($model, 'cabang_industri')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'cabang_industri')->textInput(['maxlength' => true]) ?>
 
                         <?= $form->field($model, 'tahun_data')->widget(DatePicker::classname(), [
                                 'name' => 'filter_date',
@@ -308,9 +308,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <?= $form->field($model, 'nilai_bb_bp')->textInput(['maxlength' => true, 'required'=>true]) ?>
 
-                        <?= $form->field($model, 'orientasi_ekspor')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'orientasi_ekspor')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'negara_tujuan_ekspor')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'negara_tujuan_ekspor')->textInput(['maxlength' => true]) ?>
                         <div class="button-grup-2" style="height: 30px;width: 100%;">
                             <div id="button-kasir-back-2" style="display:in-line;float:left">
                                   <div onclick="myFunctionBack2()" class="tombol-next" style="color:#40e854;border:1px solid #CCC;background:#999999;cursor:pointer;vertical-align:middle;width: 100px;padding: 5px;text-align: center;">
