@@ -12,4 +12,31 @@ $(document).ready(function(){
       $('#form-pendaftaranindustri').show();
     }
   });
+
+
+  $('#txt_search_npwp').keypress(function(e){
+    if (e.which == 13) {
+      $.ajax({
+          url : "../interaktif/searchnpwp?query="+$(this).val(),
+          dataType : "json",
+          type : "post"
+      }).done(function(data){
+        if (!$.trim(data)){
+          $('#val_npwp').html('-');
+          $('#val_nama_perusahaan').html('-');
+        }
+        else{
+          $('#val_npwp').html(data.npwp);
+          $('#val_nama_perusahaan').html(data.nama_perusahaan)
+        }
+      });
+    }
+  });
 });
+
+
+function showDaftarPerusahaan(){
+    $("#bukutamu").hide();
+    $("#form-daftar").show();
+
+}

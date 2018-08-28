@@ -58,10 +58,13 @@ class InteraktifController extends MainController
             ->limit($pages->limit)
             ->all();
 
+        $model = new Industri();
+
         return $this->render('contact', [
             'model_form_comment' => $model_form_comment,
             'list_comment' => $list_comment_page,
             'pages' => $pages,
+            'model' => $model
         ]);
     }
     public function actionFeedback()

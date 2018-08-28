@@ -10,6 +10,8 @@ use yii\captcha\Captcha;
 use yii\widgets\LinkPager;
 use yii\web\View;
 use kartik\select2\Select2;
+use yii\widgets\DetailView;
+
 
 $this->registerJsFile("@web/frontend/web/js/bukutamu.js",['depends' => 'yii\web\JqueryAsset']);
 $this->title = 'Contact';
@@ -53,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 
 
-<div class="list-page">
+<div class="list-page" id="contact-bottom">
     <div class="box-content">
         <div class="box-body padding">
 
@@ -94,7 +96,11 @@ $this->params['breadcrumbs'][] = $this->title;
           </div>
 
           <div id="form-pendaftaranindustri">
-            <div class="form">
+            <div class="box-header">
+              <div onclick="showDaftarPerusahaan()" class="pull-right box-tools"><a href="#contact-bottom" class="btn btn-sm btn-default btn-flat" id="btn-list">Lihat Daftar Industri Anda disini</a></div>
+            </div>
+            <br>
+            <div class="form" id="bukutamu">
               <div class="title">Silahkan daftarkan perusahaan anda dibawah ini:</div><br>
                 <?php $form = ActiveForm::begin(['id' => 'form-pendaftaranindustri', 'action' => 'pendaftaransave/']); ?>
 
@@ -115,6 +121,59 @@ $this->params['breadcrumbs'][] = $this->title;
                   </div>
               <?php ActiveForm::end(); ?>
             </div>
+          </div>
+          <div id="form-daftar" style="display: none">
+            <div class="title">Silahkan isi masukkan npwp perusahaan anda dibawah ini:</div>
+            <br>
+            <div class="form-group">
+            <?= Html::textInput('txt_search_npwp', NULL, ['class' => 'form-control', 'id' => 'txt_search_npwp', 'placeholder' => 'Contoh : 123456789 atau PT. XYZ, tekan tombol enter untuk mencari']) ?>
+            </div>
+            <!-- <div class="form-group">
+              <?= Html::Button('Kembali', ['class' => 'btn btn-flat btn-warning', 'name' => 'contact-button', 'id' => 'btn_back']) ?>
+            </div> -->
+            <div id="button-buku-back" style="display:in-line;padding-top: 10px;">
+              <div onclick="perusahaanBack()" class="tombol-next" style="color:#40e854;border:1px solid #CCC;background:#999999;cursor:pointer;vertical-align:middle;width: 100px;padding: 10px;text-align: center;">
+                <font color="white">Kembali</font>
+                <a href="#contact-bottom" class="fill-div"></a>
+              </div>
+            </div>
+            <br>
+            <br>
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    [
+                      'attribute' => 'npwp',
+                      'label' => 'Nomor Pokok Wajib Pajak',
+                      'contentOptions' => [
+                        'id' => 'val_npwp'
+                      ],
+                      'value' => function($model){
+                        if($model->npwp != null){
+                          return $model->npwp;
+                        }else{
+                          return '-';
+                        }
+                      }
+                    ],
+                    [
+                      'attribute' => 'nama_perusahaan',
+                      'label' => 'Nama Perusahaan',
+                      'contentOptions' => [
+                        'id' => 'val_nama_perusahaan'
+                      ],
+                      'value' => function($model){
+                        if($model->nama_perusahaan != null){
+                          return $model->npwp;
+                        }else{
+                          return '-';
+                        }
+                      }
+                    ],
+                ],
+            ]) ?> 
+            
+            <div class="detail-perusahaan" style="padding-top: 10px;"></div>
           </div>
         </div>
     </div>
@@ -144,7 +203,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
   </div>
 </div>
-
 <?php
 if(Yii::$app->session->getFlash('success') != null){
     $this->registerJs("$('#myModal').modal('show');", View::POS_END);

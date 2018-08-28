@@ -141,55 +141,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="box-body padding" id="form-industri">
             <div class="form">
                 <?php $form = ActiveForm::begin(['action' => 'industrisave/']); ?>
-                  <div id="form-daftar" style="display: none">
-                      <div class="title">Silahkan isi masukkan npwp perusahaan anda dibawah ini:</div>
-                      <br>
-                      <?= Html::textInput('txt_search_npwp', NULL, ['class' => 'form-control', 'id' => 'txt_search_npwp', 'placeholder' => 'Contoh : 123456789 atau PT. Mega Bangkrut']) ?>
-                      <br>
-                      <br>
-                      <?= DetailView::widget([
-                          'model' => $model,
-                          'attributes' => [
-                              [
-                                'attribute' => 'npwp',
-                                'label' => 'Nomor Pokok Wajib Pajak',
-                                'contentOptions' => [
-                                  'id' => 'val_npwp'
-                                ],
-                                'value' => function($model){
-                                  if($model->npwp != null){
-                                    return $model->npwp;
-                                  }else{
-                                    return '-';
-                                  }
-                                }
-                              ],
-                              [
-                                'attribute' => 'nama_perusahaan',
-                                'label' => 'Nama Perusahaan',
-                                'contentOptions' => [
-                                  'id' => 'val_nama_perusahaan'
-                                ],
-                                'value' => function($model){
-                                  if($model->nama_perusahaan != null){
-                                    return $model->npwp;
-                                  }else{
-                                    return '-';
-                                  }
-                                }
-                              ],
-                          ],
-                      ]) ?>
-                      <div id="button-buku-back" style="display:in-line;padding-top: 10px;">
-                        <div onclick="bukuTamuBack()" class="tombol-next" style="color:#40e854;border:1px solid #CCC;background:#999999;cursor:pointer;vertical-align:middle;width: 100px;padding: 10px;text-align: center;">
-                          <font color="white">Kembali</font>
-                          <a href="#" class="fill-div"></a>
-                        </div>
-                      </div>
-                      <div class="detail-perusahaan" style="padding-top: 10px;"></div>
-                  </div>
-
-
                     <div id="form-1">
                         <?= $form->field($model, 'badan_usaha')->dropDownList(
                             $badanUsaha,           // Flat array ('id'=>'label')
