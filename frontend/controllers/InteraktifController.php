@@ -12,6 +12,8 @@ use common\models\Villages;
 use common\models\Industri;
 use common\models\Kbli;
 use common\models\KbliSearch;
+use common\models\BlokIp;
+
 use frontend\models\ContactForm;
 use Yii;
 use yii\data\Pagination;
@@ -42,10 +44,22 @@ class InteraktifController extends MainController
     {
         $model_form_comment = new ContactForm();
         if ($model_form_comment->load(Yii::$app->request->post())) {
-            if($model_form_comment->validate() && $model_form_comment->saveAs())
-                Yii::$app->session->setFlash('success', 'Terimakasih telah mengisi buku tamu kami, kami akan merespon pesan Anda ini segera mungkin melalui email Anda.');
+            if($model_form_comment->validate())
+
+                if($this->cekBlokir() == true) {
+                    Yii::$app->session->setFlash('warning', 'Maaf Anda tidak bisa mengirim pesan sekarang!');
+                }else if($this->KataJelek($model_form_comment->body)) {
+                    Yii::$app->session->setFlash('warning', 'Maaf komentar anda mengandung kata yang tidak pantas, komentar Anda tidak ditampilkan.');
+                    $this->BlokirIP();
+                }else{
+
+                    if($model_form_comment->saveAs()) {
+                        Yii::$app->session->setFlash('success', 'Terimakasih telah mengisi buku tamu kami, kami akan merespon pesan Anda ini segera mungkin melalui email Anda.');
+                    }
+                }
             else
                 Yii::$app->session->setFlash('error', 'Error');
+
             return $this->refresh();
         }
 
@@ -386,6 +400,108 @@ class InteraktifController extends MainController
                     ],
                 ],
             ]);
+    }
+
+
+    private function KataJelek($kata)
+    {
+        //open from file
+        $path = './'.Yii::$app->params['uploadUrlOther'];
+        $path = str_replace("/","\\", $path);
+        $my_file = $path.'badword.txt';
+        $data = "";
+
+        if(file_exists($my_file)){
+            if(filesize($my_file) > 0){
+                $handle = fopen($my_file, 'r');
+                $data = fread($handle,filesize($my_file));
+                fclose($handle);
+            }
+        }
+        $kata_kotor = explode(",", $data);
+
+        $count = 0;
+
+        $jml_kata = count($kata_kotor);
+        
+        for ($i = 0; $i < $jml_kata; $i++)
+        {
+            if ( stristr($kata, $kata_kotor[$i]))
+            { 
+                $count = 1; 
+                break;
+            }
+        }
+
+        return $count;
+    }
+
+    private function BlokirIP()//BlokIP()
+    {
+        $lamanya  = 60;
+        $time     = new \DateTime(date("Y-m-d H:i:s"));
+        $time->add(new \DateInterval('PT' . $lamanya . 'M'));
+        $duration = $time->format('Y-m-d H:i:s');
+        $ip = $_SERVER['REMOTE_ADDR'];
+        if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
+            $ip = array_pop(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
+        }
+
+        $blokir   = new BlokIp();
+        $blokir->ip_address = $ip;
+        $blokir->sampai = $duration;
+        $blokir->ket = "kata tidak pantas";
+        $blokir->status = 1;
+        $blokir->save();
+
+    }
+
+    private function cekBlokir()
+    {
+        $ip = $_SERVER['REMOTE_ADDR'];
+        if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
+            $ip = array_pop(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
+        }
+        $userIP = BlokIp::find()
+            ->where(['ip_address' => $ip])
+            ->andWhere(['status' => 1])
+            ->one();
+        if($userIP) {
+            $date1 = new \DateTime(date("Y-m-d H:i:s"));
+            $date2 = new \DateTime($userIP->sampai);
+            if($date1 < $date2) {
+                return true;
+            }else{
+                //buka blokir;
+                $userIP->status = 3;
+                $userIP->save(false);
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    public function actionBlokir()
+    {
+       $ip = $_SERVER['REMOTE_ADDR'];
+        if (array_key_exists('HTTP_X_FORWARDED_FOR', $_SERVER)) {
+            $ip = array_pop(explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']));
+        }
+        $userIP = BlokIp::find()
+            ->where(['ip_address' => $ip])
+            ->andWhere(['status' => 1])
+            ->one();
+        if($userIP) {
+            $date1 = new \DateTime(date("Y-m-d H:i:s"));
+            $date2 = new \DateTime($userIP->sampai);
+            if($date1 < $date2) {
+                echo "on";
+            }else{
+                //buka blokir;
+                echo "buka";
+            }
+        }
     }
 
 }

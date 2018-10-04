@@ -84,10 +84,8 @@ class BukuTamuController extends MainController
      */
     public function actionDeleteAll()
     {
-      // $post['selection']='';
       $post = Yii::$app->request->post();
-      if (in_array('selection', $post)) {
-        # code...
+      if (isset($post['selection'])) {
         foreach ($post['selection'] as $id) {
           $this->findModel($id)->delete();
         }

@@ -51,6 +51,12 @@ class DownloadController extends MainController
         $file = $model_download->getPathFrontend().$file;
         
         if (file_exists($file)) {
+            $name=basename($file);
+            $path=pathinfo($file, PATHINFO_EXTENSION);
+            
+            $model_download->hits = $model_download->hits+1; 
+            $model_download->save();
+            // var_dump($file);die;
             /*
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
@@ -60,20 +66,24 @@ class DownloadController extends MainController
             header('Pragma: public');
             header('Content-Length: ' . filesize($file));
             */
-            header('Content-Description: File Transfer');
-            header("Content-Type: octet/stream");
-            header("Pragma: private"); 
-            header("Expires: 0");
-            header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
-            header("Cache-Control: private",false); 
-            
-            header("Content-Disposition: attachment; filename=\"".basename($file)."\";" );
-            header("Content-Transfer-Encoding: binary");
-            header("Content-Length: ".filesize($file));
-            readfile($file);
-            $model_download->hits = $model_download->hits+1; 
-        	$model_download->save();
-            exit;
+            if (pathinfo($file, PATHINFO_EXTENSION)=="pdf") {
+                # code...
+                // var_dump("expression");die;
+                return \Yii::$app->response->sendFile($file, $name, ['inline'=>true]);
+            }else{
+                header('Content-Description: File Transfer');
+                header("Content-Type: octet/stream");
+                header("Pragma: private"); 
+                header("Expires: 0");
+                header("Cache-Control: must-revalidate, post-check=0, pre-check=0");
+                header("Cache-Control: private",false); 
+                
+                header("Content-Disposition: attachment; filename=\"".basename($file)."\";" );
+                header("Content-Transfer-Encoding: binary");
+                header("Content-Length: ".filesize($file));
+                readfile($file);
+                exit;
+            }
         }else{
             $pesan = "Maaf terjadi kesalahan saat download, silahkan hubungi kami kalau memang terjadi kesalahan berulang kali";
             return $this->redirect(['index']);

@@ -192,12 +192,15 @@ $this->params['breadcrumbs'][] = $this->title;
             if(Yii::$app->session->getFlash('success')){
                 echo '<div class="alert alert-success" role="alert">';
                 echo "Sukses";
+            }else if(Yii::$app->session->getFlash('warning')) {
+                echo '<div class="alert alert-warning" role="alert">';
+                echo "Error";
             }else{
                 echo '<div class="alert alert-danger" role="alert">';
                 echo "Error";
             }
             ?>
-            !</strong> <?= Yii::$app->session->getFlash('success') ?><?= Yii::$app->session->getFlash('error') ?>
+            !</strong> <?= Yii::$app->session->getFlash('success') ?><?= Yii::$app->session->getFlash('error') ?><?= Yii::$app->session->getFlash('warning')?>
         </div>
       </div>
     </div>
@@ -205,6 +208,9 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <?php
 if(Yii::$app->session->getFlash('success') != null){
+    $this->registerJs("$('#myModal').modal('show');", View::POS_END);
+}
+if(Yii::$app->session->getFlash('warning') != null){
     $this->registerJs("$('#myModal').modal('show');", View::POS_END);
 }
 ?>

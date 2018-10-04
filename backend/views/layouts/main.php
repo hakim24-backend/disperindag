@@ -418,6 +418,11 @@ AppAsset::register($this);
                           'url' => ['#'],
                           'active'=>Yii::$app->controller->id=='history-shared',
                       ],
+                      [
+                          'label' => '<i class="fa fa-times"></i> <span>Kata Tidak Pantas</span>', 
+                          'url' => ['kata-sensor/edit'],
+                          'active'=>Yii::$app->controller->id=='kata-sensor',
+                      ],
 					  
                   ];
                   $menuItems = array_merge($menuUtama, $menuKonten);

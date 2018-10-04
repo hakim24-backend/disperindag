@@ -122,4 +122,37 @@ class KataSensorController extends MainController
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionEdit()
+    {
+        $path ='../'.Yii::$app->params['uploadUrlOther'];
+        $path = str_replace("/","\\", $path);
+        $my_file = $path.'badword.txt';
+
+        if(Yii::$app->request->post())
+        {
+            $katabaru = Yii::$app->request->post("kata");
+            $katabaru = str_replace(";", ",", $katabaru);
+            chmod($my_file, 0644);
+            $filee = fopen($my_file, "w");
+            fwrite($filee, $katabaru);
+            fclose($filee);
+            return $this->redirect(['edit']);
+
+        }
+        
+        $data = "";
+
+        if(file_exists($my_file)){
+            if(filesize($my_file) > 0){
+                $handle = fopen($my_file, 'r');
+                $data = fread($handle,filesize($my_file));
+                fclose($handle);
+            }
+        }
+
+        return $this->render('edit', [
+            'model' => $data,
+        ]);
+    }
 }
