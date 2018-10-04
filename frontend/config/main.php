@@ -23,7 +23,7 @@ return [
             'tableUsers' => 'pcounter_users',
             'tableSave' => 'pcounter_save',
             'autoInstallTables' => true,
-            'onlineTime' => 10, // min
+            'onlineTime' => 1, // min
         ],
         /*'MenuClass'=>[
             'class'=>'frontend\components\MenuClass',

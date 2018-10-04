@@ -5,6 +5,15 @@ use yii\bootstrap\NavBar;
 
 ?>
 
+<!-- Code provided by Google -->
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'id', includedLanguages: 'en,jw',layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+  }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" type="text/javascript"></script>
+
 <div class="header">
     <div class="header-top">
         <div class="container">
@@ -22,6 +31,10 @@ use yii\bootstrap\NavBar;
                     <input type="submit" value="">
                 </form>
             </div>
+            <div>
+            <div id="google_translate_element"></div>
+                
+            </div>    
         </div>
     </div>
     <div class="head-bottom head-bottom-normal">
@@ -154,7 +167,10 @@ use yii\bootstrap\NavBar;
     </div>
 </div>  
 
+   
 <!--Start of Tawk.to Script-->
+
+
 <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
@@ -165,5 +181,6 @@ use yii\bootstrap\NavBar;
     s1.setAttribute('crossorigin','*');
     s0.parentNode.insertBefore(s1,s0);
     })();
+
 </script>
 <!--End of Tawk.to Script-->
