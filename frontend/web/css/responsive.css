@@ -2,6 +2,9 @@
     ul.nav.navbar-nav li a {
         padding: 12px 15px !important;
     }
+    .gtranslate{
+        text-align: right;
+    }
 }
 
 @media (max-width: 991px) {
@@ -13,6 +16,9 @@
     }
     .logo .text {
         margin-top:20px; 
+    }
+    .gtranslate{
+        text-align: right;
     }
     .search{ 
         float: none;
@@ -93,6 +99,9 @@
     ul.nav.navbar-nav li.treeview ul.dropdown-menu{
         background: #0B468A;
     }
+        .gtranslate{
+        text-align: center;
+    }
     .head-bottom ul.dropdown-menu li a {
         color: #fff !important;
         padding-left: 55px !important;
@@ -123,6 +132,9 @@
         width: 100%;
         text-align: center;
     }
+    .gtranslate{
+        text-align: center;
+    }
     .logo .img, .logo .text {
         float: none;
     }
@@ -140,5 +152,8 @@
 @media (max-width: 460px) {
     html,body {
         overflow-x: scroll;
+    }
+        .gtranslate{
+        text-align: center;
     }
 }

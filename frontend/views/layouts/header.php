@@ -17,7 +17,7 @@ use yii\bootstrap\NavBar;
 <div class="header">
     <div class="header-top">
         <div class="container">
-            <div class="logo">    
+            <div class="col-md-8 logo">    
                 <div class="img"><img src="<?= Yii::$app->request->baseUrl ?>/frontend/web/images/logo.png"></div>
                 <div class="text">
                     <div class="text1">Dinas Perindustrian Dan Perdagangan</div>
@@ -25,16 +25,15 @@ use yii\bootstrap\NavBar;
                 </div>
                 <div class="clear"></div>
             </div>
-            <div class="search">
-                <form method="get" action="<?= Yii::$app->request->baseUrl ?>/post/pencarian">
-                    <input type="text" name="s" value="Pencarian Berita" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Pencarian Berita';}">
-                    <input type="submit" value="">
-                </form>
+            <div class="col-md-3 right-head">
+                <div  class="gtranslate" id="google_translate_element"></div>
+                    <div class="search">
+                        <form method="get" action="<?= Yii::$app->request->baseUrl ?>/post/pencarian">
+                            <input type="text" name="s" value="Pencarian Berita" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Pencarian Berita';}">
+                            <input type="submit" value="">
+                        </form>
+                    </div>  
             </div>
-            <div>
-            <div id="google_translate_element"></div>
-                
-            </div>    
         </div>
     </div>
     <div class="head-bottom head-bottom-normal">
