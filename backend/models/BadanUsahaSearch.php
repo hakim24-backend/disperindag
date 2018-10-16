@@ -5,7 +5,7 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\models\BadanUsaha;
+use common\models\BadanUsaha;
 
 /**
  * BadanUsahaSearch represents the model behind the search form of `backend\models\BadanUsaha`.

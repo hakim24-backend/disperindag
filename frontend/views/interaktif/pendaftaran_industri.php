@@ -4,7 +4,7 @@
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model \frontend\models\ContactForm */
 
-use backend\models\BadanUsaha;
+use common\models\BadanUsaha;
 use common\models\Villages;
 use common\models\Districts;
 

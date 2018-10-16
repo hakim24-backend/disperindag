@@ -3,8 +3,6 @@
 namespace common\models;
 
 use Yii;
-use backend\models\Kbli;
-use backend\models\BadanUsaha;
 
 /**
  * This is the model class for table "industri".

@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\BadanUsaha;
+use common\models\BadanUsaha;
 use backend\models\BadanUsahaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

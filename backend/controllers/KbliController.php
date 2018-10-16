@@ -3,7 +3,7 @@
 namespace backend\controllers;
 
 use Yii;
-use backend\models\Kbli;
+use common\models\Kbli;
 use backend\models\KbliSearch;
 //use yii\web\Controller;
 use yii\web\NotFoundHttpException;

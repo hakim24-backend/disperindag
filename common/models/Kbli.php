@@ -5,15 +5,18 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "account_bidang".
+ * This is the model class for table "kbli".
  *
- * @property integer $id
+ * @property int $id
+ * @property string $kode
  * @property string $nama
+ *
+ * @property Industri[] $industris
  */
 class Kbli extends \yii\db\ActiveRecord
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public static function tableName()
     {
@@ -21,27 +24,33 @@ class Kbli extends \yii\db\ActiveRecord
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['nama','kode','deskripsi'], 'required'],
-            [['nama','kode'], 'string', 'max' => 255],
-            [['deskripsi'], 'string'],
+            [['kode'], 'string', 'max' => 50],
+            [['nama'], 'string', 'max' => 255],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
-            'nama' => 'Nama',
             'kode' => 'Kode',
-            'deskripsi'=>'Deskripsi'
+            'nama' => 'Nama',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getIndustris()
+    {
+        return $this->hasMany(Industri::className(), ['kbli' => 'id']);
     }
 }
