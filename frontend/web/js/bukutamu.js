@@ -2,14 +2,16 @@ $(document).ready(function(){
   $('#form-bukutamu').show();
   $('#form-pendaftaranindustri').hide();
 
-  $('#drop_jenis').change(function(){
-    var jenis = $('#drop_jenis').val();
+  $("input[name='drop_jenis']").on('change', function() {
+    var jenis = $(this).val();
     if(jenis == 0){
       $('#form-bukutamu').show();
       $('#form-pendaftaranindustri').hide();
+      $('#form-daftar').hide();
     }else{
-      $('#form-bukutamu').hide();
-      $('#form-pendaftaranindustri').show();
+        $('#form-bukutamu').hide();
+        $('#form-pendaftaranindustri').show();
+        $('#form-daftar').hide();
     }
   });
 

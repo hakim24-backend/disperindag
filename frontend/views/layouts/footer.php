@@ -32,7 +32,7 @@ use elzix\CurrencyConverter\CurrencyConverter;
                     <div class="text2">Jl. Siwalankerto Utara II/42 Surabaya 60236</div>
                     <div class="text3"><b>Telp : </b> 031-8499895</div>
                     <div class="text4"><b>Fax : </b> 031-8431717</div>
-					<div class="text4"><b>Email : </b> disperindag@jatimprov.go.id</div>
+                    <div class="text4"><b>Email : </b> disperindag@jatimprov.go.id</div>
                 </div>
             </div>
         </div>
@@ -54,27 +54,39 @@ use elzix\CurrencyConverter\CurrencyConverter;
 //     echo 'Nilai jual ' . $currency . ' adalah: ' . $value->jual . '<br>';
 //     echo 'Nilai beli ' . $currency . ' adalah: ' . $value->beli . '<br><br>';
 // }     
-$json = file_get_contents('http://www.adisurya.net/kurs-bca/get');
-$my_array = json_decode($json);
-
-$kurs_usd= $my_array->Data->USD->Jual; 
-$kurs_eur= $my_array->Data->EUR->Jual; 
-$kurs_aud= $my_array->Data->AUD->Jual; 
-$kurs_jpy= $my_array->Data->JPY->Jual; 
-$kurs_sgd= $my_array->Data->SGD->Jual; 
-$last_update_kurs= $my_array->LastUpdate; 
-
-
-
-echo '1 USD = <b>' . number_format("$kurs_usd",2,",",".") . '</b> IDR<br>';
-echo '1 EUR = <b>' . number_format("$kurs_eur",2,",",".") . '</b> IDR<br>';
-echo '1 AUD = <b>' . number_format("$kurs_aud",2,",",".") . '</b> IDR<br>';
-echo '1 JPY = <b>' . number_format("$kurs_jpy",2,",",".") . '</b> IDR<br>';
-echo '1 SGD = <b>' . number_format("$kurs_sgd",2,",",".") . '</b> IDR<br>';
-echo '<br>Terakhir diperbarui pada <b>' . $last_update_kurs . '</b> GMT(+7), Jakarta<br>';
-
-                        
+                        $json = file_get_contents('http://www.adisurya.net/kurs-bca/get');
+                        $my_array = json_decode($json);
+                       
                         ?>
+                        <tr>
+                            <td width="40">USD</td>
+                            <td width="20">Rp <?= number_format($my_array->Data->USD->Jual,2,",",".") ?></td>
+                            <td width="20">Rp <?= number_format($my_array->Data->USD->Beli,2,",",".") ?></td>
+                        </tr>
+
+                        <tr>
+                            <td width="40">EUR</td>
+                            <td width="20">Rp <?= number_format($my_array->Data->EUR->Jual,2,",",".") ?></td>
+                            <td width="20">Rp <?= number_format($my_array->Data->EUR->Beli,2,",",".") ?></td>
+                        </tr>
+
+                        <tr>
+                            <td width="40">AUD</td>
+                            <td width="20">Rp <?= number_format($my_array->Data->AUD->Jual,2,",",".") ?></td>
+                            <td width="20">Rp <?= number_format($my_array->Data->AUD->Beli,2,",",".") ?></td>
+                        </tr>
+
+                        <tr>
+                            <td width="40">JPY</td>
+                            <td width="20">Rp <?= number_format($my_array->Data->JPY->Jual,2,",",".") ?></td>
+                            <td width="20">Rp <?= number_format($my_array->Data->JPY->Beli,2,",",".") ?></td>
+                        </tr>
+
+                        <tr>
+                            <td width="40">SGD</td>
+                            <td width="20">Rp <?= number_format($my_array->Data->SGD->Jual,2,",",".") ?></td>
+                            <td width="20">Rp <?= number_format($my_array->Data->SGD->Beli,2,",",".") ?></td>
+                        </tr>
                     </table>
                 </div>
             </div>

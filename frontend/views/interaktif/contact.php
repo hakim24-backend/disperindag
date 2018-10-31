@@ -61,13 +61,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
           <?php
             echo '<label class="control-label">Pilihan Jenis Buku Tamu</label>';
-            echo Select2::widget([
-              'name' => 'drop_jenis',
-              'id' => 'drop_jenis',
-              'data' => ['Buku Tamu', 'Pendaftaran Industri'],
-              'options' => [
-                  'placeholder' => 'Pilih jenis buku tamu',
-              ],
+      echo Html::radioList('drop_jenis', 0, ['Buku Tamu', 'Pendaftaran Industri'], 
+              [
+                'id'=>'drop_jenis',
+                'itemOptions' => [ 'style'=> 'margin-left: 1em' ]
             ]);
           ?>
           <br>
