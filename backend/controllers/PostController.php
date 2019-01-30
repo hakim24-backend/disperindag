@@ -6,13 +6,15 @@ use Yii;
 use common\models\Post;
 use backend\models\PostSearch;
 use backend\models\PollsResult;
+use backend\models\MemberMobile;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use backend\models\BroadcastBerita;
 use yii\filters\AccessControl;
 use backend\components\MainController;
 use backend\components\AccessRule;
-
+use backend\firebase\Firebase;
+use backend\firebase\Push;
 /**
  * PostController implements the CRUD actions for Post model.
  */
@@ -206,6 +208,30 @@ class PostController extends MainController
         return $this->redirect(['view', 'id' => $id]);
     }
 
+    // 
+    public function actionBroadcastToFirebase($id){
+        $model = $this->findModel($id);
+        $device_tokens = MemberMobile::find()->select(['broadcast_token'])->where(['breadcast_token' != ""]);
+        // var_dump($device_tokens);die;
+        if($device_tokens){
+            $push = null;
+            $push = new Push();
+            $push->News($model->id_berita, $model->judul, $model->isi_berita, $model->imageFile);
+            $mPushNotification = $push->getPush();
+            
+            $firebase = new Firebase();
+            echo $firebase->send($device_tokens, $mPushNotification);
+    
+            $broadcast_model = new BroadcastBerita();
+            $broadcast_model->date = date("Y-m-d", time());
+            $broadcast_model->id_berita = $id;
+            $broadcast_model->save();
+        }else{
+            $response['error']=true;
+            $response['message']='Parameters missing';
+        }
+    }
+
     /**
      * Broadcast berita, notif to mobile apps
      * @param integer $id
@@ -231,6 +257,7 @@ class PostController extends MainController
             'deskripsi'=>$model->getStringThumb($model->isi_berita,100),
             'gambar_url'=>$image,
         ];
+        
         return json_encode($return,JSON_FORCE_OBJECT);
         //return $this->redirect(['view', 'id' => $id]);
     }   

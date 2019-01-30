@@ -33,7 +33,7 @@ window.onload  = function () {
             var r = confirm('Broadcast suatu berita dibatasi 1 kali sehari, apakah Anda yakin ingin membroadcast berita ini sekarang?');
             if(r==true){
                 $.ajax({
-                    url: '".Yii::$app->request->baseUrl."/post/broadcast-notif?id=".$model->id_berita."',
+                    url: '".Yii::$app->request->baseUrl."/post/broadcast-to-firebase?id=".$model->id_berita."',
                     type: 'post',
                     beforeSend: function(){
                         $('#button_notif_berita').button('loading');
