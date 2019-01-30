@@ -87,6 +87,21 @@ class MemberController extends \yii\rest\ActiveController
             return ["error" => true, "message" => "Gagal menyimpan data !"];
         }
     }
+
+    public function actionUpdateToken() {
+        $key = \Yii::$app->user->identity->getAuthKey();
+        $user = \app\modules\v1\models\MemberMobile::findIdentityByAccessToken($key);
+        
+        $input = \Yii::$app->request->post();
+        
+        $user->broadcast_token = $input['broadcast_token'];
+        
+        if($user->save()) {
+            return ["error" => false, "message" => "Data berhasil diupdate !"];
+        }else{
+            return ["error" => true, "message" => "Gagal menyimpan data !"];
+        }
+    }
     
     public function actionProfil() {
         $key = \Yii::$app->user->identity->getAuthKey();

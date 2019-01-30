@@ -16,6 +16,7 @@ use yii\web\IdentityInterface;
  * @property string $password_reset_token
  * @property string $email
  * @property string $auth_key
+ * @property string $broadcast_token
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
@@ -201,6 +202,7 @@ class MemberMobile extends ActiveRecord implements IdentityInterface
             'member_status'     => 'status',
             'member_tgl_lahir'  => 'tanggal_lahir',
             'member_instansi'   => 'instansi',
+            'member_broadcast_token'   => 'broadcast_token',
         ];
     }
 }
