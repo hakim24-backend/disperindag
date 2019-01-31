@@ -33,6 +33,10 @@ class PostController extends MainController
                         'allow'=>true,
                         'roles'=>['@'],
                     ],
+                    [
+                        'actions' => ['broadcast-to-firebase'],
+                        'allow' => true,
+                    ],
                 ],
             ],
             'verbs' => [
@@ -210,22 +214,42 @@ class PostController extends MainController
 
     // 
     public function actionBroadcastToFirebase($id){
-        $model = $this->findModel($id);
-        $device_tokens = MemberMobile::find()->select(['broadcast_token'])->where(['breadcast_token' != ""]);
+        $model =  Post::findOne($id);
+        $device_tokens = MemberMobile::find()->select(['broadcast_token'])->where(['not', ['broadcast_token' => null]])->all();
         // var_dump($device_tokens);die;
         if($device_tokens){
             $push = null;
+            $url_bash = "http://disperindag.jatimprov.go.id";
+            $image = $url_bash.Yii::$app->params['uploadUrlPost']."thumb_mobile/small_".$model->gambar;
+            if(!$this->is_url_exist($image)){
+                $image = $url_bash.Yii::$app->params['uploadUrlPost']."default-mobile.png";
+            }
             $push = new Push();
-            $push->News($model->id_berita, $model->judul, $model->isi_berita, $model->imageFile);
+            $push->News($model->id_berita, $model->judul, $model->getStringThumb($model->isi_berita,100), $image);
             $mPushNotification = $push->getPush();
-            
-            $firebase = new Firebase();
-            echo $firebase->send($device_tokens, $mPushNotification);
+            // var_dump($mPushNotification);
+            foreach ($device_tokens as $key => $value) {
+                // var_dump($value->broadcast_token);
+                // echo "<br>";
+                // echo "<br>";
+                $firebase = new Firebase();
+                $firebase->send($value->broadcast_token, $mPushNotification);
+            }
     
             $broadcast_model = new BroadcastBerita();
             $broadcast_model->date = date("Y-m-d", time());
             $broadcast_model->id_berita = $id;
             $broadcast_model->save();
+            
+            $return = [
+                'event'=>'berita',
+                'id'=>$model->id_berita,
+                'judul'=>$model->judul,
+                'message'=>$model->getStringThumb($model->isi_berita,100),
+                'gambar_url'=>$image,
+            ];
+            
+            return json_encode($return,JSON_FORCE_OBJECT);
         }else{
             $response['error']=true;
             $response['message']='Parameters missing';
@@ -252,6 +276,7 @@ class PostController extends MainController
         }
         
         $return = [
+            'event'=>'berita',
             'id'=>$model->id_berita,
             'judul'=>$model->judul,
             'deskripsi'=>$model->getStringThumb($model->isi_berita,100),

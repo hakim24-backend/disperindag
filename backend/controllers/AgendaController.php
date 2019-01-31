@@ -11,7 +11,9 @@ use backend\models\BroadcastAgenda;
 use yii\filters\AccessControl;
 use backend\components\MainController;
 use backend\components\AccessRule;
-
+use backend\firebase\Firebase;
+use backend\firebase\Push;
+use backend\models\MemberMobile;
 /**
  * AgendaController implements the CRUD actions for Agenda model.
  */
@@ -29,6 +31,10 @@ class AgendaController extends MainController
                     [
                         'allow'=>true,
                         'roles'=>['@'],
+                    ],
+                    [
+                        'actions' => ['broadcast-to-firebase'],
+                        'allow' => true,
                     ],
                 ],
             ],
@@ -154,6 +160,42 @@ class AgendaController extends MainController
             'jam'=> $model->jam,
         ];
         return json_encode($return,JSON_FORCE_OBJECT);
+    }
+
+    public function actionBroadcastToFirebase($id)
+    {
+        $model = Agenda::findOne($id);
+        $device_tokens = MemberMobile::find()->select(['broadcast_token'])->where(['not', ['broadcast_token' => null]])->all();
+
+        if ($device_tokens) {
+            $push = null;
+            $push = new Push();
+            $push->Agenda($model->id_agenda, $model->tema, $model->tgl_mulai, $model->tgl_selesai,$model->jam,$model->tempat);
+            $mPushNotification = $push->getPushAgenda();
+            foreach ($device_tokens as $key => $value) {
+                $firebase = new Firebase();
+                $firebase->send($value->broadcast_token, $mPushNotification);
+            }
+    
+            $broadcast_model = new BroadcastAgenda();
+            $broadcast_model->date = date("Y-m-d",time());
+            $broadcast_model->id_agenda = $id;
+            $broadcast_model->save();
+
+            $return = [
+                'id'=>$model->id_agenda,
+                'topik'=>$model->tema,
+                'tanggal_mulai'=> $model->tgl_mulai,
+                'tanggal_selesai'=> $model->tgl_selesai,
+                'lokasi'=> $model->tempat,
+                'jam'=> $model->jam,
+            ];
+            return json_encode($return,JSON_FORCE_OBJECT);      
+        }else{
+            $response['error']=true;
+            $response['message']='Parameters missing';
+        }
+        
     }
 
     /**

@@ -4,8 +4,9 @@ namespace backend\firebase;
 class Firebase {
 
     public function send($registration_ids, $message) {
+        // var_dump($registration_ids);die;
         $fields = array(
-            'registration_ids' => $registration_ids,
+            'to' => $registration_ids,
             'data' => $message,
         );
         return $this->sendPushNotification($fields);
@@ -16,6 +17,7 @@ class Firebase {
     * and then the message is sent 
     */
     private function sendPushNotification($fields) {
+        // var_dump(json_encode($fields));die;
          
         //importing the constant files
         require_once dirname(__FILE__) . '\config\Config.php';

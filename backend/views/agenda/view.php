@@ -24,7 +24,7 @@ window.onload  = function () {
             var r = confirm('Broadcast suatu agenda dibatasi 1 kali sehari, apakah Anda yakin ingin membroadcast agenda ini sekarang?');
             if(r==true){
                 $.ajax({
-                    url: '".Yii::$app->request->baseUrl."/agenda/broadcast-notif?id=".$model->id_agenda."',
+                    url: '".Yii::$app->request->baseUrl."/agenda/broadcast-to-firebase?id=".$model->id_agenda."',
                     type: 'post',
                     beforeSend: function(){
                         $('#button_notif_agenda').button('loading');

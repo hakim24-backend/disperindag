@@ -39,8 +39,9 @@ window.onload  = function () {
                         $('#button_notif_berita').button('loading');
                     },                 
                     success: function(detailBerita2){
-                        $('#button_notif_berita').button('reset');
+                        console.log(detailBerita2);
                         var hasil = JSON.parse(detailBerita2);
+                        $('#button_notif_berita').button('reset');
                         console.log(hasil);
                         socket.emit('beritaDitambahkan', hasil);  
                         location.reload();

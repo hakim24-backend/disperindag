@@ -53,11 +53,27 @@ class Push {
     //getting the push notification
     public function getPush() {
         $res = array();
-        $res['data']['title'] = $this->title;
+        $res['data']['judul'] = $this->title;
         $res['data']['message'] = $this->message;
-        $res['data']['image'] = $this->image;
+        $res['data']['gambar_url'] = $this->image;
+        $res['data']['id'] = $this->news_id;
+        $res['data']['event'] = 'berita';
         return $res;
     }
+
+    public function getPushAgenda() {
+        $res = array();
+        $res['data']['id'] = $this->agenda_id;
+        $res['data']['topik'] = $this->topic;
+        $res['data']['tanggal_mulai'] = $this->date_start;
+        $res['data']['tanggal_selesai'] = $this->date_end;
+        $res['data']['jam'] = $this->time;
+        $res['data']['lokasi'] = $this->location;
+        $res['data']['event'] = 'agenda';
+        return $res;
+    }
+
+
  
 }
 

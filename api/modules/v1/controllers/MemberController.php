@@ -33,7 +33,7 @@ class MemberController extends \yii\rest\ActiveController
         ];
         $behaviors['authenticator'] = [
             'class' => \yii\filters\auth\HttpBearerAuth::className(),
-            'only'  => ['profil', 'edit', 'ganti-password'],
+            'only'  => ['profil', 'edit', 'ganti-password','update-token'],
         ];
         
         return $behaviors;

@@ -52,6 +52,7 @@ class MemberMobile extends \yii\db\ActiveRecord
             [['nama', 'gender', 'email','no_telp', 'status'], 'required'],
             [['status'], 'integer'],
             [['nama'], 'string', 'max' => 30],
+            [['broadcast_token'], 'string', 'max' => 255],
             [['gender'], 'string', 'max' => 1],
             [['alamat'], 'string', 'max' => 100],
             [['no_telp'], 'string', 'max' => 15],
