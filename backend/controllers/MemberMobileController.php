@@ -126,6 +126,25 @@ class MemberMobileController extends MainController
         return $this->redirect(['index']);
     }
 
+    public function actionDeleteSelected($id)
+    {
+        if ($id == null) {
+            Yii::$app->session->setFlash('warning', "Tidak ada data yang dihapus");
+            return $this->redirect(['index']);
+        } else {
+
+            $stringToArrayId = explode(',', $id);
+
+            foreach ($stringToArrayId as $key => $value) {
+                $data[$key] = $this->findModel($value);
+                $data[$key]->delete();
+            }
+
+            Yii::$app->session->setFlash('success', "Hapus data yang dipilih berhasil");
+            return $this->redirect(['index']);
+        }
+    }
+
     /**
      * Finds the MemberMobile model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

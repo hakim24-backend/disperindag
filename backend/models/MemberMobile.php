@@ -120,6 +120,7 @@ class MemberMobile extends \yii\db\ActiveRecord
             if($this->isNewRecord){
                 $this->setPassword();
                 $this->generateAuthKey();
+                $status_mail = 1;
             }else{
                 if($this->status != $this->status_before){
                     if($this->status==10){
