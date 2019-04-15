@@ -95,43 +95,6 @@ $this->params['breadcrumbs'][] = $this->title;
   Modal::end();
 ?>
 
-<div class="list-page">
-    <div class="box-content">
-        <div class="box-header">
-            <h3 class="title">Buku Tamu</h3>
-        </div>
-        <div class="box-body">
-            <div class="list-comment">
-                <?php foreach ($list_comment as $key => $item) { ?>
-                        <div class="item">
-                            <div class="text1"><?= $item->nama ?></div>
-                            <div class="date"><?= $item->tanggal ?></div>
-                            <div>
-                                <?php if($item->getStatus()==0): ?>
-                                    <span class="label label-default">Menunggu Tanggapan</span>
-                                <?php else: ?>
-                                    <span class="label label-success">Sudah Ditanggapi</span>
-                                <?php endif; ?>
-                            </div>
-                            <div class="text2">
-                            <strong><?= $item->subjek ?></strong><br>
-                            <?= nl2br($item->pesan) ?>
-                            </div>
-                        </div>
-                <?php } ?>
-                <div class="box-footer">
-                    <?php
-                        echo LinkPager::widget([
-                            'pagination' => $pages,
-                            'maxButtonCount' => 5,
-                        ]);
-                    ?>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 
 <div class="list-page">
     <div class="box-content">

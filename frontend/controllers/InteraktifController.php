@@ -153,7 +153,7 @@ class InteraktifController extends MainController
       $model_form_comment = new ContactForm();
       if ($model_form_comment->load(Yii::$app->request->post())) {
         if($model_form_comment->validate() && $model_form_comment->saveAs()){
-            Yii::$app->session->setFlash('success', 'Terimakasih telah mengisi buku tamu kami, kami akan merespon pesan Anda ini segera mungkin melalui email Anda.');
+            Yii::$app->session->setFlash('success', 'Terimakasih telah mengisi pendaftaran industri.');
             #buku tamu load
             $model_form_comment = new ContactForm();
             $list_comment = Contact::find()
