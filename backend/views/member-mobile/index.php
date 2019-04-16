@@ -31,6 +31,7 @@ $this->title = 'Member Mobiles';
     <p>
         <?= Html::a('Tambah Member Mobile', ['create'], ['class' => 'btn btn-primary btn-flat']) ?>
         <?= Html::a('Export Excel', ['excel'], ['class' => 'btn btn-success btn-flat']) ?>
+        <?= Html::a('Export PDF', ['pdf'], ['class' => 'btn btn-danger btn-flat','data-pjax' => 0,'target' => '_blank']) ?>
         <a class="btn btn-warning select-data">Hapus Data Yang Dipilih</a>
     </p>
 
@@ -53,6 +54,7 @@ $this->title = 'Member Mobiles';
             'nama',
 
             'email:email',
+
             [
                 'attribute' => 'created_at',
                 'format' => 'raw',

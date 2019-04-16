@@ -33,7 +33,8 @@
         "kartik-v/yii2-widget-depdrop": "@dev",
         "kartik-v/yii2-widget-datepicker": "@dev",
         "et-soft/yii2-widget-select-year": "*",
-        "scotthuangzl/yii2-google-chart": "dev-master"
+        "scotthuangzl/yii2-google-chart": "dev-master",
+        "kartik-v/yii2-mpdf": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
@@ -42,8 +43,17 @@
         "yiisoft/yii2-faker": "*"
     },
     "config": {
-        "process-timeout": 1800
+        "process-timeout": 1800,
+        "fxp-asset": {
+            "enabled": false
+        }
     },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
     "extra": {
         "asset-installer-paths": {
             "npm-asset-library": "vendor/npm",
