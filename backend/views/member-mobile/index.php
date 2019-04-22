@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\grid\GridView;
 use kartik\daterange\DateRangePicker;
 
@@ -29,9 +30,13 @@ $this->title = 'Member Mobiles';
 
     <p>
         <?= Html::a('Tambah Member Mobile', ['create'], ['class' => 'btn btn-primary btn-flat']) ?>
+        <?= Html::a('Export Excel', ['excel'], ['class' => 'btn btn-success btn-flat']) ?>
+        <?= Html::a('Export PDF', ['pdf'], ['class' => 'btn btn-danger btn-flat','data-pjax' => 0,'target' => '_blank']) ?>
+        <a class="btn btn-warning select-data">Hapus Data Yang Dipilih</a>
     </p>
 
     <?= GridView::widget([
+        'id' => 'my_gridview_id',
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'rowOptions'=>function($model){
@@ -40,21 +45,16 @@ $this->title = 'Member Mobiles';
             }
         },
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn',
-                    'contentOptions' => ['class' => 'td-serial-number'],
-                    'headerOptions' => ['class' => 'td-serial-number']],
+            [
+                'class' => 'yii\grid\SerialColumn',
+                'contentOptions' => ['class' => 'td-serial-number'],
+                'headerOptions' => ['class' => 'td-serial-number']
+            ],
 
-            //'id',
-			
             'nama',
-			
-            //'gender',
-            //'alamat',
-            //'no_telp',
-            // 'auth_key',
-            // 'password_hash',
-            // 'password_reset_token',
+
             'email:email',
+
             [
                 'attribute' => 'created_at',
                 'format' => 'raw',
@@ -86,7 +86,10 @@ $this->title = 'Member Mobiles';
                  'filter' => Html::activeDropDownList($searchModel, 'status',   ['10'=>'Aktif','00'=>'Non-Aktif'],['class'=>'form-control','prompt' => 'Semua Status']),
             ],
             
-            // 'updated_at',
+            [
+                'class' => 'yii\grid\CheckboxColumn',
+                // you may configure additional properties here
+            ],
 
             [
                 'class' => 'yii\grid\ActionColumn',
@@ -98,3 +101,18 @@ $this->title = 'Member Mobiles';
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+
+    $('.select-data').on('click', function(){
+        var id = $('#my_gridview_id').yiiGridView('getSelectedRows');
+        var alert = confirm('Apakah anda ingin menghapus data yang terpilih ?');
+        if (alert == true) {
+            $.ajax({
+                url : "<?php echo Url::to(['member-mobile/delete-selected?id=']) ?>"+id
+            });
+        } else {
+            return false;
+        }
+    });
+</script>
