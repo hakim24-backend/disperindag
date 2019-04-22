@@ -113,6 +113,41 @@ AppAsset::register($this);
                 </li>
                 <!-- End Notif Buku Tamu -->
 
+                <!-- Notif Industri -->
+                <li class="dropdown messages-menu">
+                    <!-- Menu toggle button -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="fa fa-paper-plane-o"></i>
+                      <?php 
+                        $ni_not_see = count($notif_new['industri']);
+                        if($ni_not_see)
+                          echo '<span class="label label-warning">'.$ni_not_see.'</span>';
+                      ?>
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li class="header"><?= ($ni_not_see>0) ? "Anda mendapatkan ".$ni_not_see." pesan baru" : "Tidak ada pesan baru" ?></li>
+                      <li <?= ($ni_not_see==0) ? 'style="height:0px;"' : '' ?>>
+                        <!-- inner menu: contains the messages -->
+                        <ul class="menu">
+                          <?php foreach ($notif_new['industri'] as $key => $industri) { ?>
+                            <li <?= ($key%2==0) ? "style='background-color:#fbfbfb'" : "" ?>><!-- start message -->
+                              <a href="<?= Yii::$app->request->baseUrl ?>/industri/view/<?= $industri->id ?>">
+                                <!-- Message title and timestamp -->
+                                <h4>
+                                  <?= $industri->email ?>
+                                </h4>
+                                <!-- The message -->
+                                <p>Pendaftaran Industri <?= $industri->nama_perusahaan ?></p>
+                              </a>
+                            </li><!-- end message -->
+                          <?php } ?>
+                        </ul><!-- /.menu -->
+                      </li>
+                      <li class="footer"><a href="<?= Yii::$app->request->baseUrl ?>/buku-tamu">Lihat Semua Pesan</a></li>
+                    </ul>
+                </li>
+                <!-- End Notif Industri -->
+
                 <!-- Notif Member Mobile -->
                 <li class="dropdown messages-menu">
                     <!-- Menu toggle button -->
@@ -264,13 +299,16 @@ AppAsset::register($this);
                   $nn_sidebar_bt = "";
                   $nn_sidebar_m = "";
                   $nn_sidebar_e = "";
+                  $nn_sidebar_i = "";
                   if($nbc_not_see>0) 
                     $nn_sidebar_bt = '<small class="label pull-right bg-yellow">'.$nbc_not_see.'</small>';
                   if($nmc_not_see>0)
                     $nn_sidebar_m = '<small class="label pull-right bg-yellow">'.$nmc_not_see.'</small>';
                   if($nec_not_see>0)
                     $nn_sidebar_e = '<small class="label pull-right bg-yellow">'.$nec_not_see.'</small>';
-                
+                  if ($ni_not_see > 0)
+                    $nn_sidebar_i = '<small class="label pull-right bg-yellow">'.$ni_not_see.'</small>';
+
                   $menuUtama = [
                       [
                           'label' => 'MENU UTAMA', 
@@ -329,11 +367,6 @@ AppAsset::register($this);
                                         'url' => ['badan-usaha/index'],
                                         'active'=>Yii::$app->controller->id=='badan-usaha',
                                       ],
-                                      [
-                                        'label' => '<i class="fa fa-list-ol fa-sm"></i>Data Perindustrian',
-                                        'url' => ['industri/index'],
-                                        'active'=>Yii::$app->controller->id=='industri',
-                                      ]
                                     ]
                                  
                                ],
@@ -381,6 +414,11 @@ AppAsset::register($this);
                           'active'=>Yii::$app->controller->id=='buku-tamu',
                       ],
                       [
+                          'label' => '<i class="fa fa-university"></i>Data Perindustrian'.$nn_sidebar_i,
+                          'url' => ['industri/index'],
+                          'active'=>Yii::$app->controller->id=='industri',
+                      ],
+                      [
                           'label' => '<i class="fa fa-user"></i> <span>Member Mobile</span> '.$nn_sidebar_m, 
                           'url' => ['member-mobile/index'],
                           'active'=>Yii::$app->controller->id=='member-mobile',
@@ -395,7 +433,7 @@ AppAsset::register($this);
                           'url' => ['mail-server/index'],
                           'active'=>Yii::$app->controller->id=='mail-server',
                       ],
-					  [
+					            [
                           'label' => '<i class="fa fa-feed"></i> <span>Feedback</span> ', 
                           'url' => ['feedback/index'],
                           'active'=>Yii::$app->controller->id=='feedback',
