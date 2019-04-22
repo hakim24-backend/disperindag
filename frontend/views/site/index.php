@@ -299,8 +299,28 @@
             </div>
         </div>
     </div>
-
 </div>
+
+ <!-- link terkait -->
+<div id="owl-caro">
+    <div class="container">
+        <h3 class="title"><strong>Link Terkait</strong></h3><hr>
+        <div class="owl-carousel owl-theme">
+        <?php foreach ($list_link_terkait as $key => $value) { ?>
+            
+                <div class="item"><a href="<?=$value->url?>" target="blank" title="<?=$value->url?>">
+                    <img src="/disperindagproject/common/uploaded/other/<?=$value->gambar?>" class="img-responsive" ></a>
+                </div>
+                
+        <?php } ?>
+                <!-- width: 300px;
+                   height: 170px;
+                -->
+        </div>
+    </div>
+</div>
+
+
 
 <script type="text/javascript" src="https://code.angularjs.org/1.1.4/angular.js"></script>
 <script type="text/javascript">

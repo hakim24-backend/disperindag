@@ -41,7 +41,7 @@ $this->title = 'Buku Tamu';
                 <div class="col-sm-5">
                     <?= $form->field($printForm, 'end_date')->textInput(['class'=>'form-control datemaskFull','readonly'=>'true']) ?>
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-1">
                     <div class="form-group">
                         <label>&nbsp;</label>
                         <?= Html::submitButton('Print', ['class' => 'btn btn-flat btn-block btn-primary']) ?>

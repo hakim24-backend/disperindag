@@ -1,20 +1,5 @@
 <?php
-
-use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\widgets\DetailView;
-use kartik\mpdf\Pdf;
-
-/* @var $this yii\web\View */
-/* @var $model common\models\ActivityDaily */
-
-$this->title = 'Data Kegiatan Rutin Sekretariat';
-$this->params['breadcrumbs'][] = ['label' => 'Activity Dailies', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
-
 $no=1;
-
 ?>
 <html>
 <head>
@@ -36,12 +21,16 @@ $no=1;
 </style>
 </head>
 <body>
+<h1 align="center"> <b>Data Member Mobile</b></h1><br>
 <table class="table table-responsive" width="100%" border="1">
 	<tbody>
 		<tr>
 			<td class="text-center">No</td>
-			<td class="text-center" width="25%">Nama</td>
+			<td class="text-center" width="10%">Nama</td>
 			<td class="text-center">Email</td>
+			<td class="text-center">Instansi</td>
+			<td class="text-center">Alamat</td>
+			<td class="text-center">No Telepon</td>
 			<td class="text-center">Member Sejak</td>
 			<td class="text-center">Status</td>
 		</tr>
@@ -50,6 +39,9 @@ $no=1;
 				<td><?=$no++?></td>
 				<td class="text-center"><?=$value->nama?></td>
 				<td class="text-center"><?=$value->email?></td>
+				<td class="text-center"><?=$value->instansi?></td>
+				<td class="text-center"><?=$value->alamat?></td>
+				<td class="text-center"><?=$value->no_telp?></td>
 				<td class="text-center"><?=date("d M Y",$value->created_at)?></td>
 				<?php if ($value->status == 10) { ?>
 					<td class="text-center">Aktif</td>

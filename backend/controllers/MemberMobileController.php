@@ -159,13 +159,19 @@ class MemberMobileController extends MainController
         $sheet->getColumnDimension("C")->setAutoSize(true);
         $sheet->getColumnDimension("D")->setAutoSize(true);
         $sheet->getColumnDimension("E")->setAutoSize(true);
+        $sheet->getColumnDimension("F")->setAutoSize(true);
+        $sheet->getColumnDimension("G")->setAutoSize(true);
+        $sheet->getColumnDimension("H")->setAutoSize(true);
 
         //colomn
         $sheet->setCellValue('A1', 'No');
         $sheet->setCellValue('B1', 'Nama');
         $sheet->setCellValue('C1', 'Email');
-        $sheet->setCellValue('D1', 'Member Sejak');
-        $sheet->setCellValue('E1', 'Status');
+        $sheet->setCellValue('D1', 'Instansi');
+        $sheet->setCellValue('E1', 'Alamat');
+        $sheet->setCellValue('F1', 'No Telpon');
+        $sheet->setCellValue('G1', 'Member Sejak');
+        $sheet->setCellValue('H1', 'Status');
 
         //row
         $item = MemberMobile::find()->all();
@@ -176,12 +182,15 @@ class MemberMobileController extends MainController
             $sheet->setCellValue('A'.$indeks, (string)$no);
             $sheet->setCellValue('B'.$indeks, $value['nama']);
             $sheet->setCellValue('C'.$indeks, $value['email']);
-            $sheet->setCellValue('D'.$indeks, date("d M Y",$value['created_at']));
+            $sheet->setCellValue('D'.$indeks, $value['instansi']);
+            $sheet->setCellValue('E'.$indeks, $value['alamat']);
+            $sheet->setCellValue('F'.$indeks, $value['no_telp']);
+            $sheet->setCellValue('G'.$indeks, date("d M Y",$value['created_at']));
 
             if ($value['status'] == 10) {
-                $sheet->setCellValue('E'.$indeks, 'Aktif');
+                $sheet->setCellValue('H'.$indeks, 'Aktif');
             } else {
-                $sheet->setCellValue('E'.$indeks, 'Non-Aktif');
+                $sheet->setCellValue('H'.$indeks, 'Non-Aktif');
             }
             
             $indeks++;
@@ -215,7 +224,7 @@ class MemberMobileController extends MainController
             // A4 paper format
             'format' => Pdf::FORMAT_A4, 
             // portrait orientation
-            'orientation' => Pdf::ORIENT_PORTRAIT, 
+            'orientation' => Pdf::ORIENT_LANDSCAPE, 
             // stream to browser inline
             'destination' => Pdf::DEST_BROWSER, 
             // your html content input

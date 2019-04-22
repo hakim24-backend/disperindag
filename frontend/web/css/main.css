@@ -25,6 +25,26 @@ html,body {
     color: #c55;
     font-style: italic;
 }
+
+#owl-caro {
+    background-color: #0a4384;
+    margin-bottom: -5px;
+    padding: 45px 0px;
+}
+
+#owl-caro .title {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 30px;
+
+}
+
+#owl-caro img {
+    width: 300px;
+    height: 160px;
+    object-fit: cover;
+}
+
 .clear{
     clear:both;
 }
@@ -192,7 +212,7 @@ ul.nav.navbar-nav li.active > a{
 
 .footer {
     background-color: #0A3D78;
-    border-top: 1px solid #ddd;
+    border-top: 0px solid #08366b;
     padding: 10px 0;
     font-size: 12px;
     color: #D0D9E4;

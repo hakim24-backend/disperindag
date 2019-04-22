@@ -23,9 +23,12 @@ class AppAsset extends AssetBundle
         'css/main.css',
         'css/site.css',
         'css/custom.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css',
+        'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css',
         'css/responsive.css',
     ];
     public $js = [
+        'https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js',
         'js/script.js',
         'js/bukutamu.js',
     ];

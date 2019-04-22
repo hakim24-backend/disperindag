@@ -9,6 +9,7 @@ use common\models\Download;
 use common\models\Agenda;
 use common\models\Video;
 use common\models\RunningText;
+use common\models\LinkTerkait;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
@@ -112,6 +113,8 @@ class SiteController extends MainHomeController
 					  ->all();
 		}
 
+    $list_link_terkait = LinkTerkait::find()->all();
+
 
         return $this->render('index',[
             'list_post'     => $list_post,
@@ -119,6 +122,7 @@ class SiteController extends MainHomeController
             'model_banner'  => $model_banner,
             'sidebar'       => $sidebar,
             'running_text'  => $running_text,
+            'list_link_terkait' => $list_link_terkait
         ]);
     }
    

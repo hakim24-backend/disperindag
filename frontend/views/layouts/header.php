@@ -79,28 +79,28 @@ use yii\bootstrap\NavBar;
                 }
 
                 
-                if(count($menu['link_terkait']) > 0){
-                    foreach ($menu['link_terkait'] as $item) {
-                        $view_menu_link_terkait[] = [
-                            'label' => $item->judul,
-                            'url' => $item->url, 
-                            'linkOptions'=>['target'=>'blank']
-                        ];
-                    }
+                // if(count($menu['link_terkait']) > 0){
+                //     foreach ($menu['link_terkait'] as $item) {
+                //         $view_menu_link_terkait[] = [
+                //             'label' => $item->judul,
+                //             'url' => $item->url, 
+                //             'linkOptions'=>['target'=>'blank']
+                //         ];
+                //     }
 
-                    $view_menu_link_terkait[] = [  
-                       'label'=>'Lihat Semua',
-                       'options'=> ['class'=>'not-active'],
-                       'url'=>['/interaktif/link-terkait'],
-                    ];
+                //     $view_menu_link_terkait[] = [  
+                //        'label'=>'Lihat Semua',
+                //        'options'=> ['class'=>'not-active'],
+                //        'url'=>['/interaktif/link-terkait'],
+                //     ];
 
-                    $menu_link_terkait = [
-                        'label' => 'Link Terkait', 'url' => ['/interaktif/link-terkait'],
-                        'items'=> $view_menu_link_terkait,
-                    ];                        
-                }else{
-                    $menu_link_terkait = ['label' => 'Link Terkait', 'url' => ['/interaktif/link-terkait']];
-                }
+                //     $menu_link_terkait = [
+                //         'label' => 'Link Terkait', 'url' => ['/interaktif/link-terkait'],
+                //         'items'=> $view_menu_link_terkait,
+                //     ];                        
+                // }else{
+                //     $menu_link_terkait = ['label' => 'Link Terkait', 'url' => ['/interaktif/link-terkait']];
+                // }
 
 
                 NavBar::begin([
@@ -115,7 +115,7 @@ use yii\bootstrap\NavBar;
                     ['label' => 'Berita', 'url' => ['/post'], 'active'=>Yii::$app->controller->id=='berita'],
                     ['label' => 'Sakip', 'url' => ['/sakip'], 'active'=>Yii::$app->controller->id=='sakip'],
                     ['label' => 'Buku Tamu', 'url' => ['/interaktif/contact']],
-                    $menu_link_terkait,
+                    // $menu_link_terkait,
                     ['label' => 'Galeri', 'url' => ['#'],
                         'active'=>Yii::$app->controller->id=='gallery',
                         'options'=> ['class'=>'treeview'],
