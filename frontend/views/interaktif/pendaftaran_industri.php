@@ -28,6 +28,8 @@ use kartik\daterange\DateRangePicker;
 use kartik\date\DatePicker;
 $this->registerJsFile("@web/frontend/web/js/sweetalert.js",['depends' => 'yii\web\JqueryAsset']);
 $this->registerJsFile("@web/frontend/web/js/industri.js",['depends' => 'yii\web\JqueryAsset']);
+$this->registerJsFile("@web/frontend/web/js/datatable.js",['depends' => 'yii\web\JqueryAsset']);
+// $this->registerCssFile("@web/frontend/web/css/datatable.js", ['depends' => 'yii\bootstrap\BootstrapAsset']);
 $url =  Yii::$app->request->baseUrl. '/interaktif/kbli-list';
 $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => SORT_ASC])->asArray()->all(), 'id', 'nama_badan_usaha');
 $this->title = 'Contact';
@@ -49,49 +51,80 @@ $this->params['breadcrumbs'][] = $this->title;
         'data-dismiss' =>'modal',
       ],
    ]);
-  Pjax::begin();
-  echo GridView::widget([
-     'dataProvider' => $providerKBLI,
-     'filterModel' => $searchModel,
-     'columns' => [
-          [
-            'attribute' => 'id',
-            'label' => 'Nomor',
-            'contentOptions' => [
-              'id' => 'val_id',
-              'class' => 'val_id',
-            ],
-          ],
-          [
-            'attribute' => 'kode',
-            'label' => 'Kode',
-            'contentOptions' => [
-              'id' => 'val_kode',
-              'class' => 'val_kode',
-            ],
-          ],
-          [
-            'attribute' => 'nama',
-            'label' => 'Nama',
-            'contentOptions' => [
-              'id' => 'val_nama',
-              'class' => 'val_nama',
-            ],
-          ],
-         [
-         'class' => 'yii\grid\ActionColumn',
-           'template' => '{pilih}',
-           'options' => ['width' => '120'],
-           'buttons' => [
-             'pilih' => function ($model) {
-               return Html::button('Pilih', ['class' => 'btn btn-info teaser']);
-             },
-           ],
-         ],
-     ],
-  ]);
-  Pjax::end();
-
+?>
+<!--   // Pjax::begin();
+  // echo GridView::widget([
+  //    'dataProvider' => $providerKBLI,
+  //    'filterModel' => $searchModel,
+  //    'columns' => [
+  //         [
+  //           'attribute' => 'id',
+  //           'label' => 'Nomor',
+  //           'contentOptions' => [
+  //             'id' => 'val_id',
+  //             'class' => 'val_id',
+  //           ],
+  //         ],
+  //         [
+  //           'attribute' => 'kode',
+  //           'label' => 'Kode',
+  //           'contentOptions' => [
+  //             'id' => 'val_kode',
+  //             'class' => 'val_kode',
+  //           ],
+  //         ],
+  //         [
+  //           'attribute' => 'nama',
+  //           'label' => 'Nama',
+  //           'contentOptions' => [
+  //             'id' => 'val_nama',
+  //             'class' => 'val_nama',
+  //           ],
+  //         ],
+  //        [
+  //        'class' => 'yii\grid\ActionColumn',
+  //          'template' => '{pilih}',
+  //          'options' => ['width' => '120'],
+  //          'buttons' => [
+  //            'pilih' => function ($model) {
+  //              return Html::button('Pilih', ['class' => 'btn btn-info teaser']);
+  //            },
+  //          ],
+  //        ],
+  //    ],
+  // ]);
+  // Pjax::end(); -->
+<div id="p0" data-pjax-container="" data-pjax-push-state="" data-pjax-timeout="1000">
+    <div id="w0" class="table-responsive">
+        <table class="table table-striped table-bordered responsive-utilities jambo_table kbli">
+            <thead>
+                <tr class="headings">
+                    <th width="5%">Nomor</th>
+                    <th width="5%">Kode</th>
+                    <th width="20%">Nama</th>
+                    <th class="action-column" width="5%">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+              <?php 
+              $no = 1;
+              foreach ($providerKBLI as $key => $value) { ?>
+                <tr data-key="<?=$no?>">
+                    <td id="val_id" class="val_id" width="5%"><?= $value->id ?></td>
+                    <td id="val_kode" class="val_kode" width="5%"><?= $value->kode ?></td>
+                    <td id="val_nama" class="val_nama" width="20%"><?= $value->nama ?></td>
+                    <td width="5%">
+                        <button type="button" class="btn btn-info teaser">Pilih</button>
+                    </td>
+                </tr>
+              <?php 
+              $no++;
+              } ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<?php
   Modal::end();
 ?>
 
@@ -103,7 +136,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="box-body padding" id="form-industri">
             <div class="form">
-                <?php $form = ActiveForm::begin(['action' => 'industrisave/']); ?>
+                  <?php $form = ActiveForm::begin(['action' => 'industrisave/']); ?>
                     <div id="form-1">
                         <?= $form->field($model, 'badan_usaha')->dropDownList(
                             $badanUsaha,           // Flat array ('id'=>'label')
@@ -248,3 +281,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+
+</script>

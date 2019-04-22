@@ -135,11 +135,11 @@ class Industri extends \yii\db\ActiveRecord
     {
         switch ($this->status) {
             case '1':
-                return "<label class='label label-success'>Aktif</label>";
+                return "<label class='label label-success'>disetujui</label>";
                 break;
 
             default:
-                return "<label class='label label-danger'>Tidak Aktif</label>";
+                return "<label class='label label-warning'>belum disetujui</label>";
                 break;
         }
     }

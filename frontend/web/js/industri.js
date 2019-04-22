@@ -11,6 +11,12 @@ $(document).ready(function(){
   $('#txt_kbli').click(function(){
     $('#modal').modal('show');
   });
+  $('.kbli').DataTable({
+      "columnDefs": [{
+        "orderable": false,
+        "targets": -1
+      }],
+    });
 
   // $('#txt_search_npwp').keypress(function(e){
   //   if (e.which == 13) {
