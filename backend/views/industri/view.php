@@ -43,7 +43,7 @@ $this->title = "Detail Data Perindustrian";
         <div class="box-body">
             <?php $form = ActiveForm::begin(['action' => 'update/'.$model->id]); ?>
             <div class="row">
-                <div class="col-md-10 col-sm-8"><?= $form->field($model, 'status')->dropDownList([ 1 => 'Aktif', 0 => 'Non-Aktif', ], ['prompt' => 'Pilih status'])->label('Update Data Industri') ?></div>
+                <div class="col-md-10 col-sm-8"><?= $form->field($model, 'status')->dropDownList([ 1 => 'approve', 0 => 'pending', ], ['prompt' => 'Pilih status'])->label('Update Data Industri') ?></div>
                 <div class="col-md-2 col-sm-4">
                     <div class="form-group">
                         <label>&nbsp;</label><br>

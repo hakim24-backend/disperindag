@@ -91,36 +91,46 @@ class SiteController extends MainHomeController
             $id_berita[] = $value->id_berita;
         }
 		
-		$timepopu = date('Y-m-01',strtotime( '-4 month', time()));
-        $popunews = Post::find()
-					  ->select(['judul','judul_seo','hari','jam','tanggal','gambar'])
-					  ->where(['not in','id_berita',$id_berita])
-					  ->andWhere(['>=','tanggal',$timepopu])
-					  ->orderBy(['dibaca'=>SORT_DESC])
-					  ->limit(6);
-		
-		if($popunews->count() >= 6){
-			$sidebar['popular_post'] = $popunews->all();
-		}else{
-			$timepopu = date('Y-m-01',strtotime( '-12 month', time()));
-			$sidebar['popular_post'] = Post::find()
-					  ->select(['judul','judul_seo','hari','jam','tanggal','gambar'])
-					  ->where(['not in','id_berita',$id_berita])
-					  ->andWhere(['>=','tanggal',$timepopu])
-					  ->orderBy(['dibaca'=>SORT_DESC])
-					  ->limit(4)
-					  ->all();
-		}
+    		$timepopu = date('Y-m-01',strtotime( '-4 month', time()));
+            $popunews = Post::find()
+    					  ->select(['judul','judul_seo','hari','jam','tanggal','gambar'])
+    					  ->where(['not in','id_berita',$id_berita])
+    					  ->andWhere(['>=','tanggal',$timepopu])
+    					  ->orderBy(['dibaca'=>SORT_DESC])
+    					  ->limit(6);
+    		
+    		if($popunews->count() >= 6){
+    			$sidebar['popular_post'] = $popunews->all();
+    		}else{
+    			$timepopu = date('Y-m-01',strtotime( '-12 month', time()));
+    			$sidebar['popular_post'] = Post::find()
+    					  ->select(['judul','judul_seo','hari','jam','tanggal','gambar'])
+    					  ->where(['not in','id_berita',$id_berita])
+    					  ->andWhere(['>=','tanggal',$timepopu])
+    					  ->orderBy(['dibaca'=>SORT_DESC])
+    					  ->limit(4)
+    					  ->all();
+    		}
 
 
-        return $this->render('index',[
-            'list_post'     => $list_post,
-            'model_video'   => $model_video,
-            'model_banner'  => $model_banner,
-            'sidebar'       => $sidebar,
-            'running_text'  => $running_text,
-        ]);
+            return $this->render('index',[
+                'list_post'     => $list_post,
+                'model_video'   => $model_video,
+                'model_banner'  => $model_banner,
+                'sidebar'       => $sidebar,
+                'running_text'  => $running_text,
+            ]);
+    }
+
+    public function actionPasar()
+    {
+      $dataPasar = file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getMasterMarket');
+      $dataArrayPasar = json_decode($dataPasar,true);
+
+      $dataComodity = file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getDailyPriceAllMarket&tanggal='.date('Y-m-d'));
+      $dataArrayComodity = json_decode($dataComodity,true);
+      var_dump($dataArray['result']);
+      # code...
     }
    
-  
 }

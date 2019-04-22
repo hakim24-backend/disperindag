@@ -106,67 +106,83 @@ class InteraktifController extends MainController
     }
 
     public function actionIndustrisave(){
-      #data kbli
-      $searchModel = new KbliSearch();
-      $providerKBLI = $searchModel->search(Yii::$app->request->queryParams);
-      #buku tamu load
-      $model_form_comment = new ContactForm();
-      $list_comment = Contact::find()
-                          ->where(['tampilkan'=>'Y'])
-                          ->orderBy(['id_hubungi'=>SORT_DESC]);
-      $countQuery = clone $list_comment;
-      $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize'=>3]);
-      $list_comment_page = $list_comment->offset($pages->offset)
+        // var_dump(\Yii::$app->session->get('name'));die;
+        $email = \Yii::$app->session->get('name');
+        #data kbli
+        $providerKBLI = KBLI::find()->all();
+        #buku tamu load
+        $model_form_comment = new ContactForm();
+        $list_comment = Contact::find()
+                        ->where(['tampilkan'=>'Y'])
+                        ->orderBy(['id_hubungi'=>SORT_DESC]);
+        $countQuery = clone $list_comment;
+        $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize'=>3]);
+        $list_comment_page = $list_comment->offset($pages->offset)
           ->limit($pages->limit)
           ->all();
-      #industri load
-      $model= new Industri();
-      $model->tahun_izin = date("Y");
-      $model->tahun_data = date("Y");
-      $model->status = 0;
-      $selectionPerusahaan = Industri::selectionPerusahaan();
+        #industri load
+        $model= new Industri();
+        $model->tahun_izin = date("Y");
+        $model->tahun_data = date("Y");
+        $model->status = 0;
+        $selectionPerusahaan = Industri::selectionPerusahaan();
 
-      if ($model->load(Yii::$app->request->post())) {
-          $model->status=0;
-          $model->kbli = intval($model->kbli);
-          $isValid = $model->validate();
-          // var_dump($isValid);die;
+        if ($model->load(Yii::$app->request->post())) {
+            $model->email = $email;
+            $model->status=0;
+            $model->kbli = intval($model->kbli);
+            $isValid = $model->validate();
+        
+            if ($isValid) {
+                Yii::$app->session->setFlash('success', 'Terimakasih telah mengisi pendaftaran industri.');
+                $model->save(false);
+                return Yii::$app->response->redirect(['interaktif/contact']);
+            }
+        }
 
-          if ($isValid) {
-              $model->save(false);
-              return Yii::$app->response->redirect(['interaktif/contact']);
-          }
-      }
-
-      return $this->render('pendaftaran_industri', [
-        'model_form_comment' => $model_form_comment,
-        'list_comment' => $list_comment_page,
-        'pages' => $pages,
-        'selectionPerusahaan' => $selectionPerusahaan,
-        'model' => $model,
-        'providerKBLI' => $providerKBLI,
-        'searchModel' => $searchModel,
-      ]);
+        return $this->render('pendaftaran_industri', [
+            'model_form_comment' => $model_form_comment,
+            'list_comment' => $list_comment_page,
+            'pages' => $pages,
+            'selectionPerusahaan' => $selectionPerusahaan,
+            'model' => $model,
+            'providerKBLI' => $providerKBLI,
+        ]);
     }
 
     public function actionPendaftaransave(){
       $model_form_comment = new ContactForm();
       if ($model_form_comment->load(Yii::$app->request->post())) {
-        if($model_form_comment->validate() && $model_form_comment->saveAs()){
-            Yii::$app->session->setFlash('success', 'Terimakasih telah mengisi pendaftaran industri.');
+        if($model_form_comment->validate()){
             #buku tamu load
-            $model_form_comment = new ContactForm();
-            $list_comment = Contact::find()
-                                ->where(['tampilkan'=>'Y'])
-                                ->orderBy(['id_hubungi'=>SORT_DESC]);
-            $countQuery = clone $list_comment;
-            $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize'=>3]);
-            $list_comment_page = $list_comment->offset($pages->offset)
-                ->limit($pages->limit)
-                ->all();
-            #industri load
-            $model= new Industri();
-            $selectionPerusahaan = Industri::selectionPerusahaan();
+            // $model_form_comment = new ContactForm();
+            // $list_comment = Contact::find()
+            //                     ->where(['tampilkan'=>'Y'])
+            //                     ->orderBy(['id_hubungi'=>SORT_DESC]);
+            // $countQuery = clone $list_comment;
+            // $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize'=>3]);
+            // $list_comment_page = $list_comment->offset($pages->offset)
+            //     ->limit($pages->limit)
+            //     ->all();
+            // #industri load
+            // $model= new Industri();
+            // $selectionPerusahaan = Industri::selectionPerusahaan();
+            $post = Yii::$app->request->post();
+            // if (!Yii::$app->session->getIsActive()) {
+            //     Yii::$app->session->open();
+            // }
+            // $session = Yii::$app->session;
+
+            // // the following code will NOT work
+            // if (isset($post['ContactForm']['email'])) {
+            //     $session['email-user'] = $post['ContactForm']['email'];
+            // }else{
+            //     $session['email-user'] = '-';
+            // }
+            \Yii::$app->session->set('name',$post['ContactForm']['email']);
+
+            // var_dump(\Yii::$app->session->get('name'));die;
+            // the following code also works:
             return Yii::$app->response->redirect(['interaktif/industrisave']);
 
         }else{

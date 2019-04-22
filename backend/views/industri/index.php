@@ -140,14 +140,14 @@ $this->title = 'Data Perindustrian';
                     'nama_pemilik',
                     [
                         'attribute'=>'status',
-                        'label'=>'Status Aktif',
+                        'label'=>'Status',
                         'format'=>'raw',
                         'value'=>function($data){
-                            return ($data->status==1) ? "<span class='label label-success'>Aktif</span>" : "<span class='label label-danger'>Non-Aktif</span>";
+                            return ($data->status==1) ? "<span class='label label-success'>disetujui</span>" : "<span class='label label-warning'>belum disetujui</span>";
                         },
                         'contentOptions' => ['class' => 'td-action'],
                         'headerOptions' => ['class' => 'text-center'],
-                        'filter' => Html::activeDropDownList($searchModel, 'status', [1=>'Aktif',0=>'Non-Aktif'],['class'=>'form-control','prompt' => 'Semua Status']),
+                        'filter' => Html::activeDropDownList($searchModel, 'status', [1=>'disetujui',0=>'belum disetujui'],['class'=>'form-control','prompt' => 'Semua Status']),
                     ],
                     // 'jalan',
                     //'kelurahan',
