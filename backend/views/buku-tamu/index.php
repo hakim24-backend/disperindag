@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use backend\assets\InputMaskAsset;
@@ -52,14 +53,29 @@ $this->title = 'Buku Tamu';
         </div>
     </div>
 
-    <div class="box box-primary">
+    <!-- <div class="box box-primary">
         <div class="box-body">
-            <div class="box-header with-border"><h3 class="box-title">Print Buku Tamu</h3></div>
-                <div class="col-sm-4">
-                    
-                </div>
+            <div class="row">
+                <div class="box-header with-border"><h3 class="box-title">Print Buku Tamu</h3></div>
+                    <div class="col-sm-4">
+                        <label class="">Dari Tanggal</label>
+                        <input type="text" id="start_date" class="form-control datemaskFull" name="PrintBukuTamuForm[start_date]" readonly="true" aria-required="true" aria-invalid="true">
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Sampai Tanggal</label>
+                        <input type="text" id="end_date" class="form-control datemaskFull" name="PrintBukuTamuForm[end_date]" readonly="true" aria-required="true" aria-invalid="true">
+                    </div>
+                    <div class="col-sm-2">
+                        <label> &nbsp; </label><br>
+                        <a class="btn btn-primary excel">Print Excel</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <label> &nbsp; </label><br>
+                        <a class="btn btn-warning pdf">Print PDF</a>
+                    </div>
+            </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="box box-primary">
         <div class="box-body">
@@ -150,3 +166,33 @@ $this->title = 'Buku Tamu';
         </div>
     </div>
 </section>
+
+<!-- <script type="text/javascript">
+    $(".excel").on("click",function(){
+        var date1 = $("#start_date").val();
+        var date2 = $("#end_date").val();
+        $.ajax({
+            url : "<?php echo Url::to(['buku-tamu/excel']) ?>",
+            data : {
+                date1 : $("#start_date").val(),
+                date2 : $("#end_date").val()
+            }
+        }).done(function(data){
+            window.location.replace("../buku-tamu/excel?date1="+date1+"&date2="+date2+"");
+        });
+    });
+
+    $(".pdf").on("click",function(){
+        var date1 = $("#start_date").val();
+        var date2 = $("#end_date").val();
+        $.ajax({
+            url : "<?php echo Url::to(['buku-tamu/pdf']) ?>",
+            data : {
+                date1 : $("#start_date").val(),
+                date2 : $("#end_date").val()
+            }
+        }).done(function(data){
+            window.open("../buku-tamu/pdf?date1="+date1+"&date2="+date2+"");
+        })
+    });
+</script> -->

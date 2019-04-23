@@ -12,11 +12,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(['options'=>['enctype'=>'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'judul')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'judul')->textInput(['maxlength' => true, 'required' => true]) ?>
 
-    <?= $form->field($model, 'url')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'url')->textInput(['maxlength' => true, 'required' => true]) ?>
 
-    <?= $form->field($model, 'keterangan')->textarea(['rows' => 3,'maxlength'=>200,'onkeyup'=>'countChar(this)']) ?>
+    <?= $form->field($model, 'keterangan')->textarea(['rows' => 3, 'required' => true, 'maxlength'=>200,'onkeyup'=>'countChar(this)']) ?>
     <div class="count-char-wrep">
         <span id="lenght-char">0</span> / 200
     </div>
@@ -31,7 +31,7 @@ use yii\widgets\ActiveForm;
     <span style="color:red">(*NB: Jika tidak ingin mengganti gambar thumbnail, biarkan file input Gambar Thumbnail kosong)</span>
     <?php } ?>
 
-    <?= $form->field($model, 'imageFile')->fileInput() ?>
+    <?= $form->field($model, 'imageFile')->fileInput(['required' => true]) ?>
     <span style="margin-bottom: 20px;margin-top: -10px" class="help-block">
     Rekomendasi ukuran gambar 150 x 150 px</span>
     <?=
