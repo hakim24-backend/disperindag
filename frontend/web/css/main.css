@@ -75,10 +75,9 @@ html,body {
     color: #555;
 }
 
-.pasar .card .card-footer{
-    padding-top: 10px;
-    width: 100%;
-    text-align: right;
+.pasar {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .filter-pasar{
