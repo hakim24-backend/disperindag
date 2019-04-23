@@ -188,7 +188,6 @@ class SiteController extends MainHomeController
       }catch (\Exception $e) {
         return $e->getMessage();
       }
->>>>>>> ad614bbbce13ade5da1b8c491c32f6d319b7cc3d
     }
 
     public function comodity(array $dataArrayComodity, array $pasarKota, $dates, $kota_id)
