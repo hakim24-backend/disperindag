@@ -146,6 +146,7 @@ class SiteController extends MainHomeController
         $dataComodity = file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getDailyPriceAllMarket&tanggal='.date('Y-m-d'));
         $dataArrayComodity = json_decode($dataComodity,true);
 
+
         foreach($pasarKota as $key => $value){
           $filtered[] = array_filter($dataArrayComodity['result'], function($element) use($value){
             return isset($element['market_id']) && $element['market_id'] == $value['market_id'];
@@ -193,11 +194,10 @@ class SiteController extends MainHomeController
           }
             
         }
-  
-        print_r($item);die;
+        var_dump($item);die;
       }catch (\Exception $e) {
         return $e->getMessage();
       }
-      
+    }
    
 }
