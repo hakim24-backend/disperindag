@@ -42,7 +42,7 @@ $this->title = "Harga Pasar";
 	  			        	$harga = 0;
 	  			        	$total = count($value['market']);
 	  			        	foreach ($value['market'] as $keys => $values) { ?>
-	  			        	<p><?= $values['market_name'] ?> : <?= 'Rp. '.number_format(intval($values['price']),2,',','.') ?></p>
+	  			        	<p><?= $values['market_name'] ?> : <span style="text-align: right;"><?= 'Rp. '.number_format(intval($values['price']),2,',','.') ?></span></p>
 	  						<?php 
 		  						$harga+=intval($values['price']);
 	  						} ?>
