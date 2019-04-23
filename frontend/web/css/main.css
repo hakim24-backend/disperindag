@@ -82,6 +82,11 @@ html,body {
     float: right;
 }
 
+.filter-pasar select{
+    width: 200px;
+}
+
+
 .clear{
     clear:both;
 }
