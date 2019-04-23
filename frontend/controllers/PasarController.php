@@ -26,7 +26,6 @@ class PasarController extends MainController
     	}
 
     	//data pangan
-
     	$dataPasar = file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getMasterMarket');
         $dataArrayPasar = json_decode($dataPasar,true);
 
@@ -38,6 +37,7 @@ class PasarController extends MainController
 
         $exists_array    = array();
         foreach( $arrayComodityFinal['result'] as $element ) {
+
           //get market name
           $market_id = $element['market_id'];
           $market_name = array_values(array_filter($dataArrayPasar['result'], function($element) use($market_id){
@@ -67,10 +67,7 @@ class PasarController extends MainController
               $item[$values['commodity_id']]['market'][$element['market_id']]['price'] = $values['price'];
             }  
           }
-            
         }
-
-
 
         return $this->render('index',[
         	'kabupaten' => $result,
