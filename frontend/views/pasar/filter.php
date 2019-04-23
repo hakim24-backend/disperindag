@@ -6,7 +6,7 @@ $this->title = "Harga Pasar";
 <?php 
 $col = 1;
 foreach ($item as $key => $value) {?>
-  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 pasar-content">
+  <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 pasar-content">
       <div class="card">
         <div class="card-body">
             <div style="display: inline-block;">
