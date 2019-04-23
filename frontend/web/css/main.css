@@ -77,6 +77,11 @@ html,body {
     text-align: right;
 }
 
+.filter-pasar{
+    padding: 15px;
+    float: right;
+}
+
 .clear{
     clear:both;
 }
