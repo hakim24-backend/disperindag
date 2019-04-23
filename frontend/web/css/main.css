@@ -45,6 +45,10 @@ html,body {
     object-fit: cover;
 }
 
+.pasar .pasar-content{
+    margin-bottom: 20px;
+}
+
 .pasar .card{
     background-color: #f5f5f5;
     padding: 15px 10px;
