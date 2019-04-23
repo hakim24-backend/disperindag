@@ -133,7 +133,8 @@ class SiteController extends MainHomeController
 
       $dataComodity = file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getDailyPriceAllMarket&tanggal='.date('Y-m-d'));
       $dataArrayComodity = json_decode($dataComodity,true);
-      var_dump($dataArray['result']);
+      
+      return $this->render('hargapasar');
     }
    
 }

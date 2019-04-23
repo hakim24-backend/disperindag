@@ -304,7 +304,7 @@
  <!-- link terkait -->
 <div id="owl-caro">
     <div class="container">
-        <h3 class="title"><strong>Link Terkait</strong></h3><hr>
+        <h4 class="title"><strong>Link Terkait</strong></h4><hr>
         <div class="owl-carousel owl-theme">
         <?php foreach ($list_link_terkait as $key => $value) { ?>
             

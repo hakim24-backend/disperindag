@@ -139,6 +139,7 @@ use yii\bootstrap\NavBar;
                     //['label' => 'Intranet', 'url' => null, 'linkOptions'=>['href'=>'http://disperindag.jatimprov.go.id/intranet/', 'target'=>'blank']],
                     //['label' => 'SIM IKM', 'url' => null, 'linkOptions'=>['href'=>'http://disperindag.jatimprov.go.id/sim_ikm/', 'target'=>'blank']],
                     ['label' => 'PPID', 'url' => null, 'linkOptions'=>['href'=>'http://disperindag.jatimprov.go.id/dp/', 'target'=>'blank']],
+                    ['label' => 'Informasi Harga Pasar', 'url' => ['/pasar']],
                     ['label' => 'Feedback', 'url' => ['interaktif/feedback']],
                     // ['label' => 'Industri', 'url' => ['interaktif/industri']],
                 ];

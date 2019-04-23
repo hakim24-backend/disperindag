@@ -51,8 +51,17 @@ $this->title = 'Buku Tamu';
             </div>
         </div>
     </div>
-    <div class="box box-primary">
 
+    <div class="box box-primary">
+        <div class="box-body">
+            <div class="box-header with-border"><h3 class="box-title">Print Buku Tamu</h3></div>
+                <div class="col-sm-4">
+                    
+                </div>
+        </div>
+    </div>
+
+    <div class="box box-primary">
         <div class="box-body">
             <div class="row">
                 <div class="col-sm-2">
