@@ -30,11 +30,11 @@ $this->title = "Harga Pasar";
 				<div class="card pasar-content">
 				  <div class="card-body">
 				    <h5 class="card-title"><strong>Beras IR64 (kw premium)</strong></h5>
-				      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#coll-pasar-<?= $col ?>" aria-expanded="false" aria-controls="coll-pasar-<?= $col ?>">
+				      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#coll-pasar-1-<?= $col ?>" aria-expanded="false" aria-controls="coll-pasar-1-<?= $col ?>">
 				        Show <span class="caret"></span>
 				      </button>
 				    </p>
-				    <div class="collapse" id="coll-pasar-<?= $col ?>">
+				    <div class="collapse" id="coll-pasar-1-<?= $col ?>">
 				      <div class="card-body">
 				      		<img src="" style="width: 100%; height: auto;">
 				        	<p>Pasar Johar Rp. 12,000</p>
@@ -64,11 +64,11 @@ $this->title = "Harga Pasar";
 				<div class="card pasar-content">
 				  <div class="card-body">
 				    <h5 class="card-title"><strong>Beras IR64 (kw premium)</strong></h5>
-				      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#coll-pasar-<?= $col ?>" aria-expanded="false" aria-controls="coll-pasar-<?= $col ?>">
+				      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#coll-pasar-2-<?= $col ?>" aria-expanded="false" aria-controls="coll-pasar-2-<?= $col ?>">
 				        Show <span class="caret"></span>
 				      </button>
 				    </p>
-				    <div class="collapse" id="coll-pasar-<?= $col ?>">
+				    <div class="collapse" id="coll-pasar-2-<?= $col ?>">
 				      <div class="card-body">
 				      		<img src="" style="width: 100%; height: auto;">
 				        	<p>Pasar Johar Rp. 12,000</p>
@@ -98,11 +98,11 @@ $this->title = "Harga Pasar";
 				<div class="card pasar-content">
 				  <div class="card-body">
 				    <h5 class="card-title"><strong>Beras IR64 (kw premium)</strong></h5>
-				      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#coll-pasar-<?= $col ?>" aria-expanded="false" aria-controls="coll-pasar-<?= $col ?>">
+				      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#coll-pasar-3-<?= $col ?>" aria-expanded="false" aria-controls="coll-pasar-3-<?= $col ?>">
 				        Show <span class="caret"></span>
 				      </button>
 				    </p>
-				    <div class="collapse" id="coll-pasar-<?= $col ?>">
+				    <div class="collapse" id="coll-pasar-3-<?= $col ?>">
 				      <div class="card-body">
 				      		<img src="" style="width: 100%; height: auto;">
 				        	<p>Pasar Johar Rp. 12,000</p>
