@@ -78,11 +78,10 @@ class PasarController extends MainController
         ]);
     }
 
-    public function actionPasar()
+    public function actionPasar($kota_id)
     {
-      $kota_id = '3';
       $item = array();
-      try{
+      // try{
         $arrayComodityFinal = array();
         $dataPasar = file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getMasterMarket');
         $dataArrayPasar = json_decode($dataPasar,true);
@@ -136,10 +135,12 @@ class PasarController extends MainController
           }
             
         }
-        var_dump($item);die;
-      }catch (\Exception $e) {
-        return $e->getMessage();
-      }
+      // }catch (\Exception $e) {
+      //   return $e->getMessage();
+      // }
+	  return $this->renderAjax('filter',[
+	    	'item' => $item,
+	    ]);
     }
 
     public function comodity(array $dataArrayComodity, array $pasarKota, $dates, $kota_id)
