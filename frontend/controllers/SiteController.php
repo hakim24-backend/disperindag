@@ -126,14 +126,5 @@ class SiteController extends MainHomeController
         ]);
     }
 
-    public function actionPasar()
-    {
-      $dataPasar = file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getMasterMarket');
-      $dataArrayPasar = json_decode($dataPasar,true);
-
-      $dataComodity = file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getDailyPriceAllMarket&tanggal='.date('Y-m-d'));
-      $dataArrayComodity = json_decode($dataComodity,true);
-      var_dump($dataArray['result']);
-    }
    
 }

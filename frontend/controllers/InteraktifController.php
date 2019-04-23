@@ -19,6 +19,7 @@ use Yii;
 use yii\data\Pagination;
 use yii\data\ActiveDataProvider;
 use frontend\models\FeedbackForm;
+
 class InteraktifController extends MainController
 {
     /**
