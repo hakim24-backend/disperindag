@@ -15,7 +15,10 @@ $(document).ready(function(){
     }
   });
 
-
+  $('#data_missing').on('change',function(){
+    alert(hai);
+  });
+  
   $('#txt_search_npwp').keypress(function(e){
     if (e.which == 13) {
       $.ajax({
@@ -26,10 +29,20 @@ $(document).ready(function(){
         if (!$.trim(data)){
           $('#val_npwp').html('-');
           $('#val_nama_perusahaan').html('-');
+          swal({
+            title: "Good job!",
+            text: "Perusahaan anda tidak terdaftar, silahkan daftarkan perusahaan anda dengan memilih tombol daftar dibawah ini",
+            icon: "error",
+            button: "Daftar",
+          }).then(function() {
+            // Redirect the user
+            window.href = perusahaanBack();
+          });
         }
         else{
           $('#val_npwp').html(data.npwp);
           $('#val_nama_perusahaan').html(data.nama_perusahaan)
+          $('#data-missing').html('');
         }
       });
     }

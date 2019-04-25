@@ -149,7 +149,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <?= $form->field($model, 'jalan')->textInput(['maxlength' => true, 'required'=>true]) ?>
 
-                        <?= $form->field($model, 'kecamatan')->dropDownList(Districts::getDistricts(),
+                        <?= $form->field($model, 'kecamatan')->widget(Select2::classname(), [
+                            'data' => Districts::getDistricts(),
+                            'options' => ['placeholder' => 'Pilih Kecamatan...', 'id'=>'id-cat','required'=>true],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ]) ?>
+
+                        <?= $form->field($model, 'kelurahan')->widget(Select2::classname(), [
+                            'data' => [],
+                            'options' => ['placeholder' => 'Pilih Kelurahan...', 'id'=>'id-subcat','required'=>true],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ]) ?>
+
+                        <!-- <?= $form->field($model, 'kecamatan')->dropDownList(Districts::getDistricts(),
                         ['prompt'=>'Pilih Kecamatan...','id'=> 'cat-id', 'required'=>true])?>
 
                         <?= $form->field($model, 'kelurahan')->widget(DepDrop::classname(), [
@@ -159,15 +175,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'placeholder'=>'Pilih Kelurahan...',
                                 'url'=>Url::to(['interaktif/subcat'])
                             ]
-                        ])?>
+                        ])?> -->
 
-                        <?= $form->field($model, 'telepon')->textInput(['maxlength' => true, 'required' => 'true']) ?>
+                        <?= $form->field($model, 'telepon')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'fax')->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($model, 'fax')->textInput(['maxlength' => true,'required' => 'true']) ?>
 
                         <?= $form->field($model, 'email')->hiddenInput(['value'=>'-'])->label(false); ?>
 
-                        <?= $form->field($model, 'web')->textInput(['maxlength' => true,]) ?>
+                        <?= $form->field($model, 'web')->textInput(['maxlength' => true,'required' => 'true']) ?>
 
                             <div id="button-kasir-next-1" style="display:in-line;">
                                   <div onclick="myFunctionNext1()" class="tombol-next" style="color:#40e854;border:1px solid #CCC;background:#4CAF50;cursor:pointer;vertical-align:middle;width: 100px;padding: 5px;text-align: center;">
@@ -282,7 +298,20 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
+<?php 
+  
+$this->registerJs("
 
-<script type="text/javascript">
+  $('#id-cat').on('change', function() {
+  var id = $('#id-cat').val();
+    $.ajax({
+      url : '" . Yii::$app->urlManager->baseUrl."/interaktif/get-subcat?id='+id,
+      dataType : 'html',
+      success: function (data) {
+        $('#id-subcat').html(data);
+      }
+    })
+  });
+");
 
-</script>
+?>

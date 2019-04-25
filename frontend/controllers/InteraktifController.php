@@ -235,6 +235,7 @@ class InteraktifController extends MainController
             if ($parents != null) {
                 $cat_id = $parents[0];
                 $out = Villages::getSubCatList($cat_id);
+                var_dump($out);die();
                 // the getSubCatList function will query the database based on the
                 // cat_id and return an array like below:
                 // [
@@ -245,6 +246,24 @@ class InteraktifController extends MainController
             }
         }
         return json_encode(['output'=>'', 'selected'=>'']);
+    }
+
+    public function actionGetSubcat($id)
+    {
+        if ($id != null) {
+
+            //dropdown kelurahan
+            $data = Villages::getSubCatList($id);
+
+            //get kelurahan with looping
+            if ($data) {
+                foreach ($data as $datas) {
+                    echo "<option value='".$datas['id']."'>".$datas['name']."</option>";   
+                }
+            }
+        } else {
+            echo "<option value=0>Pilih Kabupaten ...</option>";
+        }
     }
 
     public function actionKbliList($q = null, $id = null) {

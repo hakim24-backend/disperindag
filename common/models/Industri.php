@@ -60,7 +60,7 @@ class Industri extends \yii\db\ActiveRecord
             [['badan_usaha', 'kbli', 'status'], 'integer'],
             [['nama_perusahaan', 'jalan', 'jenis_produk', 'cabang_industri'], 'string', 'max' => 100],
             [['nama_pemilik', 'kelurahan', 'kecamatan', 'web', 'izin_usaha_industri', 'tahun_izin', 'komoditi', 'tahun_data', 'tk_lk', 'tk_pr', 'nilai_investasi', 'jml_kapasitas_produksi', 'satuan', 'nilai_produksi', 'nilai_bb_bp', 'orientasi_ekspor', 'negara_tujuan_ekspor'], 'string', 'max' => 50],
-            [['telepon', 'fax'], 'string', 'max' => 20],
+            [['telepon', 'fax'], 'integer', 'min' => 12],
             [['email'], 'string', 'max' => 150],
             [['npwp'], 'integer', 'integerOnly'=>true],
             [['npwp'], 'unique'],

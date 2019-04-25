@@ -140,6 +140,7 @@ use yii\bootstrap\NavBar;
                     //['label' => 'SIM IKM', 'url' => null, 'linkOptions'=>['href'=>'http://disperindag.jatimprov.go.id/sim_ikm/', 'target'=>'blank']],
                     ['label' => 'PPID', 'url' => null, 'linkOptions'=>['href'=>'http://disperindag.jatimprov.go.id/dp/', 'target'=>'blank']],
                     ['label' => 'Informasi Harga Pasar', 'url' => ['/pasar']],
+                    ['label' => 'Direktori Industri', 'url' => ['/direktori-industri']],
                     ['label' => 'Feedback', 'url' => ['interaktif/feedback']],
                     // ['label' => 'Industri', 'url' => ['interaktif/industri']],
                 ];

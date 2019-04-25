@@ -14,6 +14,7 @@ use yii\widgets\DetailView;
 
 
 $this->registerJsFile("@web/frontend/web/js/bukutamu.js",['depends' => 'yii\web\JqueryAsset']);
+$this->registerJsFile("@web/frontend/web/js/sweetalert.js",['depends' => 'yii\web\JqueryAsset']);
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -128,6 +129,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <!-- <div class="form-group">
               <?= Html::Button('Kembali', ['class' => 'btn btn-flat btn-warning', 'name' => 'contact-button', 'id' => 'btn_back']) ?>
             </div> -->
+            <div id="data-missing">
+            </div>
             <div id="button-buku-back" style="display:in-line;padding-top: 10px;">
               <div onclick="perusahaanBack()" class="tombol-next" style="color:#40e854;border:1px solid #CCC;background:#999999;cursor:pointer;vertical-align:middle;width: 100px;padding: 10px;text-align: center;">
                 <font color="white">Kembali</font>

@@ -62,7 +62,6 @@ $this->title = "Harga Pasar";
 			$col++;
 		} ?>
 	</div>
-
 </div>
 
                     
