@@ -53,7 +53,7 @@ foreach ($itemToday as $key => $value) {
     }
   }
   end:
-  if ($hargaYesterday!=0 && $hargaYesterday>$hargaToday) {
+  if ($hargaYesterday!=0 && ($hargaYesterday/$total)>($hargaToday/$total)) {
     $text.='Rp. '.number_format(intval($hargaToday/$total),2,',','.')." <i class='fa fa-arrow-circle-up' aria-hidden='true'></i>  ";
   }else{
     $text.='Rp. '.number_format(intval($hargaToday/$total),2,',','.')." <i class='fa fa-arrow-circle-up' aria-hidden='true'></i>  ";
