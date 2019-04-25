@@ -21,6 +21,7 @@ $this->title = "Direktori Pasar";
 					<th>Alamat</th>
 					<th>Produk Utama</th>
 					<th>KBLI</th>
+					<th>Nomor Telepon</th>
 				</thead>
 				<tbody>
 					<?php
@@ -34,6 +35,7 @@ $this->title = "Direktori Pasar";
 							<td><?=$value->jalan?></td>
 							<td><?=$value->jenis_produk?></td>
 							<td><?=$value->kbli?></td>
+							<td><?=$value->telepon?></td>
 						</tr>
 
 					<?php } ?>
