@@ -54,9 +54,9 @@ foreach ($itemToday as $key => $value) {
   }
   end:
   if ($hargaYesterday!=0 && ($hargaYesterday/$total)>($hargaToday/$total)) {
-    $text.='Rp. '.number_format(intval($hargaToday/$total),2,',','.')." <i class='fa fa-arrow-circle-up' aria-hidden='true'></i>  ";
+    $text.='Rp. '.number_format(intval($hargaToday/$total),2,',','.')." <i class='fa fa-arrow-circle-up' aria-hidden='true' style='color: green; margin-left: 20px;'></i>  ";
   }else{
-    $text.='Rp. '.number_format(intval($hargaToday/$total),2,',','.')." <i class='fa fa-arrow-circle-up' aria-hidden='true'></i>  ";
+    $text.='Rp. '.number_format(intval($hargaToday/$total),2,',','.')." <i class='fa fa-arrow-circle-down' aria-hidden='true' style='color: red; margin-left: 20px;'></i>  ";
   }
   $hargaToday=0;
 }
@@ -220,7 +220,13 @@ foreach ($running_text as $key => $value) {
                 NavBar::end();
             ?>
         </div>
+        <div class="runningtext">
+            <div class="marquee">
+                <?= $text ?>
+            </div>
+        </div>
     </div>
+
     <div class="head-bottom head-bottom-fixed">
         <div class="container">
             <?php
@@ -236,6 +242,9 @@ foreach ($running_text as $key => $value) {
                 ]);
                 NavBar::end();
             ?>
+        </div>
+        <div class="marquee">
+            <?= $text ?>
         </div>
     </div>
 </div>  
