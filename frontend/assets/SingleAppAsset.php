@@ -32,6 +32,7 @@ class SingleAppAsset extends AssetBundle
         '../../common/assets/plugins/datatables/jquery.dataTables.min.js',
         '../../common/assets/plugins/datatables/dataTables.bootstrap.min.js',
         'plugins/lightbox/js/lightbox.min.js',
+        'js/dist/jquery.marquee.js',
         'js/script.js',
         'assets/registerJs.js',
         

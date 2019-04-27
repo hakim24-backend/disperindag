@@ -3,71 +3,8 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use frontend\controllers\PasarController;
-use common\models\RunningText;
 
-
-//data harga pasar
-$dataKabupaten = file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getMasterKabkota');
-$dataArrayKabupaten = json_decode($dataKabupaten,true);
-
-if ($dataArrayKabupaten['success']) {
-    foreach ($dataArrayKabupaten['result'] as $key => $value) {
-        $result[$value['kabkota_id']]=$value['kabkota_name'];
-    }
-}
-
-//data pangan
-$dataPasar = file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getMasterMarket');
-$dataArrayPasar = json_decode($dataPasar,true);
-
-$masterComodity = file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getMasterCommodity');
-$masterArrayComodity = json_decode($masterComodity,true);
-
-$dataComodity = file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getDailyPriceAllMarket&tanggal='.date('Y-m-d'));
-$arrayComodityFinal = json_decode($dataComodity,true);
-
-$dataComodityYesterday = file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getDailyPriceAllMarket&tanggal='.date('Y-m-d', strtotime('-1 day', strtotime(date('Y-m-d')))));
-$arrayComodityFinalYesterday = json_decode($dataComodityYesterday,true);
-
-
-$itemToday = PasarController::getArrayBarang($arrayComodityFinal, $dataArrayPasar, $masterArrayComodity);
-
-$itemYesterday = PasarController::getArrayBarang($arrayComodityFinalYesterday, $dataArrayPasar, $masterArrayComodity);
-
-$text = "";
-foreach ($itemToday as $key => $value) {
-  $text .=$value['commodity_name']. " Harga rata-rata ";
-  $hargaToday = 0;
-  $total = count($value['market']);
-  foreach ($value['market'] as $keys => $values) {
-    $hargaToday+=intval($values['price']);
-  }
-
-  foreach ($itemYesterday as $keyItem => $valueItem) {
-    if ($value['commodity_id']==$valueItem['commodity_id']) {
-      $hargaYesterday = 0;
-      foreach ($itemYesterday[$key]['market'] as $keyYesterday => $valueYesterday) {
-        $hargaYesterday+=intval($valueYesterday['price']);
-      }
-      goto end;
-    }
-  }
-  end:
-  if ($hargaYesterday!=0 && ($hargaYesterday/$total)>($hargaToday/$total)) {
-    $text.='Rp. '.number_format(intval($hargaToday/$total),2,',','.')." <i class='fa fa-arrow-circle-up' aria-hidden='true'></i>  ";
-  }else{
-    $text.='Rp. '.number_format(intval($hargaToday/$total),2,',','.')." <i class='fa fa-arrow-circle-up' aria-hidden='true'></i>  ";
-  }
-  $hargaToday=0;
-}
-
-
-$running_text = RunningText::find()
-                        ->select(['info'])
-                        ->all();
-foreach ($running_text as $key => $value) {
-    $text.=$value->info.' ';
-}
+$text = PasarController::DataPasar();
 
 ?>
 
@@ -220,7 +157,13 @@ foreach ($running_text as $key => $value) {
                 NavBar::end();
             ?>
         </div>
+        <div class="runningtext">
+            <div class="marquee">
+                <?= $text ?>
+            </div>
+        </div>
     </div>
+
     <div class="head-bottom head-bottom-fixed">
         <div class="container">
             <?php
@@ -236,6 +179,9 @@ foreach ($running_text as $key => $value) {
                 ]);
                 NavBar::end();
             ?>
+        </div>
+        <div class="marquee">
+            <?= $text ?>
         </div>
     </div>
 </div>  

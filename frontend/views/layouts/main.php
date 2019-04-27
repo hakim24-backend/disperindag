@@ -30,6 +30,8 @@ SingleAppAsset::register($this);
 <body>
 
 
+
+
 <?php $this->beginBody() ?>
 
 
@@ -52,6 +54,7 @@ SingleAppAsset::register($this);
             <div class="col-md-3">
                 <div class="sidebar-content">
                     <div class="row"> 
+                        
                         <div class="col-md-12 col-sm-6">
                             <div class="box-content popular-news">
                                 <div class="box-header">
