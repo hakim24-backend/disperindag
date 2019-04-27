@@ -18,26 +18,17 @@ $this->title = "Detail Data Perindustrian";
   <h1>
     <?= $this->title ?>
     <small></small>
-  </h1>
-  <ol class="breadcrumb">
+</h1>
+<ol class="breadcrumb">
     <li>Manage Data Industri</li>
     <li><a href="index"><i class="fa fa-user"></i> Data Perindustrian</a></li>
     <li class="active">Detail</li>
-  </ol>
+</ol>
 </section>
 <!-- Main content -->
 <section class="content">
     <div class="box box-primary">
         <div class="box-header">
-            <p>
-                <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-                    'class' => 'btn btn-danger btn-flat',
-                    'data' => [
-                        'confirm' => 'Are you sure you want to delete this item?',
-                        'method' => 'post',
-                    ],
-                ]) ?>
-            </p>
             <div class="pull-right box-tools"><a href="index" class="btn btn-sm btn-default btn-flat">Kembali</a></div>
         </div>
         <div class="box-body">
@@ -191,7 +182,17 @@ $this->title = "Detail Data Perindustrian";
                     ],
                 ],
             ]) ?>
-
-</div>
-</div>
+            <div class="pull-right box-tools">
+                <p>
+                    <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                        'class' => 'btn btn-danger btn-flat',
+                        'data' => [
+                            'confirm' => 'Are you sure you want to delete this item?',
+                            'method' => 'post',
+                        ],
+                    ]) ?>
+                </p>
+            </div>
+        </div>
+    </div>
 </section>

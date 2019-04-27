@@ -112,6 +112,16 @@ class IndustriController extends MainController
         // ]);
     }
 
+    public function actionApprove($id)
+    {
+        $model = $this->findModel($id);
+        $model->status = 1;
+        $model->save(false);
+
+        Yii::$app->session->setFlash('success', "Data perindustrian berhasil di approve");
+        return $this->redirect(['index']);
+    }
+
     /**
      * Deletes an existing Industri model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

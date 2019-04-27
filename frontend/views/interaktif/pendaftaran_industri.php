@@ -22,6 +22,7 @@ use yii\bootstrap\Modal;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 
+use kartik\money\MaskMoney;
 use kartik\select2\Select2;
 use kartik\depdrop\DepDrop;
 use kartik\daterange\DateRangePicker;
@@ -29,6 +30,7 @@ use kartik\date\DatePicker;
 $this->registerJsFile("@web/frontend/web/js/sweetalert.js",['depends' => 'yii\web\JqueryAsset']);
 $this->registerJsFile("@web/frontend/web/js/industri.js",['depends' => 'yii\web\JqueryAsset']);
 $this->registerJsFile("@web/frontend/web/js/datatable.js",['depends' => 'yii\web\JqueryAsset']);
+$this->registerJsFile("@web/frontend/web/js/maskinput.js",['depends' => 'yii\web\JqueryAsset']);
 // $this->registerCssFile("@web/frontend/web/css/datatable.js", ['depends' => 'yii\bootstrap\BootstrapAsset']);
 $url =  Yii::$app->request->baseUrl. '/interaktif/kbli-list';
 $badanUsaha=ArrayHelper::map(BadanUsaha::find()->orderBy(['nama_badan_usaha' => SORT_ASC])->asArray()->all(), 'id', 'nama_badan_usaha');
@@ -143,6 +145,8 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['prompt'=>'Pilih Badan Usaha Perusahaan Anda', 'required'=>true]    // options
                         ) ?>
 
+                        <!-- <?= $form->field($model, 'komoditi')->textInput(['maxlength' => true, 'required'=>true]) ?> -->
+
                         <?= $form->field($model, 'nama_perusahaan')->textInput(['maxlength' => true, 'required'=>true]) ?>
 
                         <?= $form->field($model, 'nama_pemilik')->textInput(['maxlength' => true, 'required'=>true]) ?>
@@ -177,9 +181,9 @@ $this->params['breadcrumbs'][] = $this->title;
                             ]
                         ])?> -->
 
-                        <?= $form->field($model, 'telepon')->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($model, 'telepon')->textInput(['maxlength' => true,'type' => 'number']) ?>
 
-                        <?= $form->field($model, 'fax')->textInput(['maxlength' => true,'required' => 'true']) ?>
+                        <?= $form->field($model, 'fax')->textInput(['maxlength' => true,'required' => 'true','type' => 'number']) ?>
 
                         <?= $form->field($model, 'email')->hiddenInput(['value'=>'-'])->label(false); ?>
 
@@ -195,7 +199,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
 
                     <div id="form-2" style="display: none;">
-                        <?= $form->field($model, 'npwp')->textInput(['min'=>'1' ,'type' => 'number' ,'maxlength' => true, 'placeholder' => 'Contoh : 1234567890', 'required'=>true])->label('Nomor Pokok Wajib Pajak') ?>
+                        <!-- <?= $form->field($model, 'npwp')->textInput(['type' => 'text' , 'pattern'=>'[0-9]','maxlength' => true, 'placeholder' => 'Contoh : 1234567890', 'required'=>true])->label('Nomor Pokok Wajib Pajak') ?> -->
+
+                        <?= $form->field($model, 'npwp')->widget(yii\widgets\MaskedInput::class, 
+                          [
+                            'mask' => '99.999.999.9-999.999',
+                          ]
+                        ) ?>
 
                         <?= $form->field($model, 'izin_usaha_industri')->dropDownList(
                             [
@@ -215,14 +225,17 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'minViewMode'=>'years',
                                     'format' => 'yyyy'
                                   ]
-                            ]) ?>
+                        ]) ?>
 
                         <?= Html::label('KBLI') ?>
                         <?= Html::textInput('txt_kbli', NULL, ['class' => 'form-control', 'id' => 'txt_kbli']) ?>
 
                         <?= $form->field($model, 'kbli')->hiddenInput(['id'=>'txt_kbli_val', 'required'=>true])->label(false); ?>
 
-                        <?= $form->field($model, 'komoditi')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= Html::label('Komoditi') ?>
+                        <?= Html::textInput('industri-komoditi', NULL, ['class' => 'form-control', 'id' => 'industri-komoditi', 'readonly' => true]) ?>
+
+                        <?= $form->field($model, 'komoditi')->hiddenInput(['id'=>'industri-komoditi', 'required'=>true])->label(false); ?>
 
                         <?= $form->field($model, 'jenis_produk')->textInput(['maxlength' => true, 'required'=>true]) ?>
 
@@ -239,9 +252,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                   ]
                             ]) ?>
 
-                        <?= $form->field($model, 'tk_lk')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'tk_lk')->textInput(['maxlength' => true, 'required'=>true, 'type'=>'number'])->label('Tenaga Kerja Laki-Laki') ?>
 
-                        <?= $form->field($model, 'tk_pr')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'tk_pr')->textInput(['maxlength' => true, 'required'=>true,'type'=>'number'])->label('Tenaga Kerja Perempuan') ?>
 
                         <div class="button-grup-1" style="height: 30px;width: 100%;">
                             <div id="button-kasir-back-1" style="display:in-line;float:left">
@@ -261,19 +274,43 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     </div>
                     <div id="form-3" style="display: none;">
-                        <?= $form->field($model, 'nilai_investasi')->textInput(['maxlength' => true, 'required'=>true]) ?>
 
-                        <?= $form->field($model, 'jml_kapasitas_produksi')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'nilai_investasi')->widget(MaskMoney::classname(), 
+                          [
+                            'pluginOptions' => [
+                                'prefix' => 'Rp. ',
+                                'suffix' => '',
+                                'affixesStay' => true,
+                                'thousands' => '.',
+                                'decimal' => ',',
+                                'precision' => 0, 
+                                'allowZero' => false,
+                                'allowNegative' => false,
+                          ]
+                        ]) ?>
+                        
+                        <!-- <?= $form->field($model, 'nilai_investasi')->textInput(['maxlength' => true, 'required'=>true,'placeholder' => 'Rp. ']) ?> -->
+
+                        <?= $form->field($model, 'jml_kapasitas_produksi')->textInput(['maxlength' => true, 'required'=>true, 'type' => 'number']) ?>
 
                         <?= $form->field($model, 'satuan')->textInput(['maxlength' => true, 'required'=>true]) ?>
 
-                        <?= $form->field($model, 'nilai_produksi')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'nilai_produksi')->textInput(['maxlength' => true, 'required'=>true,'type' => 'number']) ?>
 
-                        <?= $form->field($model, 'nilai_bb_bp')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <?= $form->field($model, 'nilai_bb_bp')->textInput(['maxlength' => true, 'required'=>true,'type' => 'number']) ?>
 
                         <?= $form->field($model, 'orientasi_ekspor')->textInput(['maxlength' => true]) ?>
 
-                        <?= $form->field($model, 'negara_tujuan_ekspor')->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($model, 'negara_tujuan_ekspor')->widget(Select2::classname(), [
+                            'data' => $country,
+                            'options' => ['placeholder' => 'Pilih Negara Tujuan Ekspor...', 'required'=>true],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ]) ?>
+
+                        <!-- <?= $form->field($model, 'negara_tujuan_ekspor')->textInput(['maxlength' => true]) ?> -->
+
                         <div class="button-grup-2" style="height: 30px;width: 100%;">
                             <div id="button-kasir-back-2" style="display:in-line;float:left">
                                   <div onclick="myFunctionBack2()" class="tombol-next" style="color:#40e854;border:1px solid #CCC;background:#999999;cursor:pointer;vertical-align:middle;width: 100px;padding: 5px;text-align: center;">
@@ -312,6 +349,29 @@ $this->registerJs("
       }
     })
   });
+
+  $('#industri-komoditi').on('change',function(){
+    alert('hai');
+  });
+
+  $('#industri-telepon').on('change',function(){
+    var data = $('#industri-telepon').val();
+    if($.isNumeric(data) == true){
+        return true;
+      } else {
+        swal('Nomor Telepon Harus Angka');
+      }
+  });
+
+  $('#industri-fax').on('change',function(){
+    var data = $('#industri-fax').val();
+    if($.isNumeric(data) == true){
+        return true;
+      } else {
+        swal('Fax Harus Angka');
+      }
+  });
+ 
 ");
 
 ?>

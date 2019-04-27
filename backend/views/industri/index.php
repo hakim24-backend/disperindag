@@ -6,6 +6,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\DetailView;
 use common\models\Villages;
@@ -176,7 +177,45 @@ $this->title = 'Data Perindustrian';
                     // ['class' => 'yii\grid\ActionColumn'],
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'template'=>'{view}',
+                        'template'=>'{approve} {view} {delete}',
+                        'buttons' => [
+                                'approve' => function($url, $model, $key)
+                                {
+                                    $url = Url::toRoute(['industri/approve', 'id' => $model->id]);
+                                    return Html::a(
+                                        '   <span class="glyphicon glyphicon-ok"></span>    ',
+                                        $url,
+                                        [
+                                            'title' => 'Approve',
+                                        ]
+                                    );
+                                },
+                                'view' => function($url, $model, $key)
+                                {
+                                            $url = Url::toRoute(['industri/view', 'id' => $model->id]);
+                                            return Html::a(
+                                                '   <span class="glyphicon glyphicon-eye-open"></span>  ',
+                                                $url,
+                                                [
+                                                    'title' => 'Lihat',
+                                                ]
+                                            );
+                                },
+                                'delete' => function($url, $model, $key)
+                                {
+                                            $url = Url::toRoute(['industri/delete', 'id' => $model->id]);
+                                            return Html::a(
+                                                '   <span class="glyphicon glyphicon-trash"></span> ',
+                                                $url,
+                                                [
+                                                    'title' => 'Tolak',
+                                                    'data-confirm' => Yii::t('yii', 'Are you sure you want to delete?'),
+                                                    'data-method' => 'post', 
+                                                    'data-pjax' => '0'
+                                                ]
+                                            );
+                                }
+                              ],
                         'contentOptions' => ['class' => 'td-action'],
                     ],
                 ],

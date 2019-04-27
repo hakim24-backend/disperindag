@@ -13,12 +13,15 @@ use common\models\Industri;
 use common\models\Kbli;
 use common\models\KbliSearch;
 use common\models\BlokIp;
+use common\models\Country;
+
 
 use frontend\models\ContactForm;
 use Yii;
 use yii\data\Pagination;
 use yii\data\ActiveDataProvider;
 use frontend\models\FeedbackForm;
+use yii\helpers\ArrayHelper;
 
 class InteraktifController extends MainController
 {
@@ -107,7 +110,10 @@ class InteraktifController extends MainController
     }
 
     public function actionIndustrisave(){
-        // var_dump(\Yii::$app->session->get('name'));die;
+        
+        //data country
+        $country = ArrayHelper::map(Country::find()->all(), 'Name', 'Name');
+
         $email = \Yii::$app->session->get('name');
         #data kbli
         $providerKBLI = KBLI::find()->all();
@@ -129,9 +135,11 @@ class InteraktifController extends MainController
         $selectionPerusahaan = Industri::selectionPerusahaan();
 
         if ($model->load(Yii::$app->request->post())) {
+            $post = Yii::$app->request->post();
             $model->email = $email;
             $model->status=0;
             $model->kbli = intval($model->kbli);
+            $model->komoditi = $post['industri-komoditi'];
             $isValid = $model->validate();
         
             if ($isValid) {
@@ -148,6 +156,7 @@ class InteraktifController extends MainController
             'selectionPerusahaan' => $selectionPerusahaan,
             'model' => $model,
             'providerKBLI' => $providerKBLI,
+            'country' => $country
         ]);
     }
 

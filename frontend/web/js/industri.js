@@ -1,11 +1,13 @@
 $(document).ready(function(){
 
   $('.teaser').click(function(){
-    data_kode = $(this).parents('td').parents('tr').find('#val_id').html();
+    data_id = $(this).parents('td').parents('tr').find('#val_id').html();
+    data_kode = $(this).parents('td').parents('tr').find('#val_kode').html();
     data_val = $(this).parents('td').parents('tr').find('#val_nama').html();
     $('#modal').modal('hide');
     $('#txt_kbli').val(data_val);
-    $('#txt_kbli_val').val(data_kode);
+    $('#txt_kbli_val').val(data_id);
+    $('#industri-komoditi').val(data_kode.substr(0,2));
   });
 
   $('#txt_kbli').click(function(){
