@@ -38,10 +38,7 @@ use elzix\CurrencyConverter\CurrencyConverter;
         </div>
         <div class="col-md-4 col-sm-6">
             <div class="box">
-                <div class="title">Nilai Tukar Rupiah</div>
-                <div class="content tukar-rupiah">
-                    <table class="table">
-                        <?php 
+                <?php 
 // $converter = new CurrencyConverter();
 // $ratea =  $converter->convert('c222ff3fe93847068b127563a3fa8cf4', 'USD', 'NPR'); // Use Single Currency Code
 // $ratec =  $converter->convert('c222ff3fe93847068b127563a3fa8cf4', 'NPR', 'IDR'); // Use Single Country Code
@@ -54,10 +51,14 @@ use elzix\CurrencyConverter\CurrencyConverter;
 //     echo 'Nilai jual ' . $currency . ' adalah: ' . $value->jual . '<br>';
 //     echo 'Nilai beli ' . $currency . ' adalah: ' . $value->beli . '<br><br>';
 // }     
-                        $json = file_get_contents('http://www.adisurya.net/kurs-bca/get');
-                        $my_array = json_decode($json);
-                       
-                        ?>
+                $json = @file_get_contents('http://www.adisurya.net/kurs-bca/get');
+                $my_array = json_decode($json);
+                if ($my_array) {
+                ?>
+                <div class="title">Nilai Tukar Rupiah</div>
+                <div class="content tukar-rupiah">
+                    <table class="table">
+                        
                         <tr>
                             <td width="40">USD</td>
                             <td width="20">Rp <?= number_format($my_array->Data->USD->Jual,2,",",".") ?></td>
@@ -89,6 +90,8 @@ use elzix\CurrencyConverter\CurrencyConverter;
                         </tr>
                     </table>
                 </div>
+                <?php } ?>
+
             </div>
         </div>
         <div class="col-md-4 col-sm-6">
