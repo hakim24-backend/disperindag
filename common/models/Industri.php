@@ -12,6 +12,7 @@ use Yii;
  * @property string $nama_perusahaan
  * @property string $nama_pemilik
  * @property string $jalan
+ * @property string $kabupaten
  * @property string $kelurahan
  * @property string $kecamatan
  * @property string $telepon
@@ -56,10 +57,10 @@ class Industri extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['badan_usaha', 'nama_perusahaan', 'nama_pemilik', 'jalan', 'kelurahan', 'kecamatan', 'izin_usaha_industri', 'tahun_izin', 'komoditi', 'jenis_produk', 'tahun_data', 'tk_lk', 'nilai_investasi', 'jml_kapasitas_produksi', 'satuan', 'nilai_produksi', 'nilai_bb_bp', 'npwp', 'status'], 'required'],
+            [['badan_usaha', 'nama_perusahaan', 'nama_pemilik', 'jalan','kabupaten', 'kelurahan', 'kecamatan', 'izin_usaha_industri', 'tahun_izin', 'komoditi', 'jenis_produk', 'tahun_data', 'tk_lk', 'nilai_investasi', 'jml_kapasitas_produksi', 'satuan', 'nilai_produksi', 'nilai_bb_bp', 'npwp', 'status'], 'required'],
             [['badan_usaha', 'kbli', 'status','komoditi'], 'integer'],
             [['nama_perusahaan', 'jalan', 'jenis_produk', 'cabang_industri'], 'string', 'max' => 100],
-            [['nama_pemilik', 'kelurahan', 'kecamatan', 'web', 'izin_usaha_industri', 'tahun_izin', 'tahun_data', 'tk_lk', 'tk_pr', 'jml_kapasitas_produksi', 'satuan', 'nilai_produksi', 'nilai_bb_bp', 'orientasi_ekspor', 'negara_tujuan_ekspor'], 'string', 'max' => 50],
+            [['nama_pemilik', 'kabupaten','kelurahan', 'kecamatan', 'web', 'izin_usaha_industri', 'tahun_izin', 'tahun_data', 'tk_lk', 'tk_pr', 'jml_kapasitas_produksi', 'satuan', 'nilai_produksi', 'nilai_bb_bp', 'orientasi_ekspor', 'negara_tujuan_ekspor'], 'string', 'max' => 50],
             [['telepon', 'fax'], 'integer'],
             [['email'], 'string', 'max' => 150],
             // [['npwp'], 'integer', 'integerOnly'=>true],
@@ -80,6 +81,7 @@ class Industri extends \yii\db\ActiveRecord
             'nama_perusahaan' => 'Nama Perusahaan',
             'nama_pemilik' => 'Nama Pemilik',
             'jalan' => 'Jalan',
+            'kabupaten' => 'Kabupaten',
             'kelurahan' => 'Kelurahan',
             'kecamatan' => 'Kecamatan',
             'telepon' => 'Telepon',
@@ -96,10 +98,10 @@ class Industri extends \yii\db\ActiveRecord
             'tk_lk' => 'TK LK',
             'tk_pr' => 'TK PR',
             'nilai_investasi' => 'Nilai Investasi',
-            'jml_kapasitas_produksi' => 'Jml Kapasitas Produksi',
+            'jml_kapasitas_produksi' => 'Jumlah Kapasitas Produksi',
             'satuan' => 'Satuan',
             'nilai_produksi' => 'Nilai Produksi',
-            'nilai_bb_bp' => 'Nilai BB BP',
+            'nilai_bb_bp' => 'Nilai Bahan Baku / Bahan Penolong',
             'orientasi_ekspor' => 'Orientasi Ekspor',
             'negara_tujuan_ekspor' => 'Negara Tujuan Ekspor',
             'npwp' => 'Npwp',

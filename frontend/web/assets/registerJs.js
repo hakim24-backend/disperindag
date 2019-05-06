@@ -76,8 +76,8 @@ function myFunctionNext1() {
     var perusahaan=$('#industri-nama_perusahaan').val();
     var pemilik=$('#industri-nama_pemilik').val();
     var jalan=$('#industri-jalan').val();
-    var kecamatan=$('#cat-id').val();
-    var kelurahan=$('#subcat-id').val();
+    var kecamatan=$('#id-cat').val();
+    var kelurahan=$('#id-subcat').val();
     var telepon=$('#industri-telepon').val();
 
     var form1 = document.getElementById("form-1");

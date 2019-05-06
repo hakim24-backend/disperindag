@@ -134,6 +134,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="list-page">
     <div class="box-content">
         <div class="box-header">
+            <label><h2><b>Form Pendaftaran Industri</b></h2></label>
             <div onclick="showBukuTamu()" class="pull-right box-tools"><a href="#" class="btn btn-sm btn-default btn-flat" id="btn-list" style="display: none">Lihat Daftar Industri Anda disini</a></div>
         </div>
         <div class="box-body padding" id="form-industri">
@@ -145,16 +146,22 @@ $this->params['breadcrumbs'][] = $this->title;
                             ['prompt'=>'Pilih Badan Usaha Perusahaan Anda', 'required'=>true]    // options
                         ) ?>
 
-                        <!-- <?= $form->field($model, 'komoditi')->textInput(['maxlength' => true, 'required'=>true]) ?> -->
-
                         <?= $form->field($model, 'nama_perusahaan')->textInput(['maxlength' => true, 'required'=>true]) ?>
 
                         <?= $form->field($model, 'nama_pemilik')->textInput(['maxlength' => true, 'required'=>true]) ?>
 
                         <?= $form->field($model, 'jalan')->textInput(['maxlength' => true, 'required'=>true]) ?>
 
+                        <?= $form->field($model, 'kabupaten')->widget(Select2::classname(), [
+                            'data' => $kabupaten,
+                            'options' => ['placeholder' => 'Pilih Kabupaten...', 'id'=>'id-reg','required'=>true],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ]) ?>
+
                         <?= $form->field($model, 'kecamatan')->widget(Select2::classname(), [
-                            'data' => Districts::getDistricts(),
+                            'data' => [],
                             'options' => ['placeholder' => 'Pilih Kecamatan...', 'id'=>'id-cat','required'=>true],
                             'pluginOptions' => [
                                 'allowClear' => true
@@ -216,6 +223,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                 '4' => 'Izin Lainnya'
                             ,],['required'=>true])->label('Legalitas Industri') ?>
 
+                        <div id="new-form">
+                        </div>
+
                         <?= $form->field($model, 'tahun_izin')->widget(DatePicker::classname(), [
                                 'name' => 'filter_date',
                                 'options' => ['placeholder' => 'Pilih Tahun Izin ...', 'required'=>true],
@@ -239,8 +249,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <?= $form->field($model, 'jenis_produk')->textInput(['maxlength' => true, 'required'=>true]) ?>
 
-                        <?= $form->field($model, 'cabang_industri')->textInput(['maxlength' => true]) ?>
-
                         <?= $form->field($model, 'tahun_data')->widget(DatePicker::classname(), [
                                 'name' => 'filter_date',
                                 'options' => ['placeholder' => 'Pilih Tahun Izin ...', 'required'=>true],
@@ -252,9 +260,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                   ]
                             ]) ?>
 
-                        <?= $form->field($model, 'tk_lk')->textInput(['maxlength' => true, 'required'=>true, 'type'=>'number'])->label('Tenaga Kerja Laki-Laki') ?>
+                        <?= $form->field($model, 'tk_lk')->textInput(['maxlength' => true, 'required'=>true, 'type'=>'number'])->label('Jumlah Tenaga Kerja Laki-Laki') ?>
 
-                        <?= $form->field($model, 'tk_pr')->textInput(['maxlength' => true, 'required'=>true,'type'=>'number'])->label('Tenaga Kerja Perempuan') ?>
+                        <?= $form->field($model, 'tk_pr')->textInput(['maxlength' => true, 'required'=>true,'type'=>'number'])->label('Jumlah Tenaga Kerja Perempuan') ?>
 
                         <div class="button-grup-1" style="height: 30px;width: 100%;">
                             <div id="button-kasir-back-1" style="display:in-line;float:left">
@@ -291,23 +299,82 @@ $this->params['breadcrumbs'][] = $this->title;
                         
                         <!-- <?= $form->field($model, 'nilai_investasi')->textInput(['maxlength' => true, 'required'=>true,'placeholder' => 'Rp. ']) ?> -->
 
-                        <?= $form->field($model, 'jml_kapasitas_produksi')->textInput(['maxlength' => true, 'required'=>true, 'type' => 'number']) ?>
+                        <?= $form->field($model, 'jml_kapasitas_produksi')->widget(MaskMoney::classname(), 
+                          [
+                            'pluginOptions' => [
+                                'prefix' => 'Rp. ',
+                                'suffix' => '',
+                                'affixesStay' => true,
+                                'thousands' => '.',
+                                'decimal' => ',',
+                                'precision' => 0, 
+                                'allowZero' => false,
+                                'allowNegative' => false,
+                          ]
+                        ]) ?>
 
-                        <?= $form->field($model, 'satuan')->textInput(['maxlength' => true, 'required'=>true]) ?>
+                        <!-- <?= $form->field($model, 'jml_kapasitas_produksi')->textInput(['maxlength' => true, 'required'=>true, 'type' => 'number'])->label('Jumlah Kapasitas Produksi') ?> -->
 
-                        <?= $form->field($model, 'nilai_produksi')->textInput(['maxlength' => true, 'required'=>true,'type' => 'number']) ?>
-
-                        <?= $form->field($model, 'nilai_bb_bp')->textInput(['maxlength' => true, 'required'=>true,'type' => 'number']) ?>
-
-                        <?= $form->field($model, 'orientasi_ekspor')->textInput(['maxlength' => true]) ?>
-
-                        <?= $form->field($model, 'negara_tujuan_ekspor')->widget(Select2::classname(), [
-                            'data' => $country,
-                            'options' => ['placeholder' => 'Pilih Negara Tujuan Ekspor...', 'required'=>true],
+                        <?= $form->field($model, 'satuan')->widget(Select2::classname(), [
+                            'data' => $unit,
+                            'options' => ['placeholder' => 'Pilih Satuan...','required'=>true],
                             'pluginOptions' => [
                                 'allowClear' => true
                             ],
                         ]) ?>
+
+                        <!-- <?= $form->field($model, 'satuan')->textInput(['maxlength' => true, 'required'=>true]) ?> -->
+
+                        <?= $form->field($model, 'nilai_produksi')->widget(MaskMoney::classname(), 
+                          [
+                            'pluginOptions' => [
+                                'prefix' => 'Rp. ',
+                                'suffix' => '',
+                                'affixesStay' => true,
+                                'thousands' => '.',
+                                'decimal' => ',',
+                                'precision' => 0, 
+                                'allowZero' => false,
+                                'allowNegative' => false,
+                          ]
+                        ]) ?>
+
+                        <!-- <?= $form->field($model, 'nilai_produksi')->textInput(['maxlength' => true, 'required'=>true,'type' => 'number']) ?> -->
+
+                        <?= $form->field($model, 'nilai_bb_bp')->widget(MaskMoney::classname(), 
+                          [
+                            'pluginOptions' => [
+                                'prefix' => 'Rp. ',
+                                'suffix' => '',
+                                'affixesStay' => true,
+                                'thousands' => '.',
+                                'decimal' => ',',
+                                'precision' => 0, 
+                                'allowZero' => false,
+                                'allowNegative' => false,
+                          ]
+                        ]) ?>
+
+                        <!-- <?= $form->field($model, 'nilai_bb_bp')->textInput(['maxlength' => true, 'required'=>true,'type' => 'number']) ?> -->
+
+                        <?= $form->field($model, 'orientasi_ekspor')->dropDownList(
+                            [
+                                '1' => 'Regional',
+                                '2' => 'Lokal',
+                                '3' => 'Internasional',
+                            ],
+                            ['required'=>true]) 
+                        ?>
+
+                        <?= $form->field($model, 'negara_tujuan_ekspor')->widget(Select2::classname(), [
+                            'data' => [],
+                            'options' => ['placeholder' => 'Pilih Negara Tujuan Ekspor...', 'required'=>true, 'id'=>'country', 'disabled'=>true],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ]) ?>
+
+                        <!-- <?= $form->field($model, 'orientasi_ekspor')->textInput(['maxlength' => true]) ?> ?> -->
 
                         <!-- <?= $form->field($model, 'negara_tujuan_ekspor')->textInput(['maxlength' => true]) ?> -->
 
@@ -339,6 +406,17 @@ $this->params['breadcrumbs'][] = $this->title;
   
 $this->registerJs("
 
+  $('#id-reg').on('change', function() {
+  var id = $('#id-reg').val();
+    $.ajax({
+      url : '" . Yii::$app->urlManager->baseUrl."/interaktif/get-cat?id='+id,
+      dataType : 'html',
+      success: function (data) {
+        $('#id-cat').html(data);
+      }
+    })
+  });
+
   $('#id-cat').on('change', function() {
   var id = $('#id-cat').val();
     $.ajax({
@@ -348,10 +426,6 @@ $this->registerJs("
         $('#id-subcat').html(data);
       }
     })
-  });
-
-  $('#industri-komoditi').on('change',function(){
-    alert('hai');
   });
 
   $('#industri-telepon').on('change',function(){
@@ -370,6 +444,44 @@ $this->registerJs("
       } else {
         swal('Fax Harus Angka');
       }
+  });
+
+  $('#industri-izin_usaha_industri').on('change',function(){
+    if($('#industri-izin_usaha_industri').val() == 4){
+      $.ajax({
+        url : '" . Yii::$app->urlManager->baseUrl."/interaktif/new-form',
+        dataType : 'html',
+        success: function (data) {
+          $('#new-form').html(data);
+        }
+      });
+      $('#new-form').show();
+    } else {
+      $('#new-form').hide();
+    }
+  });
+
+  $('#industri-orientasi_ekspor').on('change',function(){
+    var id = $('#industri-orientasi_ekspor').val();
+    if(id == 3){
+      $.ajax({
+        url : '" . Yii::$app->urlManager->baseUrl."/interaktif/get-country?id='+id,
+        dataType : 'html',
+        success : function(data){
+          $('#country').html(data);
+        }
+      });
+      $('#country').removeAttr('disabled');
+    } else {
+      $.ajax({
+        url : '" . Yii::$app->urlManager->baseUrl."/interaktif/get-country?id='+id,
+        dataType : 'html',
+        success : function(data){
+          $('#country').html(data);
+        }
+      });
+      $('#country').attr('disabled','disabled');
+    }
   });
  
 ");

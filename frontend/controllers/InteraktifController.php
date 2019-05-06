@@ -14,6 +14,8 @@ use common\models\Kbli;
 use common\models\KbliSearch;
 use common\models\BlokIp;
 use common\models\Country;
+use common\models\Unit;
+use common\models\Regencies;
 
 
 use frontend\models\ContactForm;
@@ -46,6 +48,9 @@ class InteraktifController extends MainController
      */
     public function actionContact()
     {
+        //data industri
+        $industri = ArrayHelper::map(Industri::find()->all(), 'nama_perusahaan', 'nama_perusahaan');
+
         $model_form_comment = new ContactForm();
         if ($model_form_comment->load(Yii::$app->request->post())) {
             if($model_form_comment->validate())
@@ -82,6 +87,7 @@ class InteraktifController extends MainController
             'model_form_comment' => $model_form_comment,
             'list_comment' => $list_comment_page,
             'pages' => $pages,
+            'industri' => $industri,
             'model' => $model
         ]);
     }
@@ -110,9 +116,12 @@ class InteraktifController extends MainController
     }
 
     public function actionIndustrisave(){
-        
-        //data country
-        $country = ArrayHelper::map(Country::find()->all(), 'Name', 'Name');
+
+        //data unit
+        $unit = ArrayHelper::map(Unit::find()->all(), 'name_unit', 'name_unit');
+
+        //data kabupaten
+        $kabupaten = ArrayHelper::map(Regencies::find()->all(), 'id', 'name');
 
         $email = \Yii::$app->session->get('name');
         #data kbli
@@ -140,6 +149,11 @@ class InteraktifController extends MainController
             $model->status=0;
             $model->kbli = intval($model->kbli);
             $model->komoditi = $post['industri-komoditi'];
+
+            if ($model->izin_usaha_industri == 4) {
+                $model->izin_usaha_industri = $post['form-baru'];
+            }
+
             $isValid = $model->validate();
         
             if ($isValid) {
@@ -156,7 +170,8 @@ class InteraktifController extends MainController
             'selectionPerusahaan' => $selectionPerusahaan,
             'model' => $model,
             'providerKBLI' => $providerKBLI,
-            'country' => $country
+            'unit' => $unit,
+            'kabupaten' => $kabupaten
         ]);
     }
 
@@ -257,11 +272,31 @@ class InteraktifController extends MainController
         return json_encode(['output'=>'', 'selected'=>'']);
     }
 
+    public function actionGetCat($id)
+    {
+        if ($id != null) {
+            
+            //data kecamatan
+            $data = Districts::find()->where(['regency_id'=>$id])->all();
+
+            if ($data) {
+                foreach ($data as $datas) {
+                    echo "<option value='".$datas['id']."'>".$datas['name']."</option>";
+                }
+            } else {
+                echo "<option value=0>Pilih Kecamatan ...</option>";
+            }
+
+        } else {
+
+        }
+    }
+
     public function actionGetSubcat($id)
     {
         if ($id != null) {
 
-            //dropdown kelurahan
+            //data kelurahan
             $data = Villages::getSubCatList($id);
 
             //get kelurahan with looping
@@ -271,7 +306,28 @@ class InteraktifController extends MainController
                 }
             }
         } else {
-            echo "<option value=0>Pilih Kabupaten ...</option>";
+            echo "<option value=0>Pilih kelurahan ...</option>";
+        }
+    }
+
+    public function actionNewForm()
+    {
+        echo '
+            <input type="text" class="form-control" name="form-baru" maxlength="100" required="" aria-required="true">
+            <br>
+        ';
+    }
+
+    public function actionGetCountry($id)
+    {
+        if ($id == 3) {
+            $data = Country::find()->all();
+
+            foreach ($data as $datas) {
+                echo "<option value='".$datas['Name']."'>".$datas['Name']."</option>";
+            }
+        } else {
+            echo "<option value=0>Pilih Negara Tujuan Ekspor ...</option>";
         }
     }
 

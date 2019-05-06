@@ -30,13 +30,10 @@ $(document).ready(function(){
           $('#val_npwp').html('-');
           $('#val_nama_perusahaan').html('-');
           swal({
-            title: "Good job!",
+            title: "Data Tidak Ditemukan",
             text: "Perusahaan anda tidak terdaftar, silahkan daftarkan perusahaan anda dengan memilih tombol daftar dibawah ini",
             icon: "error",
-            button: "Daftar",
-          }).then(function() {
-            // Redirect the user
-            window.href = perusahaanBack();
+            button: ["Oh noez!", true],
           });
         }
         else{

@@ -33,17 +33,17 @@ class PasarController extends MainController
       }
 
       //data pangan
-      $dataPasar = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getMasterMarket');
-      $dataArrayPasar = json_decode($dataPasar,true);
+      // $dataPasar = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getMasterMarket');
+      // $dataArrayPasar = json_decode($dataPasar,true);
 
-      $masterComodity = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getMasterCommodity');
-      $masterArrayComodity = json_decode($masterComodity,true);
+      // $masterComodity = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getMasterCommodity');
+      // $masterArrayComodity = json_decode($masterComodity,true);
 
-      $dataComodity = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getDailyPriceAllMarket&tanggal='.date('Y-m-d'));
-      $arrayComodityFinal = json_decode($dataComodity,true);
+      // $dataComodity = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getDailyPriceAllMarket&tanggal='.date('Y-m-d'));
+      // $arrayComodityFinal = json_decode($dataComodity,true);
 
-      $dataComodityYesterday = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getDailyPriceAllMarket&tanggal='.date('Y-m-d', strtotime('-1 day', strtotime(date('Y-m-d')))));
-      $arrayComodityFinalYesterday = json_decode($dataComodityYesterday,true);
+      // $dataComodityYesterday = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getDailyPriceAllMarket&tanggal='.date('Y-m-d', strtotime('-1 day', strtotime(date('Y-m-d')))));
+      // $arrayComodityFinalYesterday = json_decode($dataComodityYesterday,true);
 
       if ($arrayComodityFinal && $arrayComodityFinalYesterday && $dataArrayPasar && $masterArrayComodity) {
         // var_dump($)
@@ -53,7 +53,7 @@ class PasarController extends MainController
 
         $hargaYesterday = 0;
         foreach ($itemToday as $key => $value) {
-          $text .=$value['commodity_name']. " Harga rata-rata ";
+          $text .=$value['commodity_title']. " Harga rata-rata ";
           $hargaToday = 0;
           $total = count($value['market']);
           foreach ($value['market'] as $keys => $values) {
@@ -71,9 +71,9 @@ class PasarController extends MainController
           }
           end:
           if ($hargaYesterday!=0 && ($hargaYesterday/$total)<($hargaToday/$total)) {
-            $text.='Rp. '.number_format(intval($hargaToday/$total),2,',','.')."/".$value['commodity_unit']."<i class='fa fa-arrow-up' aria-hidden='true' style='color: green; margin-right: 20px; margin-left: 3px;'></i>  ";
+            $text.='Rp. '.number_format(intval($hargaToday/$total),2,',','.')."/".$value['commodity_unit']."<i class='fa fa-arrow-up' aria-hidden='true' style='color: red; margin-right: 20px; margin-left: 3px;'></i>  ";
           }else if($hargaYesterday!=0 && ($hargaYesterday/$total)>($hargaToday/$total)){
-            $text.='Rp. '.number_format(intval($hargaToday/$total),2,',','.')."/".$value['commodity_unit']."<i class='fa fa-arrow-down' aria-hidden='true' style='color: red; margin-right: 20px; margin-left: 3px;'></i>  ";
+            $text.='Rp. '.number_format(intval($hargaToday/$total),2,',','.')."/".$value['commodity_unit']."<i class='fa fa-arrow-down' aria-hidden='true' style='color: green; margin-right: 20px; margin-left: 3px;'></i>  ";
           }else{
             $text.='Rp. '.number_format(intval($hargaToday/$total),2,',','.')."/".$value['commodity_unit']."<i class='fa fa-arrows-v' aria-hidden='true' style='color: yellow; margin-right: 20px; margin-left: 3px;'></i>  ";
 
@@ -92,7 +92,7 @@ class PasarController extends MainController
                             ->select(['info'])
                             ->all();
     foreach ($running_text as $key => $value) {
-        $text.=$value->info.' ';
+        $text.=$value->info.'  * * *  ';
     }
     return $text;
   }
@@ -142,14 +142,14 @@ class PasarController extends MainController
     //     //   foreach( $element['details'] as $keys => $values ) {
     //     //     //get item name
     //     //     $commodity_id = $values['commodity_id'];
-    //     //     $commodity_name = array_values(array_filter($masterArrayComodity['result'], function($element) use($commodity_id){
+    //     //     $commodity_title = array_values(array_filter($masterArrayComodity['result'], function($element) use($commodity_id){
     //     //       return isset($element['commodity_id']) && $element['commodity_id'] == $commodity_id;
     //     //     }));
 
     //     //     //start data
     //     //     $item[$values['commodity_id']]['commodity_id'] = $values['commodity_id'];
-    //     //     $item[$values['commodity_id']]['commodity_name'] = $commodity_name[0]["commodity_name"];
-    //     //     $item[$values['commodity_id']]['commodity_unit'] = $commodity_name[0]["commodity_unit"];
+    //     //     $item[$values['commodity_id']]['commodity_title'] = $commodity_title[0]["commodity_title"];
+    //     //     $item[$values['commodity_id']]['commodity_unit'] = $commodity_title[0]["commodity_unit"];
     //     //     $item[$values['commodity_id']]['market'][$element['market_id']]['market_id'] = $element['market_id'];
     //     //     $item[$values['commodity_id']]['market'][$element['market_id']]['market_name'] = $market_name[0]['market_name'];
     //     //     $item[$values['commodity_id']]['market'][$element['market_id']]['price'] = $values['price'];
@@ -168,7 +168,7 @@ class PasarController extends MainController
 
     //     $text = "";
     //     foreach ($itemToday as $key => $value) {
-    //       $text .=$value['commodity_name']. " Harga rata-rata ";
+    //       $text .=$value['commodity_title']. " Harga rata-rata ";
     //       $hargaToday = 0;
     //       $total = count($value['market']);
     //       foreach ($value['market'] as $keys => $values) {
@@ -219,14 +219,14 @@ class PasarController extends MainController
         foreach( $element['details'] as $keys => $values ) {
           //get item name
           $commodity_id = $values['commodity_id'];
-          $commodity_name = array_values(array_filter($masterArrayComodity['result'], function($element) use($commodity_id){
+          $commodity_title = array_values(array_filter($masterArrayComodity['result'], function($element) use($commodity_id){
             return isset($element['commodity_id']) && $element['commodity_id'] == $commodity_id;
           }));
 
           //start data
           $item[$values['commodity_id']]['commodity_id'] = $values['commodity_id'];
-          $item[$values['commodity_id']]['commodity_name'] = $commodity_name[0]["commodity_name"];
-          $item[$values['commodity_id']]['commodity_unit'] = $commodity_name[0]["commodity_unit"];
+          $item[$values['commodity_id']]['commodity_title'] = $commodity_title[0]["commodity_title"];
+          $item[$values['commodity_id']]['commodity_unit'] = $commodity_title[0]["commodity_unit"];
           $item[$values['commodity_id']]['market'][$element['market_id']]['market_id'] = $element['market_id'];
           $item[$values['commodity_id']]['market'][$element['market_id']]['market_name'] = $market_name[0]['market_name'];
           $item[$values['commodity_id']]['market'][$element['market_id']]['price'] = $values['price'];
@@ -279,14 +279,14 @@ class PasarController extends MainController
           foreach( $element['details'] as $keys => $values ) {
             //get item name
             $commodity_id = $values['commodity_id'];
-            $commodity_name = array_values(array_filter($masterArrayComodity['result'], function($element) use($commodity_id){
+            $commodity_title = array_values(array_filter($masterArrayComodity['result'], function($element) use($commodity_id){
               return isset($element['commodity_id']) && $element['commodity_id'] == $commodity_id;
             }));
 
             //start data
             $item[$values['commodity_id']]['commodity_id'] = $values['commodity_id'];
-            $item[$values['commodity_id']]['commodity_name'] = $commodity_name[0]["commodity_name"];
-            $item[$values['commodity_id']]['commodity_unit'] = $commodity_name[0]["commodity_unit"];
+            $item[$values['commodity_id']]['commodity_title'] = $commodity_title[0]["commodity_title"];
+            $item[$values['commodity_id']]['commodity_unit'] = $commodity_title[0]["commodity_unit"];
             $item[$values['commodity_id']]['market'][$element['market_id']]['market_id'] = $element['market_id'];
             $item[$values['commodity_id']]['market'][$element['market_id']]['market_name'] = $market_name[0]['market_name'];
             $item[$values['commodity_id']]['market'][$element['market_id']]['price'] = $values['price'];

@@ -99,21 +99,25 @@ $this->title = "Detail Data Perindustrian";
                     [
                         'attribute' => 'izin_usaha_industri',
                         'value' => function($model) {
-                            if($model->izin_usaha_industri != NULL){
-                                if ($model->izin_usaha_industri==0) {
-                                    return 'belum';
-                                }else if ($model->izin_usaha_industri==1) {
-                                    return 'TDI';
-                                }else if ($model->izin_usaha_industri==2) {
-                                    return 'IUI';
-                                }else if ($model->izin_usaha_industri==3) {
-                                    return 'IUMK';
-                                }else if ($model->izin_usaha_industri==4) {
-                                    return 'IZIN LAINNYA';
-                                }
-                            }else{
+                            if (is_numeric($model->izin_usaha_industri)) {
+                                if($model->izin_usaha_industri != NULL){
+                                    if ($model->izin_usaha_industri==0) {
+                                        return 'belum';
+                                    }else if ($model->izin_usaha_industri==1) {
+                                        return 'TDI';
+                                    }else if ($model->izin_usaha_industri==2) {
+                                        return 'IUI';
+                                    }else if ($model->izin_usaha_industri==3) {
+                                        return 'IUMK';
+                                    }else if ($model->izin_usaha_industri==4) {
+                                        return 'IZIN LAINNYA';
+                                    }
+                                }else{
 
-                                return '-';
+                                    return '-';
+                                }
+                            } else {
+                                return $model->izin_usaha_industri;
                             }
                         },
                     ],

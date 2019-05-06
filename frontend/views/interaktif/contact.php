@@ -124,7 +124,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="title">Silahkan isi masukkan npwp perusahaan anda dibawah ini:</div>
             <br>
             <div class="form-group">
-            <?= Html::textInput('txt_search_npwp', NULL, ['class' => 'form-control', 'id' => 'txt_search_npwp', 'placeholder' => 'Contoh : 123456789 atau PT. XYZ, tekan tombol enter untuk mencari']) ?>
+            <!-- <?= Html::textInput('txt_search_npwp', NULL, ['class' => 'form-control', 'id' => 'txt_search_npwp', 'placeholder' => 'Contoh : 123456789 atau PT. XYZ, tekan tombol enter untuk mencari']) ?> -->
+
+            <?= Select2::widget([
+                'name' => 'txt_search_npwp',
+                'data' => $industri,
+                'options' => ['placeholder' => 'Contoh : 123456789 atau PT. XYZ', 'id' => 'txt_search_npwp'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                 ],
+            ])?>
             </div>
             <!-- <div class="form-group">
               <?= Html::Button('Kembali', ['class' => 'btn btn-flat btn-warning', 'name' => 'contact-button', 'id' => 'btn_back']) ?>
@@ -213,4 +222,30 @@ if(Yii::$app->session->getFlash('success') != null){
 if(Yii::$app->session->getFlash('warning') != null){
     $this->registerJs("$('#myModal').modal('show');", View::POS_END);
 }
+?>
+
+<?php
+
+$this->registerJs("
+
+  $('#txt_search_npwp').on('change',function(){
+      $.ajax({
+          url : '../interaktif/searchnpwp?query='+$(this).val(),
+          dataType : 'json',
+          type : 'post'
+      }).done(function(data){
+        if (!$.trim(data)){
+          $('#val_npwp').html('-');
+          $('#val_nama_perusahaan').html('-');
+        }
+        else{
+          $('#val_npwp').html(data.npwp);
+          $('#val_nama_perusahaan').html(data.nama_perusahaan)
+          $('#data-missing').html('');
+        }
+      });
+  });
+ 
+");
+
 ?>
