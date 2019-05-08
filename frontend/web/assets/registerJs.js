@@ -79,12 +79,14 @@ function myFunctionNext1() {
     var kecamatan=$('#id-cat').val();
     var kelurahan=$('#id-subcat').val();
     var telepon=$('#industri-telepon').val();
+    var industri_fax=$('#industri-fax').val();
+    var industri_web=$('#industri-web').val();
 
     var form1 = document.getElementById("form-1");
     var form2 = document.getElementById("form-2");
     var form3 = document.getElementById("form-3");
 
-    if (badanUsaha=='' || perusahaan=='' || pemilik=='' || jalan=='' || kecamatan=='' || kelurahan=='' || telepon=='') {
+    if (badanUsaha=='' || perusahaan=='' || pemilik=='' || jalan=='' || kecamatan=='' || kelurahan=='' || telepon=='' || industri_fax == '' || industri_web =='') {
         // alert('hai');
         swal(
             'Oopss!',

@@ -5,6 +5,7 @@ use yii\widgets\DetailView;
 use yii\widgets\ActiveForm;
 use common\models\Villages;
 use common\models\Districts;
+use common\models\Regencies;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Industri */
@@ -71,6 +72,10 @@ $this->title = "Detail Data Perindustrian";
                         'value' => $model->jalan != null ? $model->jalan : '-',
                     ],
                     [
+                        'attribute' => 'kabupaten',
+                        'value' => $model->kabupaten != null ? Regencies::find()->where(['id'=>$model->kabupaten])->one()->name : '-',
+                    ],
+                    [
                         'attribute' => 'kelurahan',
                         'value' => $model->kelurahan != null ? Villages::find()->where(['id'=>$model->kelurahan])->one()->name : '-',
                     ],
@@ -128,7 +133,7 @@ $this->title = "Detail Data Perindustrian";
                     [
                         'label' => 'Nama KBLI',
                         'attribute' => 'kbli0.nama',
-                        'value' => $model->kbli != null ? $model->kbli0->nama : '-',
+                        'value' => $model->kbli != null ? $model->kbli0->kode."-".$model->kbli0->nama : '-',
                     ],
                     [
                         'attribute' => 'komoditi',

@@ -5,9 +5,13 @@ $(document).ready(function(){
     data_kode = $(this).parents('td').parents('tr').find('#val_kode').html();
     data_val = $(this).parents('td').parents('tr').find('#val_nama').html();
     $('#modal').modal('hide');
-    $('#txt_kbli').val(data_val);
+    $('#txt_kbli').val(data_kode + '-' +data_val);
     $('#txt_kbli_val').val(data_id);
-    $('#industri-komoditi').val(data_kode.substr(0,2));
+   
+    var jenis_industri = data_val.split(" ");
+    var komoditi = data_kode.substr(0,2) + '-' + jenis_industri[0] + " " + jenis_industri[1];
+    console.log(komoditi);
+    $('#industri-komoditi').val(komoditi);
   });
 
   $('#txt_kbli').click(function(){

@@ -58,9 +58,9 @@ class Industri extends \yii\db\ActiveRecord
     {
         return [
             [['badan_usaha', 'nama_perusahaan', 'nama_pemilik', 'jalan','kabupaten', 'kelurahan', 'kecamatan', 'izin_usaha_industri', 'tahun_izin', 'komoditi', 'jenis_produk', 'tahun_data', 'tk_lk', 'nilai_investasi', 'jml_kapasitas_produksi', 'satuan', 'nilai_produksi', 'nilai_bb_bp', 'npwp', 'status'], 'required'],
-            [['badan_usaha', 'kbli', 'status','komoditi'], 'integer'],
+            [['badan_usaha', 'kbli', 'status'], 'integer'],
             [['nama_perusahaan', 'jalan', 'jenis_produk', 'cabang_industri'], 'string', 'max' => 100],
-            [['nama_pemilik', 'kabupaten','kelurahan', 'kecamatan', 'web', 'izin_usaha_industri', 'tahun_izin', 'tahun_data', 'tk_lk', 'tk_pr', 'jml_kapasitas_produksi', 'satuan', 'nilai_produksi', 'nilai_bb_bp', 'orientasi_ekspor', 'negara_tujuan_ekspor'], 'string', 'max' => 50],
+            [['nama_pemilik', 'kabupaten','kelurahan', 'kecamatan', 'web', 'izin_usaha_industri', 'tahun_izin', 'tahun_data', 'tk_lk', 'tk_pr', 'jml_kapasitas_produksi', 'satuan', 'nilai_produksi', 'nilai_bb_bp', 'orientasi_ekspor', 'negara_tujuan_ekspor','komoditi'], 'string', 'max' => 50],
             [['telepon', 'fax'], 'integer'],
             [['email'], 'string', 'max' => 150],
             // [['npwp'], 'integer', 'integerOnly'=>true],
