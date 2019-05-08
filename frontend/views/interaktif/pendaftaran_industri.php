@@ -302,7 +302,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= $form->field($model, 'jml_kapasitas_produksi')->widget(MaskMoney::classname(), 
                           [
                             'pluginOptions' => [
-                                'prefix' => 'Rp. ',
+                                'prefix' => 'Jumlah/Satuan : ',
                                 'suffix' => '',
                                 'affixesStay' => true,
                                 'thousands' => '.',
