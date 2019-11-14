@@ -65,7 +65,7 @@ class Industri extends \yii\db\ActiveRecord
             [['email'], 'string', 'max' => 150],
             // [['npwp'], 'integer', 'integerOnly'=>true],
             // [['npwp'], 'unique'],
-            [['kbli'], 'exist', 'skipOnError' => true, 'targetClass' => Kbli::className(), 'targetAttribute' => ['kbli' => 'id']],
+            [['kbli'], 'exist', 'skipOnError' => true, 'targetClass' => Kbli::className(), 'targetAttribute' => ['kbli' => 'kode']],
             [['badan_usaha'], 'exist', 'skipOnError' => true, 'targetClass' => BadanUsaha::className(), 'targetAttribute' => ['badan_usaha' => 'id']],
         ];
     }
@@ -115,6 +115,14 @@ class Industri extends \yii\db\ActiveRecord
     public function getKbli0()
     {
         return $this->hasOne(Kbli::className(), ['id' => 'kbli']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getKbli1()
+    {
+        return $this->hasOne(Kbli::className(), ['kode' => 'kbli']);
     }
 
     /**

@@ -33,17 +33,17 @@ class PasarController extends MainController
       }
 
       //data pangan
-      // $dataPasar = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getMasterMarket');
-      // $dataArrayPasar = json_decode($dataPasar,true);
+      $dataPasar = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getMasterMarket');
+      $dataArrayPasar = json_decode($dataPasar,true);
 
-      // $masterComodity = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getMasterCommodity');
-      // $masterArrayComodity = json_decode($masterComodity,true);
+      $masterComodity = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getMasterCommodity');
+      $masterArrayComodity = json_decode($masterComodity,true);
 
-      // $dataComodity = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getDailyPriceAllMarket&tanggal='.date('Y-m-d'));
-      // $arrayComodityFinal = json_decode($dataComodity,true);
+      $dataComodity = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getDailyPriceAllMarket&tanggal='.date('Y-m-d'));
+      $arrayComodityFinal = json_decode($dataComodity,true);
 
-      // $dataComodityYesterday = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getDailyPriceAllMarket&tanggal='.date('Y-m-d', strtotime('-1 day', strtotime(date('Y-m-d')))));
-      // $arrayComodityFinalYesterday = json_decode($dataComodityYesterday,true);
+      $dataComodityYesterday = @file_get_contents('http://siskaperbapo.com/api/?username=pihpsapi&password=xxhargapanganxx&task=getDailyPriceAllMarket&tanggal='.date('Y-m-d', strtotime('-1 day', strtotime(date('Y-m-d')))));
+      $arrayComodityFinalYesterday = json_decode($dataComodityYesterday,true);
 
       if ($arrayComodityFinal && $arrayComodityFinalYesterday && $dataArrayPasar && $masterArrayComodity) {
         // var_dump($)

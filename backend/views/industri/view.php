@@ -133,19 +133,19 @@ $this->title = "Detail Data Perindustrian";
                     [
                         'label' => 'Nama KBLI',
                         'attribute' => 'kbli0.nama',
-                        'value' => $model->kbli != null ? $model->kbli0->kode."-".$model->kbli0->nama : '-',
+                        'value' => $model->kbli != null ? $model->kbli1->kode."-".$model->kbli1->nama : '-',
                     ],
                     [
                         'attribute' => 'komoditi',
-                        'value' => $model->komoditi != null ? $model->komoditi : '-',
+                        'value' => function($model){
+                            $kode = substr($model->kbli1->kode,0,2);
+                            $nama = explode(' ', $model->kbli1->nama);
+                            return $kode."-".$nama[0]." ".$nama[1];
+                        }
                     ],
                     [
                         'attribute' => 'jenis_produk',
                         'value' => $model->jenis_produk != null ? $model->jenis_produk : '-',
-                    ],
-                    [
-                        'attribute' => 'cabang_industri',
-                        'value' => $model->cabang_industri != null ? $model->cabang_industri : '-',
                     ],
                     [
                         'label' => 'TK LK',

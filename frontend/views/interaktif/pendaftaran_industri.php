@@ -27,6 +27,7 @@ use kartik\select2\Select2;
 use kartik\depdrop\DepDrop;
 use kartik\daterange\DateRangePicker;
 use kartik\date\DatePicker;
+
 $this->registerJsFile("@web/frontend/web/js/sweetalert.js",['depends' => 'yii\web\JqueryAsset']);
 $this->registerJsFile("@web/frontend/web/js/industri.js",['depends' => 'yii\web\JqueryAsset']);
 $this->registerJsFile("@web/frontend/web/js/datatable.js",['depends' => 'yii\web\JqueryAsset']);

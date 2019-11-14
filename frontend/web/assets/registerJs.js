@@ -86,7 +86,7 @@ function myFunctionNext1() {
     var form2 = document.getElementById("form-2");
     var form3 = document.getElementById("form-3");
 
-    if (badanUsaha=='' || perusahaan=='' || pemilik=='' || jalan=='' || kecamatan=='' || kelurahan=='' || telepon=='' || industri_fax == '' || industri_web =='') {
+    if (badanUsaha=='' || perusahaan=='' || pemilik=='' || jalan=='' || kecamatan=='' || kelurahan=='' || telepon=='') {
         // alert('hai');
         swal(
             'Oopss!',

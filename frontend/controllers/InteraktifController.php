@@ -120,12 +120,17 @@ class InteraktifController extends MainController
         //data unit
         $unit = ArrayHelper::map(Unit::find()->all(), 'name_unit', 'name_unit');
 
+        //data industri
+        $industri = ArrayHelper::map(Industri::find()->all(), 'nama_perusahaan', 'nama_perusahaan');
+
         //data kabupaten
         $kabupaten = ArrayHelper::map(Regencies::find()->all(), 'id', 'name');
 
         $email = \Yii::$app->session->get('name');
+
         #data kbli
         $providerKBLI = KBLI::find()->all();
+
         #buku tamu load
         $model_form_comment = new ContactForm();
         $list_comment = Contact::find()
@@ -136,6 +141,7 @@ class InteraktifController extends MainController
         $list_comment_page = $list_comment->offset($pages->offset)
           ->limit($pages->limit)
           ->all();
+          
         #industri load
         $model= new Industri();
         $model->tahun_izin = date("Y");
@@ -171,7 +177,8 @@ class InteraktifController extends MainController
             'model' => $model,
             'providerKBLI' => $providerKBLI,
             'unit' => $unit,
-            'kabupaten' => $kabupaten
+            'kabupaten' => $kabupaten,
+            'industri' => $industri
         ]);
     }
 

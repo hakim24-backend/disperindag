@@ -14,6 +14,7 @@ use yii\widgets\DetailView;
 
 
 $this->registerJsFile("@web/frontend/web/js/bukutamu.js",['depends' => 'yii\web\JqueryAsset']);
+$this->registerJsFile("@web/frontend/web/js/sweetalert.js",['depends' => 'yii\web\JqueryAsset']);
 $this->title = 'Contact';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -124,6 +125,18 @@ $this->params['breadcrumbs'][] = $this->title;
             <br>
             <div class="form-group">
             <?= Html::textInput('txt_search_npwp', NULL, ['class' => 'form-control', 'id' => 'txt_search_npwp', 'placeholder' => 'Contoh : 123456789 atau PT. XYZ, tekan tombol enter untuk mencari']) ?>
+
+            <!-- <?php echo Select2::widget([
+                'name' => 'txt_search_npwp',
+                'data' => $industri,
+                'options' => [
+                    'placeholder' => 'Contoh : 123456789 atau PT. XYZ',
+                ],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ])?> -->
+
             </div>
             <!-- <div class="form-group">
               <?= Html::Button('Kembali', ['class' => 'btn btn-flat btn-warning', 'name' => 'contact-button', 'id' => 'btn_back']) ?>

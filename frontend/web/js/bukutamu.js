@@ -29,11 +29,24 @@ $(document).ready(function(){
         if (!$.trim(data)){
           $('#val_npwp').html('-');
           $('#val_nama_perusahaan').html('-');
+          // swal({
+          //   title: "Data Tidak Ditemukan",
+          //   text: "Perusahaan anda tidak terdaftar, silahkan daftarkan perusahaan anda dengan memilih tombol daftar dibawah ini",
+          //   icon: "error",
+          //   button: "Daftar",
+          // });
           swal({
             title: "Data Tidak Ditemukan",
             text: "Perusahaan anda tidak terdaftar, silahkan daftarkan perusahaan anda dengan memilih tombol daftar dibawah ini",
             icon: "error",
-            button: ["Oh noez!", true],
+            buttons: ["Batal","Daftar"],
+          })
+          .then((daftar) => {
+            if (daftar) {
+              perusahaanBack();
+            } else {
+              //noaction
+            }
           });
         }
         else{
